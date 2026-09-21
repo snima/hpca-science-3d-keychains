@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Temporary test files in root
+test_*
+scratch/
+.tempmediaStorage/
+*.log
+render_test.png
+cpu_radial.stl
+cpu_souvenir_final.step
+cpu_souvenir_final.stl
+gpu_keychain_test.stl
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
