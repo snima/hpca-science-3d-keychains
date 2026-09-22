@@ -27,7 +27,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # ==============================================================================
 PCB_L = 60.0                # PCB length (X)
 PCB_W = 20.0                # PCB width (Y)
-PCB_T = 4.6                 # PCB thickness (Z: 0 -> 4.6)
+PCB_T = 3.4                 # PCB thickness (Z: 0 -> 3.4) - slim edition
 PCB_R = 2.0                 # Corner fillet
 
 # End mounting eyelet (left end, like a DIMM mounting hole)
@@ -45,7 +45,7 @@ TAB_NOTCH_W = 1.6
 # 8 memory chips (front face)
 CHIP_W = 5.0
 CHIP_H = 6.5
-CHIP_T = 1.2                # Z: 4.6 -> 5.8
+CHIP_T = 1.2                # Z: body-top -> +1.2
 CHIP_Y = 1.0
 CHIP_XS = [-23.8, -17.0, -10.2, -3.4, 3.4, 10.2, 17.0, 23.8]
 
@@ -53,7 +53,7 @@ CHIP_XS = [-23.8, -17.0, -10.2, -3.4, 3.4, 10.2, 17.0, 23.8]
 RAIL_TEXT = "HPC&A"
 RAIL_FS = 2.6
 RAIL_Y = 7.0
-RAIL_RELIEF = 0.5           # Z: 4.6 -> 5.1
+RAIL_RELIEF = 0.5           # Z: body-top -> +0.5
 
 
 def build_ram_keychain(bottom_extra: str | None = None) -> Part:
@@ -115,7 +115,7 @@ def build_ram_keychain(bottom_extra: str | None = None) -> Part:
                     extrude(amount=-0.35, mode=Mode.SUBTRACT)
 
         # ------------------------------------------------------------------
-        # 3. 8 memory chips (Z: 4.6 -> 5.8)
+        # 3. 8 memory chips (on body top)
         # ------------------------------------------------------------------
         for cx in CHIP_XS:
             with Locations((cx, CHIP_Y, PCB_T)):

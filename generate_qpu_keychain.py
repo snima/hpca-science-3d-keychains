@@ -6,9 +6,9 @@ Parametric 3D model of a modern superconducting quantum processor package
 designed for 3D printing (100% support-free FDM, flat bed adhesion at Z=0).
 
 Architecture & Components:
-  1. High-Density Ceramic/Gold-Plated Package Body (48.0 x 36.0 x 4.6 mm).
+  1. High-Density Ceramic/Gold-Plated Package Body (48.0 x 36.0 x 3.4 mm).
   2. Reinforced Keyring Eyelet on I/O tab (Ø4.6 mm through-hole, ≥3.0 mm solid rim).
-  3. Recessed Silicon Die Cavity (Z = 2.6 to 4.6 mm).
+  3. Recessed Silicon Die Cavity (Z = PKG_T down to FLOOR_Z).
   4. 3x3 Superconducting Transmon Qubit Array (cross transmons with Josephson junctions).
   5. Coplanar Waveguide (CPW) Serpentine Resonators connecting qubits and readout lines.
   6. Perimeter Wire-Bonding Contact Pads (28 gold pads).
@@ -26,6 +26,10 @@ from build123d import *
 
 OUTPUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "output"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+PKG_T = 3.4       # Package body thickness - slim edition for fast printing
+CAVITY_D = 2.0    # Die cavity depth
+FLOOR_Z = PKG_T - CAVITY_D  # Cavity floor (1.4 mm)
 
 
 def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
@@ -45,7 +49,7 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
             with Locations((-27.5, 6.0)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)  # Ø4.6 mm through-hole
-        extrude(amount=4.6)
+        extrude(amount=PKG_T)
 
         # ======================================================================
         # 2. UNDERSIDE ATTRIBUTION INSCRIPTION (Debossed at Z = 0)
@@ -71,18 +75,18 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # ======================================================================
-        # 3. TOP RECESSED SILICON DIE CAVITY (Z = 4.6 down to 2.6 mm)
+        # 3. TOP RECESSED SILICON DIE CAVITY (Z = PKG_T down to FLOOR_Z)
         # ======================================================================
-        with Locations((2.0, -1.5, 4.6)):
+        with Locations((2.0, -1.5, PKG_T)):
             with BuildSketch() as s_die:
                 Rectangle(28.0, 24.0)
                 fillet(s_die.vertices(), radius=1.6)
-            extrude(amount=-2.0, mode=Mode.SUBTRACT)
+            extrude(amount=-CAVITY_D, mode=Mode.SUBTRACT)
 
         # ======================================================================
-        # 4. TOP BRANDING BANNER (Z = 4.6 to 5.1 mm)
+        # 4. TOP BRANDING BANNER (embossed 0.5 above package top)
         # ======================================================================
-        with Locations((2.0, 13.8, 4.6)):
+        with Locations((2.0, 13.8, PKG_T)):
             with BuildSketch():
                 Text("HPC&A QUANTUM", font_size=2.8, font_style=FontStyle.BOLD)
             extrude(amount=0.5)
@@ -93,7 +97,7 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
         # Top and bottom row wirebond pads
         for px in np.linspace(-9.5, 13.5, 8):
             for py in [11.5, -14.5]:
-                with Locations((px, py, 4.6)):
+                with Locations((px, py, PKG_T)):
                     with BuildSketch():
                         Rectangle(1.4, 1.8)
                     extrude(amount=0.3)
@@ -101,19 +105,19 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
         # Left and right column wirebond pads
         for py in np.linspace(-11.5, 8.5, 6):
             for px in [-13.5, 17.5]:
-                with Locations((px, py, 4.6)):
+                with Locations((px, py, PKG_T)):
                     with BuildSketch():
                         Rectangle(1.8, 1.4)
                     extrude(amount=0.3)
 
         # ======================================================================
-        # 6. SUPERCONDUCTING TRANSMON QUBIT ARRAY (Inside die cavity, Z = 2.6 to 3.4 mm)
+        # 6. SUPERCONDUCTING TRANSMON QUBIT ARRAY (built up from FLOOR_Z)
         # ======================================================================
         qx_list = [-5.0, 2.0, 9.0]
         qy_list = [-8.5, -1.5, 5.5]
         for qx in qx_list:
             for qy in qy_list:
-                with Locations((qx, qy, 2.6)):
+                with Locations((qx, qy, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(3.4, 0.9)
                         Rectangle(0.9, 3.4)
@@ -126,7 +130,7 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
         # Horizontal inter-qubit coupling lines
         for qy in qy_list:
             for mx in [-1.5, 5.5]:
-                with Locations((mx, qy, 2.6)):
+                with Locations((mx, qy, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(2.6, 0.45)
                     extrude(amount=0.5)
@@ -134,7 +138,7 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
         # Vertical inter-qubit coupling lines
         for qx in qx_list:
             for my in [-5.0, 2.0]:
-                with Locations((qx, my, 2.6)):
+                with Locations((qx, my, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(0.45, 2.6)
                     extrude(amount=0.5)
@@ -142,7 +146,7 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
         # Silicon alignment fiducials at 4 corners of the chip
         for fx in [-9.5, 13.5]:
             for fy in [-11.0, 8.0]:
-                with Locations((fx, fy, 2.6)):
+                with Locations((fx, fy, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(1.4, 0.35)
                         Rectangle(0.35, 1.4)

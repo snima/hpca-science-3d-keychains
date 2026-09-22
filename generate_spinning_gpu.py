@@ -23,7 +23,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # Main dimensions
 CARD_LENGTH = 56.0
 CARD_WIDTH = 25.0
-CARD_THICKNESS = 4.6
+CARD_THICKNESS = 3.4  # Slim edition for fast printing
 
 EYELET_X = -CARD_LENGTH / 2.0 - 3.5  # -31.5 mm
 EYELET_Y = 4.0

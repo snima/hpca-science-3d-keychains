@@ -38,20 +38,20 @@ The repository includes a pre-packaged [`ready_to_print/`](ready_to_print/) dire
 
 1. **Superconducting QPU Chip (`qpu_keychain_hpca`)**
    - Transmon qubit crosses, serpentine coplanar waveguide (CPW) readout resonators, wirebond gold contact pads, and recessed silicon substrate cavity.
-   - Dimensions: $56.7 \times 36.0 \times 5.1\text{ mm}$ | Volume: $6.9\text{ cm}^3$ (~$6.4\text{ g}$ PLA).
+   - Dimensions: $56.7 \times 36.0 \times 3.9\text{ mm}$ | Volume: $4.8\text{ cm}^3$ (~$4.4\text{ g}$ PLA).
    - Formats: [STL](ready_to_print/stl/qpu_keychain_hpca.stl) | [3MF](ready_to_print/3mf/qpu_keychain_hpca.3mf) | [STEP](ready_to_print/step/qpu_keychain_hpca.step) | [OBJ](ready_to_print/obj/qpu_keychain_hpca.obj)
 
 2. **Multi-Tiered Dilution Chandelier (`quantum_chandelier`)**
    - 2.5D tiered silhouette of an ultra-low temperature $15\text{ mK}$ dilution refrigerator cryostat.
    - 5 gold thermal stages, vertical RF coaxial lines, side heat-exchanger cooling loops, and bottom gold-plated QPU shielding can.
    - All text inscriptions maintain verified **$>5.0\text{ mm}$ safety clearances** with zero boundary protrusion.
-   - Dimensions: $31.2 \times 61.7 \times 5.4\text{ mm}$ | Volume: $5.4\text{ cm}^3$ (~$5.0\text{ g}$ PLA).
+   - Dimensions: $31.2 \times 61.7 \times 4.4\text{ mm}$ | Volume: $4.2\text{ cm}^3$ (~$3.9\text{ g}$ PLA).
    - Formats: [STL](ready_to_print/stl/quantum_chandelier.stl) | [3MF](ready_to_print/3mf/quantum_chandelier.3mf) | [STEP](ready_to_print/step/quantum_chandelier.step) | [OBJ](ready_to_print/obj/quantum_chandelier.obj)
 
 3. **Bloch Sphere Quantum Info Medallion (`quantum_bloch`)**
    - Octagonal coin frame with a 3D spherical dome representing the single-qubit state space.
    - Features equator ring, prime meridian, $Z$-axis spindle, state vector $|\psi\rangle$ arrow, and basis state labels $|0\rangle$ & $|1\rangle$.
-   - Dimensions: $43.7 \times 49.0 \times 5.1\text{ mm}$ | Volume: $5.3\text{ cm}^3$ (~$5.0\text{ g}$ PLA).
+   - Dimensions: $43.7 \times 49.0 \times 3.9\text{ mm}$ | Volume: $3.7\text{ cm}^3$ (~$3.4\text{ g}$ PLA).
    - Formats: [STL](ready_to_print/stl/quantum_bloch.stl) | [3MF](ready_to_print/3mf/quantum_bloch.3mf) | [STEP](ready_to_print/step/quantum_bloch.step) | [OBJ](ready_to_print/obj/quantum_bloch.obj)
 
 ---
@@ -61,17 +61,17 @@ The repository includes a pre-packaged [`ready_to_print/`](ready_to_print/) dire
 
 1. **Chibi Anime GPU (`gpu_fantasy_chibi`)**
    - Cartoon graphics card with smiling anime face, blush cheeks, petal fan blades, and curved boots.
-   - Dimensions: $55.0 \times 34.0 \times 5.5\text{ mm}$ | Volume: $5.8\text{ cm}^3$ (~$5.4\text{ g}$ PLA).
+   - Dimensions: $55.2 \times 34.4 \times 4.3\text{ mm}$ | Volume: $4.3\text{ cm}^3$ (~$4.0\text{ g}$ PLA).
    - Formats: [STL](ready_to_print/stl/gpu_fantasy_chibi.stl) | [3MF](ready_to_print/3mf/gpu_fantasy_chibi.3mf) | [STEP](ready_to_print/step/gpu_fantasy_chibi.step) | [OBJ](ready_to_print/obj/gpu_fantasy_chibi.obj)
 
 2. **Sci-Fi Mecha Starfighter GPU (`gpu_fantasy_mecha`)**
    - Supersonic fighter aesthetic with swept-back aerofoil wings, central supersonic jet turbine, and dual rear thrusters.
-   - Dimensions: $63.0 \times 30.0 \times 5.6\text{ mm}$ | Volume: $4.8\text{ cm}^3$ (~$4.5\text{ g}$ PLA).
+   - Dimensions: $63.4 \times 29.9 \times 4.4\text{ mm}$ | Volume: $4.0\text{ cm}^3$ (~$3.7\text{ g}$ PLA).
    - Formats: [STL](ready_to_print/stl/gpu_fantasy_mecha.stl) | [3MF](ready_to_print/3mf/gpu_fantasy_mecha.3mf) | [STEP](ready_to_print/step/gpu_fantasy_mecha.step) | [OBJ](ready_to_print/obj/gpu_fantasy_mecha.obj)
 
 3. **Cyber-Runic Arcane GPU (`gpu_fantasy_rune`)**
    - Alchemical talisman blending electronic PCB traces with an 8-spoke summoning circle, royal shield crest, and mana crystals.
-   - Dimensions: $65.0 \times 28.0 \times 5.6\text{ mm}$ | Volume: $5.8\text{ cm}^3$ (~$5.4\text{ g}$ PLA).
+   - Dimensions: $64.7 \times 28.5 \times 4.4\text{ mm}$ | Volume: $4.5\text{ cm}^3$ (~$4.2\text{ g}$ PLA).
    - Formats: [STL](ready_to_print/stl/gpu_fantasy_rune.stl) | [3MF](ready_to_print/3mf/gpu_fantasy_rune.3mf) | [STEP](ready_to_print/step/gpu_fantasy_rune.step) | [OBJ](ready_to_print/obj/gpu_fantasy_rune.obj)
 
 ---
@@ -82,9 +82,9 @@ Pre-arranged multi-model print layouts engineered for standard $220 \times 220\t
 
 | Plate Name | Contents | Array Footprint | Filament Weight | Print Time @ 0.20 mm |
 | :--- | :--- | :--- | :--- | :--- |
-| **`batch_master_suite_x6`** | **Complete 6-Pack (All 6 unique models)** | $203.9 \times 110.0 \times 5.6\text{ mm}$ | $\approx 34\text{ g}$ | **~2.8 hours** |
-| **`batch_fantasy_gpus_x6`** | 6x Fantasy GPUs (2x Chibi, 2x Mecha, 2x Rune) | $203.9 \times 78.4 \times 5.6\text{ mm}$ | $\approx 34\text{ g}$ | **~3.0 hours** |
-| **`batch_quantum_collection_x6`** | 6x Quantum Models (2x QPU, 2x Chandelier, 2x Bloch) | $174.2 \times 129.7 \times 5.4\text{ mm}$ | $\approx 35\text{ g}$ | **~3.0 hours** |
+| **`batch_master_suite_x6`** | **Complete 6-Pack (All 6 unique models)** | $203.9 \times 110.0 \times 4.4\text{ mm}$ | $\approx 24\text{ g}$ | **~2.0 hours** |
+| **`batch_fantasy_gpus_x6`** | 6x Fantasy GPUs (2x Chibi, 2x Mecha, 2x Rune) | $203.9 \times 78.4 \times 4.4\text{ mm}$ | $\approx 24\text{ g}$ | **~2.2 hours** |
+| **`batch_quantum_collection_x6`** | 6x Quantum Models (2x QPU, 2x Chandelier, 2x Bloch) | $174.2 \times 129.7 \times 4.4\text{ mm}$ | $\approx 23\text{ g}$ | **~2.2 hours** |
 
 Available in both STL and 3MF formats under [`ready_to_print/batch_plates/`](ready_to_print/batch_plates/).
 
@@ -98,7 +98,7 @@ Available in both STL and 3MF formats under [`ready_to_print/batch_plates/`](rea
 * **Walls / Perimeters:** 3 to 4 loops (guarantees solid $\varnothing 4.6\text{ mm}$ keyring hole strength).
 * **Material:** PLA, PLA+, or PETG (Nozzle: 205–215°C, Bed: 60°C).
 * **Brim / Raft:** None needed (solid planar bed contact).
-* **Dual-Color Trick (Single Nozzle):** Set **Pause at Height** (`M600`) at $Z = 4.0\text{ mm}$ (or $4.6\text{ mm}$) to switch from dark base filament to gold/white for vibrant two-tone lettering and details.
+* **Dual-Color Trick (Single Nozzle):** Set **Pause at Height** (`M600`) at $Z = 2.8\text{ mm}$ (or $3.0\text{--}3.4\text{ mm}$) to switch from dark base filament to gold/white for vibrant two-tone lettering and details.
 
 For complete workshop instructions, see [`ready_to_print/PRINTING_GUIDE.md`](ready_to_print/PRINTING_GUIDE.md).
 

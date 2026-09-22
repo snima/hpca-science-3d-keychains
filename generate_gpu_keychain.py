@@ -26,7 +26,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # Main Card Body
 CARD_LENGTH = 56.0           # Main card body length (X)
 CARD_WIDTH = 25.0            # Main card body width (Y)
-CARD_THICKNESS = 4.6         # Shroud body height (Z)
+CARD_THICKNESS = 3.4         # Shroud body height (Z) - slim edition for fast printing
 
 # Keyring Eyelet on I/O Bracket
 EYELET_X = -CARD_LENGTH / 2.0 - 3.5  # -31.5 mm
@@ -56,7 +56,7 @@ FIN_BAY_DEPTH = 1.8          # Cut down to Z = 2.8 mm
 # Badge & Branding
 BADGE_W = 16.5               # "HPC&A" Plaque width
 BADGE_H = 8.2                # "HPC&A" Plaque height
-BADGE_TOP_Z = 4.8            # Plaque top Z
+BADGE_TOP_Z = 3.6            # Plaque top Z (slim: follows body thickness)
 TEXT_SERIES = "HPC&A"        # Main series badge
 TEXT_SPINE = "HPC&A EDITION" # Spine branding (No proprietary trademarks)
 TEXT_RELIEF = 0.6            # Embossed text relief

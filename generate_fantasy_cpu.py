@@ -25,7 +25,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # PARAMETRIC DIMENSIONS (mm)
 # ==============================================================================
 BODY = 44.0                 # Square substrate edge
-BODY_T = 4.6                # Substrate thickness (Z: 0 -> 4.6)
+BODY_T = 3.4                # Substrate thickness (Z: 0 -> 3.4) - slim edition
 CORNER_R = 3.0              # Fillet on 3 corners
 PIN1_CHAMFER = 4.5          # Chamfer on Pin-1 corner (-X, -Y)
 
@@ -47,7 +47,7 @@ PIN1_XY = -17.0
 # SMD capacitor blocks around the IHS (like a real package)
 CAP_L = 3.6
 CAP_W = 1.8
-CAP_H = 1.2                 # Z: 4.6 -> 5.8
+CAP_H = 1.2                 # Z: body-top -> +1.2
 CAP_R = 0.4
 # (x, y, rotation_deg): top row, left column, right column
 CAPS = [
@@ -58,7 +58,7 @@ CAPS = [
 
 # Nickel-style heat spreader (IHS)
 IHS = 34.0                  # IHS edge
-IHS_H = 1.0                 # Z: 4.6 -> 5.6
+IHS_H = 1.0                 # Z: body-top -> +1.0
 IHS_R = 2.0
 
 # Laser-etched branding on the IHS top ring (debossed)
@@ -103,7 +103,7 @@ L3_H = 1.2
 PLATE_W = 20.0
 PLATE_H = 3.5
 PLATE_Y = -19.75
-PLATE_T = 0.4               # Z: 4.6 -> 5.0
+PLATE_T = 0.4               # Z: body-top -> +0.4
 PLATE_TEXT = "P+E CORES"
 PLATE_FS = 2.6
 PLATE_RELIEF = 0.5          # Z: 5.0 -> 5.5
@@ -168,7 +168,7 @@ def build_fantasy_cpu(bottom_extra: str | None = None) -> Part:
                     extrude(amount=TEETH_T)
 
         # ------------------------------------------------------------------
-        # 3. Pin-1 marker dot (Z: 4.6 -> 5.1)
+        # 3. Pin-1 marker dot (on body top)
         # ------------------------------------------------------------------
         with Locations((PIN1_XY, PIN1_XY, BODY_T)):
             with BuildSketch():
@@ -176,7 +176,7 @@ def build_fantasy_cpu(bottom_extra: str | None = None) -> Part:
             extrude(amount=PIN1_H)
 
         # ------------------------------------------------------------------
-        # 4. SMD capacitor blocks around the IHS (Z: 4.6 -> 5.8)
+        # 4. SMD capacitor blocks around the IHS (on body top)
         # ------------------------------------------------------------------
         for cx, cy, crot in CAPS:
             with Locations((cx, cy, BODY_T)):
@@ -187,7 +187,7 @@ def build_fantasy_cpu(bottom_extra: str | None = None) -> Part:
                 extrude(amount=CAP_H)
 
         # ------------------------------------------------------------------
-        # 5. "P+E CORES" nameplate on bottom margin (Z: 4.6 -> 5.5)
+        # 5. "P+E CORES" nameplate on bottom margin (on body top)
         # ------------------------------------------------------------------
         with Locations((0, PLATE_Y, BODY_T)):
             with BuildSketch() as s_plate:
@@ -200,7 +200,7 @@ def build_fantasy_cpu(bottom_extra: str | None = None) -> Part:
                 extrude(amount=PLATE_RELIEF)
 
         # ------------------------------------------------------------------
-        # 6. Heat spreader / IHS (Z: 4.6 -> 5.6)
+        # 6. Heat spreader / IHS (on body top)
         # ------------------------------------------------------------------
         with Locations((0, 0, BODY_T)):
             with BuildSketch() as s_ihs:

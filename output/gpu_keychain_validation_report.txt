@@ -16,7 +16,7 @@ COMMISSIONED BY: HPC&A Research Group
 --------------------------------------------------------------------------------
 * Overall Length (X):         64.70 mm (Including I/O bracket eyelet)
 * Overall Width (Y):          27.30 mm (Including PCIe tab)
-* Overall Height (Z):         5.40 mm (Pocket-friendly slim profile)
+* Overall Height (Z):         4.20 mm (Pocket-friendly slim profile)
 * Card Body Dimensions:       56.00 mm x 25.00 mm x 4.60 mm
 * Keyring Hole Diameter:      Ø4.60 mm (Fits standard 25-30 mm split keyrings)
 * Eyelet Solid Rim Wall:      2.90 mm (Heavy-duty tensile reinforcement)
@@ -32,8 +32,8 @@ COMMISSIONED BY: HPC&A Research Group
 
 4. MATERIAL CONSUMPTION & PRODUCTION ESTIMATES
 --------------------------------------------------------------------------------
-* Solid Enclosed Volume:      6.12 cm³
-* Estimated FDM Mass (PLA):   ~5.3 grams (at 20% infill)
+* Solid Enclosed Volume:      4.37 cm³
+* Estimated FDM Mass (PLA):   ~3.8 grams (at 20% infill)
 * Keychains per 1 kg Spool:   ~180 - 190 units!
 * Material Cost per Unit:     ~$0.12 USD
 * Print Time (High-Speed):    ~15 minutes per unit (Bambu Lab / Prusa MK4)

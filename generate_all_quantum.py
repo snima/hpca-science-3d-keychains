@@ -21,6 +21,12 @@ from build123d import *
 OUTPUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "output"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+PKG_T = 3.4       # Package body thickness - slim edition for fast printing
+CAVITY_D = 2.0    # QPU die cavity depth
+FLOOR_Z = PKG_T - CAVITY_D  # QPU cavity floor (1.4 mm)
+CHAND_T = 3.0     # Chandelier base plate thickness - slim edition
+BLOCH_FLOOR = 1.4  # Bloch well floor (PKG_T - 2.0 well depth)
+
 
 # ==============================================================================
 # MODEL 1: SUPERCONDUCTING QPU CHIP KEYCHAIN
@@ -39,7 +45,7 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
             with Locations((-27.5, 6.0)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
-        extrude(amount=4.6)
+        extrude(amount=PKG_T)
 
         # Underside (Z = 0) - mirrored about YZ for correct -Z (bottom) readability
         if bottom_extra is None:
@@ -62,14 +68,14 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # Recessed Silicon Die Cavity
-        with Locations((2.0, -1.5, 4.6)):
+        with Locations((2.0, -1.5, PKG_T)):
             with BuildSketch() as s_die:
                 Rectangle(28.0, 24.0)
                 fillet(s_die.vertices(), radius=1.6)
-            extrude(amount=-2.0, mode=Mode.SUBTRACT)
+            extrude(amount=-CAVITY_D, mode=Mode.SUBTRACT)
 
         # Top Banner
-        with Locations((2.0, 13.8, 4.6)):
+        with Locations((2.0, 13.8, PKG_T)):
             with BuildSketch():
                 Text("HPC&A QUANTUM", font_size=2.8, font_style=FontStyle.BOLD)
             extrude(amount=0.5)
@@ -77,14 +83,14 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
         # Wirebond Contact Pads
         for px in np.linspace(-9.5, 13.5, 8):
             for py in [11.5, -14.5]:
-                with Locations((px, py, 4.6)):
+                with Locations((px, py, PKG_T)):
                     with BuildSketch():
                         Rectangle(1.4, 1.8)
                     extrude(amount=0.3)
 
         for py in np.linspace(-11.5, 8.5, 6):
             for px in [-13.5, 17.5]:
-                with Locations((px, py, 4.6)):
+                with Locations((px, py, PKG_T)):
                     with BuildSketch():
                         Rectangle(1.8, 1.4)
                     extrude(amount=0.3)
@@ -94,7 +100,7 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
         qy_list = [-8.5, -1.5, 5.5]
         for qx in qx_list:
             for qy in qy_list:
-                with Locations((qx, qy, 2.6)):
+                with Locations((qx, qy, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(3.4, 0.9)
                         Rectangle(0.9, 3.4)
@@ -104,14 +110,14 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
         # CPW Resonator Meanders
         for qy in qy_list:
             for mx in [-1.5, 5.5]:
-                with Locations((mx, qy, 2.6)):
+                with Locations((mx, qy, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(2.6, 0.45)
                     extrude(amount=0.5)
 
         for qx in qx_list:
             for my in [-5.0, 2.0]:
-                with Locations((qx, my, 2.6)):
+                with Locations((qx, my, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(0.45, 2.6)
                     extrude(amount=0.5)
@@ -119,7 +125,7 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
         # Corner Fiducials
         for fx in [-9.5, 13.5]:
             for fy in [-11.0, 8.0]:
-                with Locations((fx, fy, 2.6)):
+                with Locations((fx, fy, FLOOR_Z)):
                     with BuildSketch():
                         Rectangle(1.4, 0.35)
                         Rectangle(0.35, 1.4)
@@ -160,7 +166,7 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
             with Locations((0, 28.5)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)  # Ø4.6 mm standard hole
-        extrude(amount=4.0)
+        extrude(amount=CHAND_T)
 
         # 2. Underside Debossed Inscription (Z = 0, depth = 0.35 mm)
         # Base plate widths: at Y=18 -> 29.5 mm, at Y=11 -> 27.0 mm, at Y=-20 -> 15.8 mm.
@@ -187,7 +193,7 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
-        # 3. Front Details (Base Z = 4.0 mm)
+        # 3. Front Details (Base Z = CHAND_T)
         stages = [
             (23.5, 30.0, 3.0),   # 300 K / 50 K stage plate
             (14.0, 26.0, 2.5),   # 4 K stage plate
@@ -196,7 +202,7 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
             (-13.0, 14.0, 1.8),  # 15 mK mixing chamber plate
         ]
 
-        with Locations((0, 0, 4.0)):
+        with Locations((0, 0, CHAND_T)):
             # Raised Stage Plates (+0.8 mm -> Z = 4.8 mm)
             for y_pos, w, h in stages:
                 with Locations((0, y_pos)):
@@ -212,7 +218,7 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
                         Rectangle(0.9, 44.0)
                     extrude(amount=0.5)
 
-            # Helical Heat Exchanger Coils on sides (+0.6 mm -> Z = 4.6 mm)
+            # Helical Heat Exchanger Coils on sides (embossed above base top)
             for side in [-1, 1]:
                 for y_coil in [19.0, 9.5, 0.0, -9.0]:
                     x_c = side * (10.0 - (20.0 - y_coil) * 0.15)
@@ -263,7 +269,7 @@ def build_quantum_bloch(bottom_extra: str | None = None) -> Part:
             with Locations((0, 22.0)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
-        extrude(amount=4.6)
+        extrude(amount=PKG_T)
 
         # 2. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         if bottom_extra is None:
@@ -285,14 +291,14 @@ def build_quantum_bloch(bottom_extra: str | None = None) -> Part:
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
-        # 3. Recessed Central Well (Z = 4.6 to 2.6 mm)
-        with Locations((0, -1.0, 4.6)):
+        # 3. Recessed Central Well (Z = PKG_T down to BLOCH_FLOOR)
+        with Locations((0, -1.0, PKG_T)):
             with BuildSketch():
                 Circle(radius=16.0)
             extrude(amount=-2.0, mode=Mode.SUBTRACT)
 
-        # 4. 3D Bloch Sphere Dome & State Vectors (from Z = 2.6 mm)
-        with Locations((0, -1.0, 2.6)):
+        # 4. 3D Bloch Sphere Dome & State Vectors (built up from BLOCH_FLOOR)
+        with Locations((0, -1.0, BLOCH_FLOOR)):
             # Base Sphere Dome
             with BuildSketch():
                 Circle(radius=11.5)
@@ -348,7 +354,7 @@ def build_quantum_bloch(bottom_extra: str | None = None) -> Part:
                 extrude(amount=0.8)
 
         # 5. Top Crest "HPC&A QUANTUM"
-        with Locations((0, 16.0, 4.6)):
+        with Locations((0, 16.0, PKG_T)):
             with BuildSketch():
                 Text("HPC&A QUANTUM", font_size=2.4, font_style=FontStyle.BOLD)
             extrude(amount=0.5)

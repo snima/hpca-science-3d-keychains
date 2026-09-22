@@ -19,6 +19,8 @@ from build123d import *
 OUTPUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "output"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+BODY_T = 3.4  # Card body thickness - slim edition for fast printing
+
 
 # ==============================================================================
 # MODEL 1: CHIBI / KAWAII CHARACTER GPU KEYCHAIN
@@ -38,7 +40,7 @@ def build_chibi_gpu(bottom_extra: str | None = None) -> Part:
             with Locations((-25.0, 13.0)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
-        extrude(amount=4.6)
+        extrude(amount=BODY_T)
 
         # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         if bottom_extra is None:
@@ -74,13 +76,13 @@ def build_chibi_gpu(bottom_extra: str | None = None) -> Part:
                     extrude(amount=0.4)
 
         # 3. Circular Fan Well
-        with Locations((-5.0, -1.8, 4.6)):
+        with Locations((-5.0, -1.8, BODY_T)):
             with BuildSketch():
                 Circle(radius=8.8)
             extrude(amount=-2.2, mode=Mode.SUBTRACT)
 
-        # 4. Fan Interior (From floor Z = 2.4 mm)
-        with Locations((-5.0, -1.8, 2.4)):
+        # 4. Fan Interior (from well floor)
+        with Locations((-5.0, -1.8, 1.2)):
             # Chubby Smiling Face Hub (reaches Z = 4.2 mm)
             with BuildSketch():
                 Circle(radius=4.6)
@@ -122,8 +124,8 @@ def build_chibi_gpu(bottom_extra: str | None = None) -> Part:
                             Circle(radius=0.6)
                         extrude(amount=0.25)
 
-        # 5. Top Curved Banner with "HPC&A" (Z = 4.6 -> 5.5 mm)
-        with Locations((0, 10.0, 4.6)):
+        # 5. Top Curved Banner with "HPC&A" (built up from body top)
+        with Locations((0, 10.0, BODY_T)):
             with BuildSketch() as s_ban:
                 Rectangle(22.0, 4.2)
                 fillet(s_ban.vertices(), radius=1.4)
@@ -134,7 +136,7 @@ def build_chibi_gpu(bottom_extra: str | None = None) -> Part:
                 extrude(amount=0.5)
 
         # 6. Right Side Decorative Pill Vents
-        with Locations((16.0, -1.8, 4.6)):
+        with Locations((16.0, -1.8, BODY_T)):
             for vy in [-5.0, -1.5, 2.0, 5.5]:
                 with Locations((0, vy)):
                     with BuildSketch() as s_v:
@@ -177,7 +179,7 @@ def build_mecha_gpu(bottom_extra: str | None = None) -> Part:
             with Locations((-30.5, 0.0)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
-        extrude(amount=4.6)
+        extrude(amount=BODY_T)
 
         # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         if bottom_extra is None:
@@ -208,13 +210,13 @@ def build_mecha_gpu(bottom_extra: str | None = None) -> Part:
         extrude(amount=2.0)
 
         # 3. Supersonic Jet Turbine Intake (Left bay, center at X = -11.0)
-        with Locations((-11.0, 0, 4.6)):
+        with Locations((-11.0, 0, BODY_T)):
             with BuildSketch():
                 Circle(radius=9.5)
             extrude(amount=-2.2, mode=Mode.SUBTRACT)
 
-        # Turbine interior (from Z = 2.4 mm)
-        with Locations((-11.0, 0, 2.4)):
+        # Turbine interior (from well floor)
+        with Locations((-11.0, 0, 1.2)):
             # Central Aerodynamic Bullet Nose Cone
             with BuildSketch():
                 Circle(radius=3.2)
@@ -234,21 +236,21 @@ def build_mecha_gpu(bottom_extra: str | None = None) -> Part:
                         extrude(amount=1.5)
 
         # 4. Plasma Radiator Fin Grille (Right bay, center at X = 13.0)
-        with Locations((13.0, 0, 4.6)):
+        with Locations((13.0, 0, BODY_T)):
             with BuildSketch() as s_rad:
                 Rectangle(18.0, 16.0)
                 fillet(s_rad.vertices(), radius=1.4)
             extrude(amount=-1.8, mode=Mode.SUBTRACT)
 
-        # Radiator slats (from Z = 2.8 mm)
+        # Radiator slats (from well floor)
         for rx in np.linspace(5.5, 20.5, 7):
-            with Locations((rx, 0, 2.8)):
+            with Locations((rx, 0, 1.6)):
                 with BuildSketch():
                     Rectangle(1.1, 14.5)
                 extrude(amount=1.2)
 
         # 5. Heavy Armored Nameplate with "HPC&A"
-        with Locations((13.0, 0, 2.8)):
+        with Locations((13.0, 0, 1.6)):
             with BuildSketch() as s_plq:
                 Rectangle(16.0, 8.0)
                 fillet(s_plq.vertices(), radius=1.0)
@@ -261,7 +263,7 @@ def build_mecha_gpu(bottom_extra: str | None = None) -> Part:
 
         # 6. Armor Panel Grooves on Hull
         for gy in [8.5, -8.5]:
-            with Locations((0, gy, 4.6)):
+            with Locations((0, gy, BODY_T)):
                 with BuildSketch():
                     Rectangle(32.0, 0.6)
                 extrude(amount=-0.4, mode=Mode.SUBTRACT)
@@ -279,7 +281,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
         bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
     """
     with BuildPart() as rune:
-        # 1. Antique Dwarven Armor Frame (Z = 0 to 4.6 mm) + Keyring Eyelet
+        # 1. Antique Dwarven Armor Frame (slim body) + Keyring Eyelet
         with BuildSketch() as s_body:
             Rectangle(56.0, 26.0)
             fillet(s_body.vertices(), radius=2.5)
@@ -287,7 +289,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
             with Locations((-31.5, 3.5)):
                 Circle(radius=5.2)
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
-        extrude(amount=4.6)
+        extrude(amount=BODY_T)
 
         # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         if bottom_extra is None:
@@ -328,7 +330,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
         # 3. Corner Rivet Bosses (Dwarven armor aesthetics)
         for cx in [-25.0, 25.0]:
             for cy in [-10.5, 10.5]:
-                with Locations((cx, cy, 4.6)):
+                with Locations((cx, cy, BODY_T)):
                     with BuildSketch():
                         Circle(radius=1.1)
                     extrude(amount=0.4)
@@ -338,12 +340,12 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
                         extrude(amount=0.2)
 
         # 4. Left Bay: The Arcane Magic Circle (center at X = -16.0, radius 8.6 -> right edge at -7.4)
-        with Locations((-16.0, 0, 4.6)):
+        with Locations((-16.0, 0, BODY_T)):
             with BuildSketch():
                 Circle(radius=8.6)
             extrude(amount=-2.2, mode=Mode.SUBTRACT)
 
-        with Locations((-16.0, 0, 2.4)):
+        with Locations((-16.0, 0, 1.2)):
             # Outer ring
             with BuildSketch():
                 Circle(radius=8.2)
@@ -373,7 +375,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
                         extrude(amount=1.4)
 
         # 5. Right Bay: Mana Crystal Cluster (center at X = 16.0, width 15.5 -> left edge at 8.25)
-        with Locations((16.0, 0, 4.6)):
+        with Locations((16.0, 0, BODY_T)):
             with BuildSketch() as s_cwell:
                 Rectangle(15.5, 17.0)
                 fillet(s_cwell.vertices(), radius=1.6)
@@ -389,7 +391,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
             (4.5, 0.0, 1.5, 1.0, 0.5),    # Outer-right crystal
         ]
         for dx, dy, br, ph, th in crystals:
-            with Locations((16.0 + dx, dy, 2.6)):
+            with Locations((16.0 + dx, dy, 1.4)):
                 with BuildSketch():
                     RegularPolygon(radius=br, side_count=6)
                 extrude(amount=ph)
@@ -399,7 +401,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
                     extrude(amount=th)
 
         # 6. Central Heraldic Crest: Shield with "HPC&A" (from X = -5.2 to +5.2 -> zero overlap)
-        with Locations((0, 0, 4.6)):
+        with Locations((0, 0, BODY_T)):
             with BuildSketch() as s_shield:
                 pts = [(-5.2, 6.0), (5.2, 6.0), (5.2, -1.0), (0.0, -6.5), (-5.2, -1.0)]
                 Polygon(pts)
@@ -414,7 +416,7 @@ def build_rune_gpu(bottom_extra: str | None = None) -> Part:
         # 7. Ancient Mana Inscription Glyphs on Frame
         for rx in [-22.0, 22.0]:
             for ry in [8.0, -8.0]:
-                with Locations((rx, ry, 4.6)):
+                with Locations((rx, ry, BODY_T)):
                     with BuildSketch():
                         Rectangle(1.4, 1.4)
                     extrude(amount=-0.35, mode=Mode.SUBTRACT)
