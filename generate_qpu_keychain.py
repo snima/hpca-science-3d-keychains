@@ -28,8 +28,12 @@ OUTPUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "output"))
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
-def build_qpu_keychain() -> Part:
-    """Builds the 3D-printable HPC&A Quantum Processor (QPU) Keychain."""
+def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
+    """Builds the 3D-printable HPC&A Quantum Processor (QPU) Keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as qpu:
         # ======================================================================
         # 1. MAIN CERAMIC / GOLD-PLATED PACKAGE BODY + KEYRING EYELET
@@ -47,12 +51,22 @@ def build_qpu_keychain() -> Part:
         # 2. UNDERSIDE ATTRIBUTION INSCRIPTION (Debossed at Z = 0)
         # Mirrored about YZ so it reads correctly from below (-Z view).
         # ======================================================================
+        if bottom_extra is None:
+            bottom_lines = [
+                (4.2, "HPC&A QUANTUM LAB", 2.8),
+                (-4.2, "DESIGNED BY NIMA", 2.5),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (7.0, "HPC&A QUANTUM LAB", 2.6),
+                (0.5, "DESIGNED BY NIMA", 2.3),
+                (-6.0, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 4.2)):
-                    Text("HPC&A QUANTUM LAB", font_size=2.8, font_style=FontStyle.BOLD)
-                with Locations((0, -4.2)):
-                    Text("DESIGNED BY NIMA", font_size=2.5, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 

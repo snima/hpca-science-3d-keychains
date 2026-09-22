@@ -25,7 +25,12 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # ==============================================================================
 # MODEL 1: SUPERCONDUCTING QPU CHIP KEYCHAIN
 # ==============================================================================
-def build_qpu_chip() -> Part:
+def build_qpu_chip(bottom_extra: str | None = None) -> Part:
+    """Builds the superconducting QPU chip keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as qpu:
         # Package Body + Left Eyelet
         with BuildSketch() as s_pkg:
@@ -37,12 +42,22 @@ def build_qpu_chip() -> Part:
         extrude(amount=4.6)
 
         # Underside (Z = 0) - mirrored about YZ for correct -Z (bottom) readability
+        if bottom_extra is None:
+            bottom_lines = [
+                (4.2, "HPC&A QUANTUM LAB", 2.8),
+                (-4.2, "DESIGNED BY NIMA", 2.5),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (7.0, "HPC&A QUANTUM LAB", 2.6),
+                (0.5, "DESIGNED BY NIMA", 2.3),
+                (-6.0, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 4.2)):
-                    Text("HPC&A QUANTUM LAB", font_size=2.8, font_style=FontStyle.BOLD)
-                with Locations((0, -4.2)):
-                    Text("DESIGNED BY NIMA", font_size=2.5, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
@@ -116,8 +131,12 @@ def build_qpu_chip() -> Part:
 # ==============================================================================
 # MODEL 2: 2.5D SLEEK TIERED QUANTUM DILUTION CHANDELIER
 # ==============================================================================
-def build_quantum_chandelier() -> Part:
-    """Builds the sleek 2.5D tiered dilution refrigerator chandelier keychain."""
+def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
+    """Builds the sleek 2.5D tiered dilution refrigerator chandelier keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as chand:
         # 1. Base Plate: Smooth tapered trapezoidal silhouette
         # Y spans from -28 to +25 mm (53 mm tall body).
@@ -147,14 +166,24 @@ def build_quantum_chandelier() -> Part:
         # Base plate widths: at Y=18 -> 29.5 mm, at Y=11 -> 27.0 mm, at Y=-20 -> 15.8 mm.
         # Texts have >5 mm clearance from all outer contours!
         # Mirrored about YZ for correct -Z (bottom) readability.
+        if bottom_extra is None:
+            bottom_lines = [
+                (18.0, "HPC&A CRYOSTAT", 1.8),
+                (11.0, "DESIGNED BY NIMA", 1.8),
+                (-20.0, "15 mK", 1.8),
+            ]
+        else:  # FabLab edition: 4 lines, home-print-safe sizes
+            bottom_lines = [
+                (18.0, "HPC&A CRYOSTAT", 2.0),
+                (11.5, "DESIGNED BY NIMA", 1.8),
+                (5.0, bottom_extra, 1.8),
+                (-20.0, "15 mK", 2.2),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 18.0)):
-                    Text("HPC&A CRYOSTAT", font_size=1.8, font_style=FontStyle.BOLD)
-                with Locations((0, 11.0)):
-                    Text("DESIGNED BY NIMA", font_size=1.8, font_style=FontStyle.BOLD)
-                with Locations((0, -20.0)):
-                    Text("15 mK", font_size=1.8, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
@@ -220,7 +249,12 @@ def build_quantum_chandelier() -> Part:
 # ==============================================================================
 # MODEL 3: BLOCH SPHERE & QUANTUM INFO MEDALLION
 # ==============================================================================
-def build_quantum_bloch() -> Part:
+def build_quantum_bloch(bottom_extra: str | None = None) -> Part:
+    """Builds the Bloch sphere medallion keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as bloch:
         # 1. Octagonal Medallion + Top Hanging Eyelet
         with BuildSketch() as s_body:
@@ -232,12 +266,22 @@ def build_quantum_bloch() -> Part:
         extrude(amount=4.6)
 
         # 2. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
+        if bottom_extra is None:
+            bottom_lines = [
+                (4.0, "BLOCH SPHERE", 2.6),
+                (-4.0, "DESIGNED BY NIMA", 2.3),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (6.5, "BLOCH SPHERE", 2.4),
+                (0.0, "DESIGNED BY NIMA", 2.2),
+                (-6.5, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 4.0)):
-                    Text("BLOCH SPHERE", font_size=2.6, font_style=FontStyle.BOLD)
-                with Locations((0, -4.0)):
-                    Text("DESIGNED BY NIMA", font_size=2.3, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 

@@ -23,8 +23,12 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # ==============================================================================
 # MODEL 1: CHIBI / KAWAII CHARACTER GPU KEYCHAIN
 # ==============================================================================
-def build_chibi_gpu() -> Part:
-    """Builds the 3D-printable Chibi Kawaii GPU Character Keychain."""
+def build_chibi_gpu(bottom_extra: str | None = None) -> Part:
+    """Builds the 3D-printable Chibi Kawaii GPU Character Keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as chibi:
         # 1. Cute Pillowy Card Body + Integrated Keyring Eyelet
         with BuildSketch() as s:
@@ -37,12 +41,22 @@ def build_chibi_gpu() -> Part:
         extrude(amount=4.6)
 
         # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
+        if bottom_extra is None:
+            bottom_lines = [
+                (3.5, "CHIBI GPU", 2.4),
+                (-3.5, "DESIGNED BY NIMA", 2.2),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (6.0, "CHIBI GPU", 2.4),
+                (0.5, "DESIGNED BY NIMA", 2.2),
+                (-5.5, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 3.5)):
-                    Text("CHIBI GPU", font_size=2.4, font_style=FontStyle.BOLD)
-                with Locations((0, -3.5)):
-                    Text("DESIGNED BY NIMA", font_size=2.2, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
@@ -134,8 +148,12 @@ def build_chibi_gpu() -> Part:
 # ==============================================================================
 # MODEL 2: SCI-FI / MECHA STARSHIP GPU KEYCHAIN
 # ==============================================================================
-def build_mecha_gpu() -> Part:
-    """Builds the 3D-printable Sci-Fi Mecha Starship GPU Keychain."""
+def build_mecha_gpu(bottom_extra: str | None = None) -> Part:
+    """Builds the 3D-printable Sci-Fi Mecha Starship GPU Keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as mecha:
         # 1. Angular Mecha Starship Hull + Rear Thruster Eyelet
         with BuildSketch() as s_hull:
@@ -162,12 +180,22 @@ def build_mecha_gpu() -> Part:
         extrude(amount=4.6)
 
         # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
+        if bottom_extra is None:
+            bottom_lines = [
+                (3.5, "MECHA STARSHIP", 2.4),
+                (-3.5, "DESIGNED BY NIMA", 2.2),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (6.0, "MECHA STARSHIP", 2.4),
+                (0.5, "DESIGNED BY NIMA", 2.2),
+                (-5.5, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 3.5)):
-                    Text("MECHA STARSHIP", font_size=2.4, font_style=FontStyle.BOLD)
-                with Locations((0, -3.5)):
-                    Text("DESIGNED BY NIMA", font_size=2.2, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
@@ -244,8 +272,12 @@ def build_mecha_gpu() -> Part:
 # ==============================================================================
 # MODEL 3: MAGIC RUNE / CRYSTAL ARTIFACT GPU KEYCHAIN
 # ==============================================================================
-def build_rune_gpu() -> Part:
-    """Builds the 3D-printable Magic Rune / Crystal Artifact GPU Keychain."""
+def build_rune_gpu(bottom_extra: str | None = None) -> Part:
+    """Builds the 3D-printable Magic Rune / Crystal Artifact GPU Keychain.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as rune:
         # 1. Antique Dwarven Armor Frame (Z = 0 to 4.6 mm) + Keyring Eyelet
         with BuildSketch() as s_body:
@@ -258,12 +290,22 @@ def build_rune_gpu() -> Part:
         extrude(amount=4.6)
 
         # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
+        if bottom_extra is None:
+            bottom_lines = [
+                (3.5, "MAGIC RUNE GPU", 2.4),
+                (-3.5, "DESIGNED BY NIMA", 2.2),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (6.0, "MAGIC RUNE GPU", 2.4),
+                (0.5, "DESIGNED BY NIMA", 2.2),
+                (-5.5, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 3.5)):
-                    Text("MAGIC RUNE GPU", font_size=2.4, font_style=FontStyle.BOLD)
-                with Locations((0, -3.5)):
-                    Text("DESIGNED BY NIMA", font_size=2.2, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 

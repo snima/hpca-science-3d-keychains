@@ -9,6 +9,9 @@ Batch Plates:
   1. batch_fantasy_gpus_x6.stl: 6x Fantasy GPU Keychains (2x Chibi + 2x Mecha + 2x Rune).
   2. batch_quantum_collection_x6.stl: 6x Quantum Keychains (2x QPU + 2x Chandelier + 2x Bloch).
   3. batch_master_suite_x6.stl: 6-Pack of all 6 unique models (1 of each).
+  4. batch_full_set_x9.stl: all 9 keychains in 1 print (no snap-fit spinning edition).
+  5. batch_production_x17.stl: compact production run, 17 keychains
+     (2x of everything except the fantasy CPU), ~213x207 mm on 220x220.
 """
 
 import os
@@ -43,6 +46,11 @@ def main():
     m_qpu   = prepare_mesh(trimesh.load(os.path.join(OUTPUT_DIR, "qpu_keychain_hpca.stl")))
     m_chand = prepare_mesh(trimesh.load(os.path.join(OUTPUT_DIR, "quantum_chandelier.stl")))
     m_bloch = prepare_mesh(trimesh.load(os.path.join(OUTPUT_DIR, "quantum_bloch.stl")))
+
+    # Extra meshes for the full-set plate (classic GPU + fantasy CPU + DDR RAM)
+    m_gpu = prepare_mesh(trimesh.load(os.path.join(OUTPUT_DIR, "gpu_keychain_hpca.stl")))
+    m_cpu = prepare_mesh(trimesh.load(os.path.join(OUTPUT_DIR, "cpu_fantasy_chibi.stl")))
+    m_ram = prepare_mesh(trimesh.load(os.path.join(OUTPUT_DIR, "ram_ddr_hpca.stl")))
 
     # --------------------------------------------------------------------------
     # 1. BATCH PLATE: 6x Fantasy GPUs (2x Chibi, 2x Mecha, 2x Rune)
@@ -106,6 +114,63 @@ def main():
     plate_master.export(out_m)
     print(f"Exported: {out_m}")
     print(f"  Footprint: {plate_master.bounding_box.extents[0]:.1f} x {plate_master.bounding_box.extents[1]:.1f} x {plate_master.bounding_box.extents[2]:.1f} mm")
+
+    # --------------------------------------------------------------------------
+    # 4. FULL SET: all 9 keychains in 1 print (no snap-fit spinning edition)
+    #    Complete 3x3 slot grid on a 220x220 bed.
+    # --------------------------------------------------------------------------
+    full_slots = [
+        (-72.0, 68.0, m_chand), (0.0, 68.0, m_bloch), (72.0, 68.0, m_cpu),
+        (-72.0, 0.0, m_chibi), (0.0, 0.0, m_mecha), (72.0, 0.0, m_rune),
+        (-72.0, -68.0, m_gpu), (0.0, -68.0, m_qpu), (72.0, -68.0, m_ram),
+    ]
+    full_parts = []
+    for x_pos, y_pos, m in full_slots:
+        c = m.copy()
+        c.apply_translation([x_pos, y_pos, 0])
+        full_parts.append(c)
+
+    plate_full = trimesh.util.concatenate(full_parts)
+    out_full = os.path.join(OUTPUT_DIR, "batch_full_set_x9.stl")
+    plate_full.export(out_full)
+    print(f"Exported: {out_full}")
+    print(f"  Footprint: {plate_full.bounding_box.extents[0]:.1f} x {plate_full.bounding_box.extents[1]:.1f} x {plate_full.bounding_box.extents[2]:.1f} mm")
+
+    # --------------------------------------------------------------------------
+    # 5. PRODUCTION PLATE x17: compact nested rows, minimal dead space.
+    #    2x RAM/GPU/Rune/Mecha/Chibi/QPU/Chandelier/Bloch + 1x fantasy CPU.
+    # ------------------------------------------------------------------
+    prod_rows = [  # (row gap, [(mesh)])
+        (4.0, [m_ram, m_gpu, m_rune]),
+        (4.0, [m_mecha, m_chibi, m_qpu]),
+        (4.0, [m_ram, m_gpu, m_rune]),
+        (4.0, [m_mecha, m_chibi, m_qpu]),
+        (3.0, [m_chand, m_bloch, m_cpu, m_chand, m_bloch]),
+    ]
+    row_heights = [
+        max(m.bounding_box.extents[1] for m in meshes) for _, meshes in prod_rows
+    ]
+    row_gap = 4.0
+    total_h = sum(row_heights) + row_gap * (len(prod_rows) - 1)
+    prod_parts = []
+    y_cur = -total_h / 2.0
+    for (gap, meshes), rh in zip(prod_rows, row_heights):
+        widths = [m.bounding_box.extents[0] for m in meshes]
+        total_w = sum(widths) + gap * (len(meshes) - 1)
+        x_cur = -total_w / 2.0
+        y_c = y_cur + rh / 2.0
+        for m, w in zip(meshes, widths):
+            c = m.copy()
+            c.apply_translation([x_cur + w / 2.0, y_c, 0])
+            prod_parts.append(c)
+            x_cur += w + gap
+        y_cur += rh + row_gap
+
+    plate_prod = trimesh.util.concatenate(prod_parts)
+    out_prod = os.path.join(OUTPUT_DIR, "batch_production_x17.stl")
+    plate_prod.export(out_prod)
+    print(f"Exported: {out_prod}")
+    print(f"  Footprint: {plate_prod.bounding_box.extents[0]:.1f} x {plate_prod.bounding_box.extents[1]:.1f} x {plate_prod.bounding_box.extents[2]:.1f} mm")
 
     print("\nAll Mass Production Batch Plates exported successfully!")
 

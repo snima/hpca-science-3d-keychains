@@ -49,8 +49,12 @@ FIN_BAY_H = 18.0
 FIN_BAY_DEPTH = 1.8
 
 
-def build_spinning_gpu_body() -> Part:
-    """Builds the GPU body with the spindle axle pin for the snap-fit fan."""
+def build_spinning_gpu_body(bottom_extra: str | None = None) -> Part:
+    """Builds the GPU body with the spindle axle pin for the snap-fit fan.
+
+    Args:
+        bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+    """
     with BuildPart() as body:
         # 1. Main Shroud & Keyring Eyelet
         with BuildSketch() as s_shroud:
@@ -63,12 +67,22 @@ def build_spinning_gpu_body() -> Part:
 
         # 2. Underside Attribution Inscription (Debossed at Z = 0)
         # Mirrored about YZ so it reads correctly from below (-Z view).
+        if bottom_extra is None:
+            bottom_lines = [
+                (3.5, "HPC&A EDITION", 2.6),
+                (-3.5, "DESIGNED BY NIMA", 2.4),
+            ]
+        else:  # FabLab edition: 3 lines
+            bottom_lines = [
+                (6.0, "HPC&A EDITION", 2.4),
+                (0.5, "DESIGNED BY NIMA", 2.2),
+                (-5.5, bottom_extra, 2.0),
+            ]
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
-                with Locations((0, 3.5)):
-                    Text("HPC&A EDITION", font_size=2.6, font_style=FontStyle.BOLD)
-                with Locations((0, -3.5)):
-                    Text("DESIGNED BY NIMA", font_size=2.4, font_style=FontStyle.BOLD)
+                for _y, _txt, _fs in bottom_lines:
+                    with Locations((0, _y)):
+                        Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
