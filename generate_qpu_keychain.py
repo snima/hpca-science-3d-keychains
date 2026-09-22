@@ -32,11 +32,12 @@ CAVITY_D = 2.0    # Die cavity depth
 FLOOR_Z = PKG_T - CAVITY_D  # Cavity floor (1.4 mm)
 
 
-def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
+def build_qpu_keychain(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the 3D-printable HPC&A Quantum Processor (QPU) Keychain.
 
     Args:
         bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+        coarse: XL underside text with deeper cut for coarse nozzles (>= 0.6 mm).
     """
     with BuildPart() as qpu:
         # ======================================================================
@@ -55,24 +56,33 @@ def build_qpu_keychain(bottom_extra: str | None = None) -> Part:
         # 2. UNDERSIDE ATTRIBUTION INSCRIPTION (Debossed at Z = 0)
         # Mirrored about YZ so it reads correctly from below (-Z view).
         # ======================================================================
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (7.0, "HPC&A QUANTUM LAB", 3.2),
+                (0.0, "DESIGNED BY NIMA", 3.0),
+                (-7.0, bottom_extra, 2.8),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (4.2, "HPC&A QUANTUM LAB", 2.8),
                 (-4.2, "DESIGNED BY NIMA", 2.5),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 3 lines
             bottom_lines = [
                 (7.0, "HPC&A QUANTUM LAB", 2.6),
                 (0.5, "DESIGNED BY NIMA", 2.3),
                 (-6.0, bottom_extra, 2.0),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # ======================================================================
         # 3. TOP RECESSED SILICON DIE CAVITY (Z = PKG_T down to FLOOR_Z)

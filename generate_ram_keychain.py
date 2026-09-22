@@ -56,7 +56,7 @@ RAIL_Y = 7.0
 RAIL_RELIEF = 0.5           # Z: body-top -> +0.5
 
 
-def build_ram_keychain(bottom_extra: str | None = None) -> Part:
+def build_ram_keychain(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the 3D-printable HPC&A DDR Memory Stick Keychain.
 
     Args:
@@ -77,24 +77,33 @@ def build_ram_keychain(bottom_extra: str | None = None) -> Part:
         # ------------------------------------------------------------------
         # 1B. Underside inscription (Z = 0) - mirrored for -Z readability
         # ------------------------------------------------------------------
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (4.5, "DDR MEMORY", 3.0),
+                (0.0, "DESIGNED BY NIMA", 2.8),
+                (-4.5, bottom_extra, 2.6),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (2.5, "DDR MEMORY", 2.4),
                 (-2.5, "DESIGNED BY NIMA", 2.2),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 3 lines
             bottom_lines = [
                 (4.5, "DDR MEMORY", 2.4),
                 (0.0, "DESIGNED BY NIMA", 2.2),
                 (-4.5, bottom_extra, 2.0),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # ------------------------------------------------------------------
         # 2. Edge-connector finger tab (bottom edge, Z: 0 -> 2.0)

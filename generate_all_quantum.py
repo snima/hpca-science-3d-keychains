@@ -31,11 +31,12 @@ BLOCH_FLOOR = 1.4  # Bloch well floor (PKG_T - 2.0 well depth)
 # ==============================================================================
 # MODEL 1: SUPERCONDUCTING QPU CHIP KEYCHAIN
 # ==============================================================================
-def build_qpu_chip(bottom_extra: str | None = None) -> Part:
+def build_qpu_chip(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the superconducting QPU chip keychain.
 
     Args:
         bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+        coarse: XL underside text with deeper cut for coarse nozzles (>= 0.6 mm).
     """
     with BuildPart() as qpu:
         # Package Body + Left Eyelet
@@ -48,24 +49,33 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
         extrude(amount=PKG_T)
 
         # Underside (Z = 0) - mirrored about YZ for correct -Z (bottom) readability
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (7.0, "HPC&A QUANTUM LAB", 3.2),
+                (0.0, "DESIGNED BY NIMA", 3.0),
+                (-7.0, bottom_extra, 2.8),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (4.2, "HPC&A QUANTUM LAB", 2.8),
                 (-4.2, "DESIGNED BY NIMA", 2.5),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 3 lines
             bottom_lines = [
                 (7.0, "HPC&A QUANTUM LAB", 2.6),
                 (0.5, "DESIGNED BY NIMA", 2.3),
                 (-6.0, bottom_extra, 2.0),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # Recessed Silicon Die Cavity
         with Locations((2.0, -1.5, PKG_T)):
@@ -137,11 +147,12 @@ def build_qpu_chip(bottom_extra: str | None = None) -> Part:
 # ==============================================================================
 # MODEL 2: 2.5D SLEEK TIERED QUANTUM DILUTION CHANDELIER
 # ==============================================================================
-def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
+def build_quantum_chandelier(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the sleek 2.5D tiered dilution refrigerator chandelier keychain.
 
     Args:
         bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+        coarse: XL underside text with deeper cut for coarse nozzles (>= 0.6 mm).
     """
     with BuildPart() as chand:
         # 1. Base Plate: Smooth tapered trapezoidal silhouette
@@ -172,12 +183,21 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
         # Base plate widths: at Y=18 -> 29.5 mm, at Y=11 -> 27.0 mm, at Y=-20 -> 15.8 mm.
         # Texts have >5 mm clearance from all outer contours!
         # Mirrored about YZ for correct -Z (bottom) readability.
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (18.0, "HPC&A CRYOSTAT", 2.6),
+                (11.5, "DESIGNED BY NIMA", 2.4),
+                (4.5, bottom_extra, 2.4),
+                (-20.0, "15 mK", 2.6),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (18.0, "HPC&A CRYOSTAT", 1.8),
                 (11.0, "DESIGNED BY NIMA", 1.8),
                 (-20.0, "15 mK", 1.8),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 4 lines, home-print-safe sizes
             bottom_lines = [
                 (18.0, "HPC&A CRYOSTAT", 2.0),
@@ -185,13 +205,14 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
                 (5.0, bottom_extra, 1.8),
                 (-20.0, "15 mK", 2.2),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # 3. Front Details (Base Z = CHAND_T)
         stages = [
@@ -255,11 +276,12 @@ def build_quantum_chandelier(bottom_extra: str | None = None) -> Part:
 # ==============================================================================
 # MODEL 3: BLOCH SPHERE & QUANTUM INFO MEDALLION
 # ==============================================================================
-def build_quantum_bloch(bottom_extra: str | None = None) -> Part:
+def build_quantum_bloch(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the Bloch sphere medallion keychain.
 
     Args:
         bottom_extra: Optional extra line on the underside (e.g. "FABLAB CASTELLÓ").
+        coarse: XL underside text with deeper cut for coarse nozzles (>= 0.6 mm).
     """
     with BuildPart() as bloch:
         # 1. Octagonal Medallion + Top Hanging Eyelet
@@ -272,24 +294,33 @@ def build_quantum_bloch(bottom_extra: str | None = None) -> Part:
         extrude(amount=PKG_T)
 
         # 2. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (6.5, "BLOCH SPHERE", 3.0),
+                (0.0, "DESIGNED BY NIMA", 2.8),
+                (-6.5, bottom_extra, 2.6),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (4.0, "BLOCH SPHERE", 2.6),
                 (-4.0, "DESIGNED BY NIMA", 2.3),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 3 lines
             bottom_lines = [
                 (6.5, "BLOCH SPHERE", 2.4),
                 (0.0, "DESIGNED BY NIMA", 2.2),
                 (-6.5, bottom_extra, 2.0),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # 3. Recessed Central Well (Z = PKG_T down to BLOCH_FLOOR)
         with Locations((0, -1.0, PKG_T)):

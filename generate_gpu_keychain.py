@@ -62,12 +62,13 @@ TEXT_SPINE = "HPC&A EDITION" # Spine branding (No proprietary trademarks)
 TEXT_RELIEF = 0.6            # Embossed text relief
 
 
-def build_gpu_keychain_model(bottom_extra: str | None = None) -> Part:
+def build_gpu_keychain_model(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the unified 3D-printable HPC&A Edition GPU Keychain solid body.
 
     Args:
         bottom_extra: Optional third line on the underside (e.g. "FABLAB CASTELLÓ"
             for the FabLab edition). When None, the standard 2-line inscription is used.
+        coarse: XL underside text with deeper cut for coarse nozzles (>= 0.6 mm).
     """
     with BuildPart() as gpu:
         # ======================================================================
@@ -88,24 +89,33 @@ def build_gpu_keychain_model(bottom_extra: str | None = None) -> Part:
         # 1B. UNDERSIDE ATTRIBUTION INSCRIPTION (Debossed at Z = 0)
         # Mirrored about YZ so it reads correctly from below (-Z view).
         # ======================================================================
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (6.0, "HPC&A EDITION", 3.0),
+                (0.0, "DESIGNED BY NIMA", 2.8),
+                (-6.0, bottom_extra, 2.6),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (3.5, "HPC&A EDITION", 2.6),
                 (-3.5, "DESIGNED BY NIMA", 2.4),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 3 lines with home-print-safe sizes
             bottom_lines = [
                 (6.0, "HPC&A EDITION", 2.4),
                 (0.5, "DESIGNED BY NIMA", 2.2),
                 (-5.5, bottom_extra, 2.0),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # ======================================================================
         # 2. PCIe CONNECTOR TAB (Protrudes directly from card bottom edge)

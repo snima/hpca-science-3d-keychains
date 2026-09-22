@@ -109,7 +109,7 @@ PLATE_FS = 2.6
 PLATE_RELIEF = 0.5          # Z: 5.0 -> 5.5
 
 
-def build_fantasy_cpu(bottom_extra: str | None = None) -> Part:
+def build_fantasy_cpu(bottom_extra: str | None = None, coarse: bool = False) -> Part:
     """Builds the 3D-printable Hetero Fantasy CPU Keychain (weak + strong cores).
 
     Args:
@@ -137,24 +137,33 @@ def build_fantasy_cpu(bottom_extra: str | None = None) -> Part:
         # ------------------------------------------------------------------
         # 1B. Underside inscription (Z = 0) - mirrored for -Z readability
         # ------------------------------------------------------------------
-        if bottom_extra is None:
+        if coarse:  # Sergio / 0.6 mm nozzle: XL text, deeper cut
+            bottom_lines = [
+                (7.0, "HETERO CPU", 3.2),
+                (0.0, "DESIGNED BY NIMA", 3.0),
+                (-7.0, bottom_extra, 2.8),
+            ]
+            _cut = 0.6
+        elif bottom_extra is None:
             bottom_lines = [
                 (3.5, "HETERO CPU", 2.4),
                 (-3.5, "DESIGNED BY NIMA", 2.2),
             ]
+            _cut = 0.35
         else:  # FabLab edition: 3 lines
             bottom_lines = [
                 (6.0, "HETERO CPU", 2.4),
                 (0.5, "DESIGNED BY NIMA", 2.2),
                 (-5.5, bottom_extra, 2.0),
             ]
+            _cut = 0.35
         with Locations((0, 0, 0)):
             with BuildSketch() as s_bottom:
                 for _y, _txt, _fs in bottom_lines:
                     with Locations((0, _y)):
                         Text(_txt, font_size=_fs, font_style=FontStyle.BOLD)
                 mirror(about=Plane.YZ, mode=Mode.REPLACE)
-            extrude(amount=0.35, mode=Mode.SUBTRACT)
+            extrude(amount=_cut, mode=Mode.SUBTRACT)
 
         # ------------------------------------------------------------------
         # 2. Stubby socket pin teeth on left/right edges (Z: 0 -> 2.2)
