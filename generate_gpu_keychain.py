@@ -81,13 +81,15 @@ def build_gpu_keychain_model() -> Part:
 
         # ======================================================================
         # 1B. UNDERSIDE ATTRIBUTION INSCRIPTION (Debossed at Z = 0)
+        # Mirrored about YZ so it reads correctly from below (-Z view).
         # ======================================================================
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 3.5)):
                     Text("HPC&A EDITION", font_size=2.6, font_style=FontStyle.BOLD)
                 with Locations((0, -3.5)):
                     Text("DESIGNED BY NIMA", font_size=2.4, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # ======================================================================

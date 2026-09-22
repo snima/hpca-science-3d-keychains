@@ -1,54 +1,81 @@
-# HPC&A Keychains Suite: 3D Printing Workshop Manual
-**Author:** Nima | **Designation:** HPC&A Research Group  
-**Scope:** 6 Production Models (3 Fantasy GPU Editions + 3 Quantum Hardware Editions)
+# 🖨️ HPC&A 3D PRINTING PRODUCTION MANUAL & WORKSHOP GUIDE
+## راهنمای جامع تولید و کارگاه پرینت سه‌بعدی برای مجموعه سخت‌افزاری HPC&A
+
+**پروژه:** قطعات یادبود و جاکلیدی‌های رویداد علمی دانشگاهی و هویت آزمایشگاه
+**طراح:** نیما (Designed by Nima)
+**توسعه‌یافته برای:** گروه پژوهشی معماری و محاسبات با کارایی بالا (HPC&A Research Group)
 
 ---
 
-## 1. Slicer Configuration & Production Parameters
-* **Support Material:** **STRICTLY DISABLED (0% Supports)**  
-  All 6 models are engineered with self-supporting geometry (overhang angles <= 45 degrees) and 100% flat bed adhesion at Z=0.
-* **Layer Height:** 0.20 mm (First layer: 0.20 mm).
-* **Infill Density:** 15% to 20% (Gyroid, Grid, or Adaptive Cubic).
-* **Perimeter Walls:** 3 to 4 loops (ensures high tensile strength for the keyring through-holes).
-* **Top/Bottom Shells:** 4 bottom solid layers, 5 top solid layers.
-* **Bed Adhesion (Brim/Raft):** None required. The continuous planar base ensures secure adhesion to textured PEI, smooth PEI, or glass.
-* **Recommended Filament:** PLA, PLA+, or PETG (Nozzle: 205-215 deg C, Bed: 60 deg C).
+## 🇮🇷 بخش اول: راهنمای فارسی مخصوص کارگاه پرینت سه‌بعدی
+
+سلام به همکار محترم و اپراتور کارگاه پرینت سه‌بعدی!
+تمام فایل‌های این مجموعه به صورت کاملاً مهندسی‌شده و با رعایت دقیق اصول پرینت سه‌بعدی FDM طراحی شده‌اند تا **سریع، بی‌دردسر و با بالاترین کیفیت** چاپ شوند.
+
+### ۱. تنظیمات حیاتی اسلایسر (Slicer Settings)
+* **نیاز به ساپورت (Supports):** **خیر - کاملاً خاموش (Support: NONE / 0%)**. تمام زوایای شیب‌ها و اورهنگ‌ها کمتر از ۴۵ درجه طراحی شده‌اند و هیچ نیازی به ساپورت‌گذاری ندارند.
+* **ضخامت لایه (Layer Height):** **$0.20	ext{ mm}$** (برای اولین لایه و لایه‌های بعدی).
+* **تراکم داخلی (Infill):** **۱۵٪ تا ۲۰٪** با الگوی Gyroid یا Grid.
+* **تعداد دیواره‌ها (Wall Loops / Perimeters):** **۳ الی ۴ دور دیواره** (برای استحکام حداکثری سوراخ جاکلیدی در جیب).
+* **تعداد لایه‌های کف و سقف (Top/Bottom Layers):** **۴ لایه کف / ۵ لایه سقف**.
+* **نیاز به Brim / Raft:** **خیر**. تمام مدل‌ها دارای سطح تماس وسیع و کاملاً مسطح در کف ($Z=0$) هستند و بدون چسبندگی اضافه به خوبی روی پلیت می‌چسبند.
+* **متریال پیشنهادی:** **PLA یا PETG** (دمای نازل: حدود ۲۰۰-۲۱۰ درجه برای PLA / دمای بد: ۵۵-۶۰ درجه).
 
 ---
 
-## 2. Mass Production Batch Print Plates
-Pre-nested print layouts optimized for standard 220x220 mm build plates (Ender-3, Prusa MK3/MK4, Bambu Lab X1/P1/A1, Elegoo Neptune):
+### ۲. معرفی فایل‌های تکی و فایل‌های چاپ تیراژ بالا (Batch Plates)
 
-| File Name | Plate Contents | Array Footprint | Filament Weight | Print Time @ 0.20 mm |
+| نام فایل | نوع قطعه | ابعاد (میلی‌متر) | وزن تقریبی | زمان چاپ تخمینی |
 | :--- | :--- | :--- | :--- | :--- |
-| `batch_master_suite_x6.stl` | Complete 6-Pack (All 6 unique models) | 203.9 x 110.0 x 5.6 mm | ~34 g | ~2.8 hours |
-| `batch_fantasy_gpus_x6.stl` | 6x Fantasy GPUs (2x Chibi, 2x Mecha, 2x Rune) | 203.9 x 78.4 x 5.6 mm | ~34 g | ~3.0 hours |
-| `batch_quantum_collection_x6.stl` | 6x Quantum Models (2x QPU, 2x Chandelier, 2x Bloch) | 174.2 x 129.7 x 5.4 mm | ~35 g | ~3.0 hours |
+| **`batch_gpu_keychains_x6.stl`** | صفحه ۶ تایی جاکلیدی GPU | $214.7 	imes 65.3 	imes 5.4$ | $pprox 35	ext{ g}$ | حدود ۳ ساعت |
+| **`batch_qpu_keychains_x6.stl`** | صفحه ۶ تایی پردازنده کوانتومی QPU | $192.7 	imes 82.0 	imes 5.1$ | $pprox 38	ext{ g}$ | حدود ۳.۵ ساعت |
+| **`batch_spinning_rotors_x12.stl`** | صفحه ۱۲ تایی پروانه‌های چرخشی فن | $89.6 	imes 65.7 	imes 2.1$ | $pprox 3	ext{ g}$ | حدود ۲۵ دقیقه |
+| **`batch_heterogeneous_suite_x6.stl`** | صفحه ترکیبی (۲ تا CPU + ۲ تا GPU + ۲ تا QPU) | $148.7 	imes 143.0 	imes 13.6$ | $pprox 55	ext{ g}$ | حدود ۴.۵ ساعت |
+| **`gpu_keychain_hpca.stl`** | جاکلیدی GPU (نسخه یکپارچه صلب) | $64.7 	imes 27.3 	imes 5.4$ | $pprox 5.5	ext{ g}$ | حدود ۳۰ دقیقه |
+| **`gpu_spinning_body.stl`** | بدنه جاکلیدی GPU (نسخه فن متحرک) | $64.7 	imes 27.3 	imes 5.4$ | $pprox 5.3	ext{ g}$ | حدود ۲۸ دقیقه |
+| **`gpu_spinning_rotor.stl`** | پروانه فن چرخشی تک‌عددی | $arnothing 17.6 	imes 2.1$ | $pprox 0.25	ext{ g}$ | حدود ۲ دقیقه |
+| **`qpu_keychain_hpca.stl`** | جاکلیدی چیپ کوانتومی تک‌عددی | $56.7 	imes 36.0 	imes 5.1$ | $pprox 6.4	ext{ g}$ | حدود ۳۵ دقیقه |
+| **`cpu_science_souvenir.stl`** | یادبود پردازنده آموزشی تک‌عددی | $45.0 	imes 45.0 	imes 13.6$ | $pprox 18.0	ext{ g}$ | حدود ۱.۵ ساعت |
 
 ---
 
-## 3. Individual Models Summary
-
-### A. Fantasy GPU Editions
-1. `gpu_fantasy_chibi.stl`: Chibi cartoon GPU with anime face, blush cheeks, and petal fan (55.0 x 34.0 x 5.5 mm).
-2. `gpu_fantasy_mecha.stl`: Sci-fi mecha fighter GPU with supersonic jet turbine and thrusters (63.0 x 30.0 x 5.6 mm).
-3. `gpu_fantasy_rune.stl`: Cyber-runic arcane talisman with summoning circle and crest (65.0 x 28.0 x 5.6 mm).
-
-### B. Quantum Computing Editions
-1. `qpu_keychain_hpca.stl`: Superconducting QPU chip with Transmon qubits and CPW readout lines (56.7 x 36.0 x 5.1 mm).
-2. `quantum_chandelier.stl`: Multi-tiered 15 mK dilution refrigerator cryostat with QPU can (31.2 x 61.7 x 5.4 mm).
-3. `quantum_bloch.stl`: Octagonal Bloch sphere medallion with state vector |psi> and |0>, |1> poles (43.7 x 49.0 x 5.1 mm).
+### ۳. نحوه مونتاژ نسخه فن چرخشی (Snap-Fit Assembly)
+برای نسخه چرخشی:
+1. بدنه (`gpu_spinning_body.stl`) و پروانه (`gpu_spinning_rotor.stl`) جداگانه چاپ می‌شوند. (پیشنهاد جذاب: پروانه را با یک رنگ متضاد، مثلاً بدنه خاکستری و پروانه آبی یا قرمز چاپ کنید!).
+2. سوراخ وسط پروانه را روی پین برآمده وسط بدنه قرار دهید.
+3. با نوک انگشت یک فشار عمودی کوچک وارد کنید تا صدای ضعیف «کلیک» شنیده شود و پروانه جا بیفتد.
+4. پروانه اکنون بدون لق زدن و با تلرانس مهندسی $0.25	ext{ mm}$ به صورت ۳۶۰ درجه و آزادانه می‌چرخد!
 
 ---
 
-## 4. Underside Attribution & Clearances
-* Every model features **DESIGNED BY NIMA** debossed on the bottom layer (Z=0, depth 0.35 mm).
-* All inscriptions on both front and back surfaces maintain >= 5.0 mm clearance from exterior contours with zero boundary protrusion.
+### ۴. ترفند تغییر رنگ لایه‌ای در پرینتر تک‌نازل (Optional Filament Color Swap)
+اگر می‌خواهید نوشته‌ها و برجستگی‌ها دورنگ و بسیار شیک شوند (بدون نیاز به سیستم چندرنگ چندکاناله):
+* **در جاکلیدی GPU و QPU:**
+  * لایه‌های $0.00$ تا $4.60	ext{ mm}$: رنگ اصلی بدنه (مشکی، طوسی تیتانیوم، یا سرمه‌ای).
+  * در ارتفاع $Z = 4.60	ext{ mm}$ دستور **Pause at height** در اسلایسر بگذارید و فیلامنت را به **طلایی، نقره‌ای، یا سفید** تغییر دهید تا نوشته‌های `HPC&A` و کیوبیت‌های کوانتومی با کنتراست فوق‌العاده چاپ شوند!
 
 ---
 
-## 5. Dual-Color Filament Swap (Single Extruder)
-For high-contrast lettering and circuit highlights on single-extruder printers:
-1. Print layers 0.00 mm to 4.00 mm using primary dark filament (black, titanium gray, or dark navy).
-2. Insert a **Pause at height** command in your slicer at **Z = 4.00 mm** (or **Z = 4.60 mm** for GPU models).
-3. Switch to contrasting filament (gold, silver, or white) for the top details and text embossing.
+## 🇬🇧 Section 2: English Technical Production Sheet
+
+### Recommended Slicer Settings:
+* **Nozzle Size:** $0.4	ext{ mm}$ standard.
+* **Layer Height:** $0.20	ext{ mm}$ (First Layer: $0.20	ext{ mm}$).
+* **Supports:** **STRICTLY OFF (0% supports required)**. All overhang angles $\le 45^\circ$.
+* **Infill:** $15	ext{ - }20\%$ (Gyroid / Grid).
+* **Wall Perimeters:** $3	ext{ - }4$ perimeters for high tensile strength on the keyring eyelet.
+* **Top/Bottom Solid Layers:** 4 Bottom / 5 Top.
+* **Bed Adhesion:** Skirt only (Brim/Raft NOT needed; flat $Z=0$ planar contact).
+* **Material:** PLA / PETG / PLA+ ($205	ext{ - }215^\circ	ext{C}$ nozzle, $55	ext{ - }60^\circ	ext{C}$ bed).
+
+### Mass Production Batch Files:
+1. `batch_gpu_keychains_x6.stl`: 6x GPU keychains arrayed on $214.7 	imes 65.3	ext{ mm}$ footprint.
+2. `batch_qpu_keychains_x6.stl`: 6x Quantum QPU keychains on $192.7 	imes 82.0	ext{ mm}$ footprint.
+3. `batch_spinning_rotors_x12.stl`: 12x Snap-Fit fan impellers on $89.6 	imes 65.7	ext{ mm}$ footprint.
+4. `batch_heterogeneous_suite_x6.stl`: 2x CPU + 2x GPU + 2x QPU combo pack on $148.7 	imes 143.0	ext{ mm}$ footprint.
+
+### Snap-Fit Assembly:
+Press the center bore of `gpu_spinning_rotor.stl` down onto the axle pin of `gpu_spinning_body.stl` until it clicks past the retention lip. The $0.25	ext{ mm}$ radial running gap allows free, low-friction $360^\circ$ rotation.
+
+---
+**Attribution:** All models feature **`DESIGNED BY NIMA | HPC&A`** debossed on the bottom layer ($Z=0$).

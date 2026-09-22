@@ -36,13 +36,14 @@ def build_qpu_chip() -> Part:
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
         extrude(amount=4.6)
 
-        # Underside (Z = 0)
+        # Underside (Z = 0) - mirrored about YZ for correct -Z (bottom) readability
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 4.2)):
                     Text("HPC&A QUANTUM LAB", font_size=2.8, font_style=FontStyle.BOLD)
                 with Locations((0, -4.2)):
                     Text("DESIGNED BY NIMA", font_size=2.5, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # Recessed Silicon Die Cavity
@@ -145,14 +146,16 @@ def build_quantum_chandelier() -> Part:
         # 2. Underside Debossed Inscription (Z = 0, depth = 0.35 mm)
         # Base plate widths: at Y=18 -> 29.5 mm, at Y=11 -> 27.0 mm, at Y=-20 -> 15.8 mm.
         # Texts have >5 mm clearance from all outer contours!
+        # Mirrored about YZ for correct -Z (bottom) readability.
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 18.0)):
                     Text("HPC&A CRYOSTAT", font_size=1.8, font_style=FontStyle.BOLD)
                 with Locations((0, 11.0)):
                     Text("DESIGNED BY NIMA", font_size=1.8, font_style=FontStyle.BOLD)
                 with Locations((0, -20.0)):
                     Text("15 mK", font_size=1.8, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # 3. Front Details (Base Z = 4.0 mm)
@@ -228,13 +231,14 @@ def build_quantum_bloch() -> Part:
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
         extrude(amount=4.6)
 
-        # 2. Underside Inscription (Z = 0)
+        # 2. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 4.0)):
                     Text("BLOCH SPHERE", font_size=2.6, font_style=FontStyle.BOLD)
                 with Locations((0, -4.0)):
                     Text("DESIGNED BY NIMA", font_size=2.3, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # 3. Recessed Central Well (Z = 4.6 to 2.6 mm)

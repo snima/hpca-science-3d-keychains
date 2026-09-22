@@ -36,13 +36,14 @@ def build_chibi_gpu() -> Part:
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
         extrude(amount=4.6)
 
-        # 1B. Underside Inscription (Z = 0)
+        # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 3.5)):
                     Text("CHIBI GPU", font_size=2.4, font_style=FontStyle.BOLD)
                 with Locations((0, -3.5)):
                     Text("DESIGNED BY NIMA", font_size=2.2, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # 2. Cute Rounded Boots / Feet at bottom (PCIe Tab replacement)
@@ -160,13 +161,14 @@ def build_mecha_gpu() -> Part:
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
         extrude(amount=4.6)
 
-        # 1B. Underside Inscription (Z = 0)
+        # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 3.5)):
                     Text("MECHA STARSHIP", font_size=2.4, font_style=FontStyle.BOLD)
                 with Locations((0, -3.5)):
                     Text("DESIGNED BY NIMA", font_size=2.2, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # 2. PCIe Energy Conduit Bus Tab along bottom edge
@@ -255,13 +257,14 @@ def build_rune_gpu() -> Part:
                 Circle(radius=2.3, mode=Mode.SUBTRACT)
         extrude(amount=4.6)
 
-        # 1B. Underside Inscription (Z = 0)
+        # 1B. Underside Inscription (Z = 0) - mirrored about YZ for correct -Z readability
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 3.5)):
                     Text("MAGIC RUNE GPU", font_size=2.4, font_style=FontStyle.BOLD)
                 with Locations((0, -3.5)):
                     Text("DESIGNED BY NIMA", font_size=2.2, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # 2. Bottom Runic Golden Teeth (PCIe Tab at bottom)

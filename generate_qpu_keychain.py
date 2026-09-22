@@ -45,13 +45,15 @@ def build_qpu_keychain() -> Part:
 
         # ======================================================================
         # 2. UNDERSIDE ATTRIBUTION INSCRIPTION (Debossed at Z = 0)
+        # Mirrored about YZ so it reads correctly from below (-Z view).
         # ======================================================================
         with Locations((0, 0, 0)):
-            with BuildSketch():
+            with BuildSketch() as s_bottom:
                 with Locations((0, 4.2)):
                     Text("HPC&A QUANTUM LAB", font_size=2.8, font_style=FontStyle.BOLD)
                 with Locations((0, -4.2)):
                     Text("DESIGNED BY NIMA", font_size=2.5, font_style=FontStyle.BOLD)
+                mirror(about=Plane.YZ, mode=Mode.REPLACE)
             extrude(amount=0.35, mode=Mode.SUBTRACT)
 
         # ======================================================================

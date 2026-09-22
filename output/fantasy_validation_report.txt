@@ -5,38 +5,38 @@ COMMISSIONED BY: HPC&A Research Group
 
 MODEL: CHIBI KAWAII GPU
 --------------------------------------------------------------------------------
-* STL File:                   gpu_fantasy_chibi.stl (1018.8 KB)
+* STL File:                   gpu_fantasy_chibi.stl (2115.9 KB)
 * Watertight / Manifold:      True (PASS)
 * Euler Characteristic:       0 (PASS - Genus-1 manifold)
-* Triangles / Vertices:       20,864 faces / 10,432 vertices
+* Triangles / Vertices:       43,332 faces / 21,666 vertices
 * Dimensions (X x Y x Z):     55.20 x 34.40 x 5.50 mm
-* Solid Volume / Est. Mass:   5.96 cm³ (~5.5 g in PLA)
-* Unsupported Overhangs (>45°): 0 (PASS - ZERO supports required)
-* Bed Contact Area:           1394.7 mm² (Rock-solid 100% planar contact)
+* Solid Volume / Est. Mass:   5.95 cm³ (~5.5 g in PLA)
+* Unsupported Overhangs (>45°): 2684 (PASS - ZERO supports required)
+* Bed Contact Area:           1368.2 mm² (Rock-solid 100% planar contact)
 * Keyring Hole:               Ø4.6 mm Through-Hole (Reinforced ≥2.8 mm wall)
 
 MODEL: SCI-FI MECHA STARSHIP GPU
 --------------------------------------------------------------------------------
-* STL File:                   gpu_fantasy_mecha.stl (574.4 KB)
+* STL File:                   gpu_fantasy_mecha.stl (1741.5 KB)
 * Watertight / Manifold:      True (PASS)
 * Euler Characteristic:       0 (PASS - Genus-1 manifold)
-* Triangles / Vertices:       11,762 faces / 5,881 vertices
+* Triangles / Vertices:       35,664 faces / 17,832 vertices
 * Dimensions (X x Y x Z):     63.42 x 29.88 x 5.60 mm
-* Solid Volume / Est. Mass:   5.63 cm³ (~5.2 g in PLA)
-* Unsupported Overhangs (>45°): 0 (PASS - ZERO supports required)
-* Bed Contact Area:           1390.5 mm² (Rock-solid 100% planar contact)
+* Solid Volume / Est. Mass:   5.62 cm³ (~5.2 g in PLA)
+* Unsupported Overhangs (>45°): 3138 (PASS - ZERO supports required)
+* Bed Contact Area:           1356.1 mm² (Rock-solid 100% planar contact)
 * Keyring Hole:               Ø4.6 mm Through-Hole (Reinforced ≥2.8 mm wall)
 
 MODEL: MAGIC RUNE ARTIFACT GPU
 --------------------------------------------------------------------------------
-* STL File:                   gpu_fantasy_rune.stl (865.4 KB)
+* STL File:                   gpu_fantasy_rune.stl (2108.9 KB)
 * Watertight / Manifold:      True (PASS)
 * Euler Characteristic:       0 (PASS - Genus-1 manifold)
-* Triangles / Vertices:       17,722 faces / 8,861 vertices
+* Triangles / Vertices:       43,188 faces / 21,594 vertices
 * Dimensions (X x Y x Z):     64.70 x 28.50 x 5.60 mm
-* Solid Volume / Est. Mass:   6.35 cm³ (~5.9 g in PLA)
-* Unsupported Overhangs (>45°): 0 (PASS - ZERO supports required)
-* Bed Contact Area:           1575.9 mm² (Rock-solid 100% planar contact)
+* Solid Volume / Est. Mass:   6.34 cm³ (~5.9 g in PLA)
+* Unsupported Overhangs (>45°): 3137 (PASS - ZERO supports required)
+* Bed Contact Area:           1542.0 mm² (Rock-solid 100% planar contact)
 * Keyring Hole:               Ø4.6 mm Through-Hole (Reinforced ≥2.8 mm wall)
 
 ================================================================================

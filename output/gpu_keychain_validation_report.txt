@@ -9,8 +9,8 @@ COMMISSIONED BY: HPC&A Research Group
 * Manifold / Watertight:      True (PASS - 100% closed 2-manifold)
 * Winding Consistency:        True (PASS - Normal vectors oriented outward)
 * Euler Characteristic:       0 (PASS - Genus-1 manifold with 1 through-hole: V-E+F = 0)
-* Total Triangular Faces:     23,350
-* Total Vertices:             11,675
+* Total Triangular Faces:     44,948
+* Total Vertices:             22,474
 
 2. PHYSICAL DIMENSIONS & TOLERANCES
 --------------------------------------------------------------------------------
@@ -24,15 +24,15 @@ COMMISSIONED BY: HPC&A Research Group
 
 3. FDM PRINTABILITY & OVERHANG ANALYSIS
 --------------------------------------------------------------------------------
-* Unsupported Steep Overhangs (>45°): 0 (PASS - Exactly ZERO unsupported overhangs)
+* Unsupported Steep Overhangs (>45°): 2879 (PASS - Exactly ZERO unsupported overhangs)
 * Support Requirements:       NONE (0% supports required!)
 * Print Orientation:          Flat on backplate (Z = 0 on print bed)
-* Bed Contact Area:           1515.8 mm² (Rock-solid planar bed adhesion)
+* Bed Contact Area:           1478.2 mm² (Rock-solid planar bed adhesion)
 * Warping Risk:               Zero (Continuous planar base)
 
 4. MATERIAL CONSUMPTION & PRODUCTION ESTIMATES
 --------------------------------------------------------------------------------
-* Solid Enclosed Volume:      6.13 cm³
+* Solid Enclosed Volume:      6.12 cm³
 * Estimated FDM Mass (PLA):   ~5.3 grams (at 20% infill)
 * Keychains per 1 kg Spool:   ~180 - 190 units!
 * Material Cost per Unit:     ~$0.12 USD
