@@ -106,13 +106,18 @@ For complete workshop instructions, see [`ready_to_print/PRINTING_GUIDE.md`](rea
 
 ## Companion Exhibition Display Cards (A6, A7, A4)
 
-The repository provides high-resolution, print-ready companion cards in [`display_cards/`](display_cards/) designed for tabletop pedestals, conference exhibition booths, and gift boxes. Each card features the scientific/engineering narrative, dimensions, slicer color swap instructions, and author attribution:
+The repository provides high-resolution, print-ready companion cards in Spanish ([`display_cards/`](display_cards/)) designed for tabletop pedestals, conference exhibition booths, and gift boxes. Each card features the scientific/engineering narrative, dimensions, slicer color swap instructions, and author attribution:
 
-* **[`display_cards/cards_a6.pdf`](display_cards/cards_a6.pdf)** — Standalone A6 placards ($105 \times 148\text{ mm}$), 1 card per page.
-* **[`display_cards/cards_a7.pdf`](display_cards/cards_a7.pdf)** — Compact A7 mini placards ($74 \times 105\text{ mm}$), 1 card per page.
+* **[`display_cards/cards_a6.pdf`](display_cards/cards_a6.pdf)** — Standalone A6 placards ($105 \times 148\text{ mm}$), 1 card per page in Spanish.
+* **[`display_cards/cards_a7.pdf`](display_cards/cards_a7.pdf)** — Compact A7 mini placards ($74 \times 105\text{ mm}$), 1 card per page in Spanish.
 * **[`display_cards/print_sheet_a6_on_a4.pdf`](display_cards/print_sheet_a6_on_a4.pdf)** — A4 multi-up print sheets (4x A6 cards/page) with cutting guidelines.
 * **[`display_cards/print_sheet_a7_on_a4.pdf`](display_cards/print_sheet_a7_on_a4.pdf)** — A4 multi-up print sheets (8x A7 cards/page) with cutting guidelines.
 * **[`display_cards/index.html`](display_cards/index.html)** — Interactive web dashboard with direct browser print (`Ctrl+P`).
+
+<p align="center">
+  <img src="display_cards/cards_preview.png" width="90%" alt="Spanish Companion Exhibition Display Cards" />
+</p>
+
 
 ---
 
