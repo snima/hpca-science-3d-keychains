@@ -98,9 +98,21 @@ Available in both STL and 3MF formats under [`ready_to_print/batch_plates/`](rea
 * **Walls / Perimeters:** 3 to 4 loops (guarantees solid $\varnothing 4.6\text{ mm}$ keyring hole strength).
 * **Material:** PLA, PLA+, or PETG (Nozzle: 205–215°C, Bed: 60°C).
 * **Brim / Raft:** None needed (solid planar bed contact).
-* **Dual-Color Trick (Single Nozzle):** Set **Pause at Height** (`M600`) at $Z = 2.8\text{ mm}$ (or $3.0\text{--}3.4\text{ mm}$) to switch from dark base filament to gold/white for vibrant two-tone lettering and details.
+* **Dual-Color Printing (Single Extruder):** Set **Pause at Height** (`M600`) universally at **$Z = 3.40\text{ mm}$ (Layer 18 @ 0.20 mm)** for all standard models and batch plates ($Z = 3.00\text{ mm}$ / Layer 16 for standalone Chandelier). See the full model-by-model reference table in [`ready_to_print/PRINTING_GUIDE.md`](ready_to_print/PRINTING_GUIDE.md).
 
 For complete workshop instructions, see [`ready_to_print/PRINTING_GUIDE.md`](ready_to_print/PRINTING_GUIDE.md).
+
+---
+
+## Companion Exhibition Display Cards (A6, A7, A4)
+
+The repository provides high-resolution, print-ready companion cards in [`display_cards/`](display_cards/) designed for tabletop pedestals, conference exhibition booths, and gift boxes. Each card features the scientific/engineering narrative, dimensions, slicer color swap instructions, and author attribution:
+
+* **[`display_cards/cards_a6.pdf`](display_cards/cards_a6.pdf)** — Standalone A6 placards ($105 \times 148\text{ mm}$), 1 card per page.
+* **[`display_cards/cards_a7.pdf`](display_cards/cards_a7.pdf)** — Compact A7 mini placards ($74 \times 105\text{ mm}$), 1 card per page.
+* **[`display_cards/print_sheet_a6_on_a4.pdf`](display_cards/print_sheet_a6_on_a4.pdf)** — A4 multi-up print sheets (4x A6 cards/page) with cutting guidelines.
+* **[`display_cards/print_sheet_a7_on_a4.pdf`](display_cards/print_sheet_a7_on_a4.pdf)** — A4 multi-up print sheets (8x A7 cards/page) with cutting guidelines.
+* **[`display_cards/index.html`](display_cards/index.html)** — Interactive web dashboard with direct browser print (`Ctrl+P`).
 
 ---
 

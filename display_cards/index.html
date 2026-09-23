@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPC&A Science & Fantasy 3D Keychains — Companion Display Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;700;800&family=Vazirmatn:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #0f172a;
+            --border-color: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-blue: #38bdf8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding: 24px;
+            line-height: 1.5;
+        }
+
+        .no-print {
+            max-width: 1240px;
+            margin: 0 auto 32px auto;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header-title h1 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #475569;
+            color: #cbd5e1;
+        }
+
+        .btn-outline:hover {
+            background: #334155;
+            color: white;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 28px;
+            max-width: 1240px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+
+        .card {
+            width: 380px;
+            min-height: 540px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+
+        .card-stripe {
+            height: 7px;
+            width: 100%;
+        }
+
+        .card-inner {
+            padding: 16px 20px 14px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: white;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .title-en {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+            letter-spacing: -0.2px;
+        }
+
+        .title-fa {
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        .img-box {
+            width: 100%;
+            height: 155px;
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .img-box img {
+            max-width: 94%;
+            max-height: 94%;
+            object-fit: contain;
+        }
+
+        .narrative {
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+
+        .desc-en {
+            font-size: 11px;
+            color: #cbd5e1;
+            line-height: 1.45;
+            margin-bottom: 8px;
+        }
+
+        .desc-fa {
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 10.5px;
+            color: #94a3b8;
+            line-height: 1.5;
+            border-top: 1px dashed #334155;
+            padding-top: 6px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 9px 12px;
+            margin-bottom: 12px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spec-label {
+            font-size: 8px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-val {
+            font-size: 10.5px;
+            font-family: 'Fira Code', monospace;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .spec-val.highlight {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #1e293b;
+            padding-top: 8px;
+            font-size: 9px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .grid-container {
+                display: block !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #64748b !important;
+                page-break-after: always;
+                break-after: page;
+                margin: 0 auto;
+                width: 105mm !important;
+                height: 148mm !important;
+                max-width: 105mm !important;
+                max-height: 148mm !important;
+                padding: 0 !important;
+            }
+
+            @page {
+                size: A6 portrait;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print">
+        <div class="header-title">
+            <h1>HPC&A Science & Fantasy 3D Keychains — Companion Cards</h1>
+            <p>Designed by Nima | High-Resolution Tabletop Placards & Exhibition Info Cards</p>
+        </div>
+        <div class="actions">
+            <button class="btn" onclick="window.print()">🖨️ Print Direct (Ctrl+P)</button>
+            <a href="cards_a6.pdf" class="btn btn-outline" download>📥 Download A6 PDF</a>
+            <a href="cards_a7.pdf" class="btn btn-outline" download>📥 Download A7 Mini PDF</a>
+            <a href="print_sheet_a6_on_a4.pdf" class="btn btn-outline" download>📄 A4 Sheet (4x A6)</a>
+            <a href="print_sheet_a7_on_a4.pdf" class="btn btn-outline" download>📄 A4 Sheet (8x A7)</a>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        
+        <div class="card" data-category="QUANTUM INSTRUMENTATION">
+            <div class="card-stripe" style="background-color: #b45309;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #b45309;">QUANTUM INSTRUMENTATION</span>
+                    <h2 class="title-en">Quantum Dilution Chandelier</h2>
+                    <h3 class="title-fa" dir="rtl">لوستر برودتی رقت کوانتومی</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/quantum_chandelier_render.png" alt="Quantum Dilution Chandelier" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Superconducting quantum processors must operate at near absolute zero (15 mK / -273.135°C), colder than deep space, to maintain quantum coherence. This iconic golden chandelier acts as a multi-stage thermal shield, routing coaxial microwave lines through 5 cryogenic plates down to the quantum processor (QPU) can at the bottom.</p>
+                    <p class="desc-fa" dir="rtl">پردازنده‌های کوانتومی ابررسانا برای حفظ همدوسی باید در دمای ۱۵ میلی‌کلوین (نزدیک به صفر مطلق و سردتر از فضای کیهانی) کار کنند. این لوستر طلایی نمادین با ۵ طبقه حرارتی، کابل‌های مایکروویو را تا محفظه شیلد QPU در پایین‌ترین طبقه هدایت می‌کند.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">31.2 × 61.7 × 4.4 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.00 mm (Layer 16)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~3.9 g PLA (~20 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="QUANTUM HARDWARE">
+            <div class="card-stripe" style="background-color: #0284c7;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #0284c7;">QUANTUM HARDWARE</span>
+                    <h2 class="title-en">Superconducting QPU Chip</h2>
+                    <h3 class="title-fa" dir="rtl">تراشه پردازش کوانتومی ابررسانا</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/qpu_render_hero.png" alt="Superconducting QPU Chip" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">A modern quantum processor unit (QPU) fabricated on high-purity silicon. Features superconducting aluminum transmon qubits with Josephson junctions, serpentine coplanar waveguide (CPW) readout resonators, and peripheral wirebond gold pads for microwave control pulses.</p>
+                    <p class="desc-fa" dir="rtl">پردازنده کوانتومی مدرن ساخته‌شده بر پایه ویفر سیلیکونی با خلوص بالا. شامل کیوبیت‌های ترانزمون پیوند جوزفسون، موج‌برهای مارپیچی هم‌صفحه (CPW) برای بازخوانی و پدهای پیرامونی اتصال طلا برای امواج کنترلی.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">56.7 × 36.0 × 3.9 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~4.4 g PLA (~22 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="QUANTUM INFORMATION">
+            <div class="card-stripe" style="background-color: #0d9488;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #0d9488;">QUANTUM INFORMATION</span>
+                    <h2 class="title-en">Bloch Sphere Quantum Medallion</h2>
+                    <h3 class="title-fa" dir="rtl">مدالیون کوانتومی کره بلاخ</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/quantum_bloch_render.png" alt="Bloch Sphere Quantum Medallion" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">The fundamental geometric representation of a pure two-level quantum system (qubit). The north pole represents |0>, south pole represents |1>, and points on the spherical surface represent arbitrary quantum superpositions |psi> = α|0> + β|1>, manipulated via quantum logic gates.</p>
+                    <p class="desc-fa" dir="rtl">نمایش هندسی بنیادین حالت یک کیوبیت کوانتومی. قطب شمال معرف حالت پایه |0>، قطب جنوب |1> و هر نقطه روی پوسته کروی معرف برهم‌نهی کوانتومی |psi> است که با اعمال گیت‌های منطقی دوران می‌یابد.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">43.7 × 49.0 × 3.9 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~3.4 g PLA (~18 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="FANTASY ARCHITECTURE">
+            <div class="card-stripe" style="background-color: #db2777;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #db2777;">FANTASY ARCHITECTURE</span>
+                    <h2 class="title-en">Chibi Anime GPU Keychain</h2>
+                    <h3 class="title-fa" dir="rtl">کارت گرافیک فانتزی چیبی</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/gpu_fantasy_chibi_render.png" alt="Chibi Anime GPU Keychain" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Reimagines high-performance computer graphics in a playful Japanese chibi aesthetic. Features a curved shroud with smiling anime face hub, petal fan blades, cute rounded feet replacing PCIe fingers, side cooling pill-vents, and a curved 'HPC&A' banner.</p>
+                    <p class="desc-fa" dir="rtl">بازآفرینی هنری و شاداب کارت گرافیک در قالب کاراکتر چیبی ژاپنی. دارای بدنه بالشتکی با هاب فن خندان، پره‌های گلبرگی، پایه‌های کفشی گرد به جای پین‌های PCIe، منافذ جانبی قرصی‌شکل و نشان بالایی HPC&A.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">55.2 × 34.4 × 4.3 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~4.0 g PLA (~20 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="AEROSPACE SCI-FI">
+            <div class="card-stripe" style="background-color: #4f46e5;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #4f46e5;">AEROSPACE SCI-FI</span>
+                    <h2 class="title-en">Sci-Fi Mecha Starfighter GPU</h2>
+                    <h3 class="title-fa" dir="rtl">کارت گرافیک سفینه فضایی مکا</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/gpu_fantasy_mecha_render.png" alt="Sci-Fi Mecha Starfighter GPU" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Futuristic aerospace interpretation of an extreme accelerator card. Swept-back stabilizer winglets transform the cooling fan into a supersonic scramjet turbine with bullet nose cone, flanked by a 7-slat plasma radiator grille, armored 'HPC&A' nameplate, and twin thrusters.</p>
+                    <p class="desc-fa" dir="rtl">تلفیق آینده‌نگرانه کارت گرافیک با جنگنده رهگیر فضایی. بال‌های پس‌گرا توربین خنک‌کننده را به موتور جت مافوق‌صوت با دماغه مخروطی بدل کرده و در کنار رادیاتور پلاسمایی و پلاک زرهی HPC&A قرار گرفته است.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">63.4 × 29.9 × 4.4 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~3.7 g PLA (~19 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="TECHNO-SORCERY">
+            <div class="card-stripe" style="background-color: #9333ea;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #9333ea;">TECHNO-SORCERY</span>
+                    <h2 class="title-en">Cyber-Runic Arcane GPU</h2>
+                    <h3 class="title-fa" dir="rtl">کارت گرافیک تالیسمان سایبر-رونیک</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/gpu_fantasy_rune_render.png" alt="Cyber-Runic Arcane GPU" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Blends ancient dwarven runecraft with advanced silicon electronics. Features an 8-spoke arcane summoning circle, hexagonal glowing mana crystal cluster acting as power delivery inductors, heraldic shield crest, and etched runic protection glyphs.</p>
+                    <p class="desc-fa" dir="rtl">آمیزه‌ای از جادوی باستانی و مدارات الکترونیک سیلیکونی. شامل دایره احضار ۸ وجهی، خوشه‌ای از کریستال‌های شش‌ضلعی مانا به عنوان چوک‌های تغذیه برق، نشان سپر سلطنتی و خطوط رمزآلود باستانی.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">64.7 × 28.5 × 4.4 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~4.2 g PLA (~21 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="SILICON ARCHITECTURE">
+            <div class="card-stripe" style="background-color: #ea580c;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #ea580c;">SILICON ARCHITECTURE</span>
+                    <h2 class="title-en">Heterogeneous Multi-Core CPU</h2>
+                    <h3 class="title-fa" dir="rtl">پردازنده چندهسته‌ای ناهمگن</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/cpu_render_isometric.png" alt="Heterogeneous Multi-Core CPU" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Realistic scale model of modern asymmetric multi-core processors. Features two large high-performance cores (P0, P1), a quad-core efficiency cluster (E0-E3), unified L3 cache die, etched nickel integrated heat spreader (IHS), and gold edge solder pads.</p>
+                    <p class="desc-fa" dir="rtl">مدل دقیق معماری پردازنده‌های ناهمگن مدرن. شامل ۲ هسته پرقدرت محاسباتی (P-Cores)، کلاستر ۴ هسته‌ای کم‌مصرف (E-Cores)، کش اشتراکی سطح ۳، درپوش فلزی خنک‌کننده (IHS) و پدهای لحیم پیرامونی.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">51.2 × 49.2 × 5.9 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~4.8 g PLA (~24 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="SILICON ARCHITECTURE">
+            <div class="card-stripe" style="background-color: #16a34a;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #16a34a;">SILICON ARCHITECTURE</span>
+                    <h2 class="title-en">DDR RAM Memory Module</h2>
+                    <h3 class="title-fa" dir="rtl">ماژول حافظه رم DDR کامپیوتر</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/ram_ddr_render.png" alt="DDR RAM Memory Module" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Miniature desktop DDR memory module featuring 8 integrated memory IC packages, precision gold-finger edge connector tab with polarizing alignment notch, top aluminum thermal spreader fin rail with debossed 'HPC&A', and corner eyelet.</p>
+                    <p class="desc-fa" dir="rtl">ماژول مینیاتوری حافظه رم DDR دسکتاپ. شامل ۸ پکیج آی‌سی حافظه، پین‌های طلایی اسلات همراه با شیار کلیدی موقعیت‌دهی، شانه هیت‌سینک آلومینیومی با نشان برجسته HPC&A و حلقه آویز.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">68.2 × 22.3 × 4.6 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~3.6 g PLA (~18 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" data-category="KINETIC ENGINEERING">
+            <div class="card-stripe" style="background-color: #0891b2;"></div>
+            <div class="card-inner">
+                <div class="card-header">
+                    <span class="badge" style="background-color: #0891b2;">KINETIC ENGINEERING</span>
+                    <h2 class="title-en">Kinetic Spinning Fan GPU</h2>
+                    <h3 class="title-fa" dir="rtl">کارت گرافیک تعاملی فن چرخان</h3>
+                </div>
+
+                <div class="img-box">
+                    <img src="../output/spinning_fan_assembly_render.png" alt="Kinetic Spinning Fan GPU" loading="lazy" />
+                </div>
+
+                <div class="narrative">
+                    <p class="desc-en">Interactive 3D print featuring snap-fit 11-blade impellers that spin freely when flicked. Utilizes compliant cantilever spindle axle pins with retention lips and 0.22 mm low-friction radial clearances, printing 100% support-free flat on the build plate.</p>
+                    <p class="desc-fa" dir="rtl">جاکلیدی مکانیکی تعاملی مجهز به پروانه‌های ۱۱ پره با چرخش روان و بی‌اصطکاک. دارای پین‌های ارتجاعی چفت‌شونده (Snap-fit) با تلرانس ۰.۲۲ میلی‌متر، با قابلیت چاپ کاملاً مسطح و بدون نیاز به ساپورت.</p>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">DIMENSIONS</span>
+                        <span class="spec-val">64.0 × 28.0 × 4.2 mm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">FILAMENT SWAP</span>
+                        <span class="spec-val highlight">Z = 3.40 mm (Layer 18)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">WEIGHT / TIME</span>
+                        <span class="spec-val">~4.5 g PLA (~22 min)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">SUPPORT NEEDED</span>
+                        <span class="spec-val">0% (None)</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <span class="author">DESIGNED BY NIMA | HPC&A</span>
+                    <span class="lic">CC BY-NC-SA 4.0</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
