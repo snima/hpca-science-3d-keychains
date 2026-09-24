@@ -5,11 +5,10 @@ GENERATE PURE 2D VECTOR ASSETS FOR QPU CHIP (100% MESH-FREE)
 Generates ultra-clean, flat 2D graphic illustrations directly from CAD geometry:
 - ZERO 3D mesh wireframe or black facets
 - Rich gold, royal blue, and electric cyan quantum palette
-- EXTRA LARGE, high-visibility numbers for students and teens
-1. qpu_2d_full_color.png - Pure 2D vector colored QPU illustration
-2. qpu_circuit_lineart.png - Clean blueprint circuit schematic
-3. qpu_2d_12blocks_grid.png - 2D illustration with 12-block grid & EXTRA LARGE numbers
-4. qpu_block_1.png to qpu_block_12.png - Individual cropped puzzle blocks with BIG numbers
+- Numbers placed with precision away from horizontal cut lines:
+  * Row 0 (Top row): badges at TOP
+  * Row 1 (Middle row): badges in CENTER
+  * Row 2 (Bottom row): badges at BOTTOM (پایین شکل)
 """
 
 import os
@@ -130,24 +129,19 @@ def draw_pure_2d_qpu(ax, outline_only=False):
 
 
 def render_qpu_vector_image(output_path: str, outline_only: bool = False):
-    """Renders pure 2D vector graphic of QPU chip at high resolution."""
     fig, ax = plt.subplots(figsize=(10, 6.5), dpi=300, facecolor='white')
     ax.set_facecolor('white')
-
     draw_pure_2d_qpu(ax, outline_only=outline_only)
-
     ax.set_xlim(-34.5, 25.5)
     ax.set_ylim(-19.5, 19.5)
     ax.set_aspect('equal')
     ax.axis('off')
-
     plt.tight_layout()
     plt.savefig(output_path, facecolor='white', bbox_inches='tight', pad_inches=0.04)
     plt.close()
 
 
 def crop_to_content(image_path: str, margin: int = 24) -> Image.Image:
-    """Crops white border around the image and returns tight PIL Image."""
     img = Image.open(image_path).convert('RGBA')
     arr = np.array(img)
     mask = ~((arr[:, :, 0] > 248) & (arr[:, :, 1] > 248) & (arr[:, :, 2] > 248))
@@ -156,20 +150,22 @@ def crop_to_content(image_path: str, margin: int = 24) -> Image.Image:
         return img
     y0, x0 = coords.min(axis=0)
     y1, x1 = coords.max(axis=0) + 1
-
     x0 = max(0, x0 - margin)
     y0 = max(0, y0 - margin)
     x1 = min(img.width, x1 + margin)
     y1 = min(img.height, y1 + margin)
-
     cropped = img.crop((x0, y0, x1, y1))
     cropped.save(image_path)
     return cropped
 
 
-def split_into_12_blocks_big_numbers(full_img_path: str, out_grid_path: str, block_out_dir: str):
+def split_into_12_blocks_smart_positions(full_img_path: str, out_grid_path: str, block_out_dir: str):
     """
-    Splits the QPU illustration into 12 blocks with EXTRA LARGE, HIGH-VISIBILITY NUMBERS.
+    Splits into 12 blocks with:
+    - ROW 0 (Blocks 1-4): numbers at TOP
+    - ROW 1 (Blocks 5-8): numbers in CENTER
+    - ROW 2 (Blocks 9-12): numbers at BOTTOM (پایین شکل)
+    - Unobstructed horizontal cut lines between rows!
     """
     img = Image.open(full_img_path).convert('RGB')
     W, H = img.size
@@ -180,10 +176,64 @@ def split_into_12_blocks_big_numbers(full_img_path: str, out_grid_path: str, blo
     grid_img = img.copy()
     draw = ImageDraw.Draw(grid_img)
 
-    font_huge = ImageFont.truetype(FONT_PATH, size=48)
+    font_huge = ImageFont.truetype(FONT_PATH, size=46)
     font_large = ImageFont.truetype(FONT_PATH, size=28)
-    font_medium = ImageFont.truetype(FONT_PATH, size=18)
+    font_scis = ImageFont.truetype(FONT_PATH, size=20)
 
+    # 1. Dashed cutting lines
+    for c in range(1, 4):
+        x = int(round(c * dx))
+        for y in range(0, H, 18):
+            draw.line([(x, y), (x, min(y + 10, H))], fill=(2, 132, 199), width=4)
+
+    for r in range(1, 3):
+        y = int(round(r * dy))
+        for x in range(0, W, 18):
+            draw.line([(x, y), (min(x + 10, W), y)], fill=(2, 132, 199), width=4)
+
+        # Scissor markers along horizontal cuts
+        draw.text((int(dx * 0.4), y - 24), '✂ - - - -', fill=(2, 132, 199), font=font_scis)
+        draw.text((int(dx * 1.4), y - 24), '✂ - - - -', fill=(2, 132, 199), font=font_scis)
+        draw.text((int(dx * 2.4), y - 24), '✂ - - - -', fill=(2, 132, 199), font=font_scis)
+        draw.text((int(dx * 3.4), y - 24), '✂ - - - -', fill=(2, 132, 199), font=font_scis)
+
+    # 2. Number Badges: Row 0 at top, Row 1 in middle, Row 2 at bottom
+    badge_r = 34
+    for i in range(1, 13):
+        col = (i - 1) % 4
+        row = (i - 1) // 4
+        cx = int(round((col + 0.5) * dx))
+
+        if row == 0:
+            cy = 18 + badge_r  # TOP
+        elif row == 1:
+            cy = int(round((row + 0.5) * dy))  # CENTER
+        else:
+            cy = H - 18 - badge_r  # BOTTOM (پایین شکل!)
+
+        bx1 = cx - badge_r
+        by1 = cy - badge_r
+        bx2 = cx + badge_r
+        by2 = cy + badge_r
+
+        # Shadow
+        draw.ellipse([(bx1 + 3, by1 + 3), (bx2 + 3, by2 + 3)], fill=(9, 13, 22))
+        # Circle
+        draw.ellipse([(bx1, by1), (bx2, by2)], fill=(2, 132, 199), outline=(255, 255, 255), width=3)
+
+        # Number
+        num_str = str(i)
+        bbox = font_huge.getbbox(num_str)
+        nw = bbox[2] - bbox[0]
+        nh = bbox[3] - bbox[1]
+        nx = cx - nw / 2.0 - bbox[0]
+        ny = cy - nh / 2.0 - bbox[1]
+        draw.text((nx, ny), num_str, fill=(255, 255, 255), font=font_huge)
+
+    grid_img.save(out_grid_path)
+    print(f"  Saved master QPU grid: {out_grid_path}")
+
+    # 3. Individual block cropped cards
     block_names_es = [
         "1. ANILLA & WIREBOND NW",
         "2. LOGO HPC&A & PADS N1",
@@ -199,101 +249,56 @@ def split_into_12_blocks_big_numbers(full_img_path: str, out_grid_path: str, blo
         "12. ALMOHADILLAS SE",
     ]
 
-    block_num = 1
-    for r in range(3):
-        for c in range(4):
-            x1 = int(round(c * dx))
-            x2 = int(round((c + 1) * dx)) if c < 3 else W
-            y1 = int(round(r * dy))
-            y2 = int(round((r + 1) * dy)) if r < 2 else H
+    for i in range(1, 13):
+        col = (i - 1) % 4
+        row = (i - 1) // 4
 
-            piece = img.crop((x1, y1, x2, y2))
+        x1 = int(round(col * dx))
+        x2 = int(round((col + 1) * dx)) if col < 3 else W
+        y1 = int(round(row * dy))
+        y2 = int(round((row + 1) * dy)) if row < 2 else H
 
-            pw, ph = piece.size
-            header_h = 58
-            card = Image.new("RGB", (pw + 24, ph + header_h + 16), color=(255, 255, 255))
-            card.paste(piece, (12, header_h + 8))
-            cdraw = ImageDraw.Draw(card)
+        piece = img.crop((x1, y1, x2, y2))
+        pw, ph = piece.size
 
-            # Outer border
-            cdraw.rectangle([(4, 4), (pw + 19, ph + header_h + 11)], outline=(2, 132, 199), width=3)
-            # Header Badge
-            cdraw.rectangle([(8, 8), (pw + 15, header_h)], fill=(2, 132, 199))
+        bar_h = 48
+        card = Image.new("RGB", (pw + 20, ph + bar_h + 14), color=(255, 255, 255))
+        cdraw = ImageDraw.Draw(card)
 
-            # EXTRA LARGE number badge in header:
-            badge_txt = f"#{block_num}"
-            cdraw.text((16, 12), badge_txt, fill=(255, 255, 255), font=font_large)
-            title_txt = block_names_es[block_num - 1]
-            cdraw.text((78, 18), title_txt, fill=(255, 255, 255), font=font_medium)
+        if row < 2:
+            # Rows 0 & 1: number bar at top
+            card.paste(piece, (10, bar_h + 6))
+            cdraw.rectangle([(3, 3), (pw + 16, ph + bar_h + 10)], outline=(2, 132, 199), width=3)
+            cdraw.rectangle([(6, 6), (pw + 13, bar_h)], fill=(2, 132, 199))
+            cdraw.text((14, 10), f"#{i}", fill=(255, 255, 255), font=font_large)
+            cdraw.text((72, 15), block_names_es[i - 1], fill=(255, 255, 255), font=ImageFont.truetype(FONT_PATH, size=15))
+        else:
+            # Row 2 (bottom row): number bar at BOTTOM (پایین شکل!)
+            card.paste(piece, (10, 8))
+            cdraw.rectangle([(3, 3), (pw + 16, ph + bar_h + 10)], outline=(2, 132, 199), width=3)
+            cdraw.rectangle([(6, ph + 10), (pw + 13, ph + 10 + bar_h - 6)], fill=(2, 132, 199))
+            cdraw.text((14, ph + 13), f"#{i}", fill=(255, 255, 255), font=font_large)
+            cdraw.text((72, ph + 18), block_names_es[i - 1], fill=(255, 255, 255), font=ImageFont.truetype(FONT_PATH, size=15))
 
-            block_file = os.path.join(block_out_dir, f"qpu_block_{block_num}.png")
-            card.save(block_file)
-            print(f"  Saved QPU block #{block_num} with BIG number: {block_file}")
-
-            block_num += 1
-
-    # Draw vertical dashed lines on master grid
-    for c in range(1, 4):
-        x = int(round(c * dx))
-        for y in range(0, H, 18):
-            draw.line([(x, y), (x, min(y + 10, H))], fill=(2, 132, 199), width=4)
-
-    # Draw horizontal dashed lines
-    for r in range(1, 3):
-        y = int(round(r * dy))
-        for x in range(0, W, 18):
-            draw.line([(x, y), (min(x + 10, W), y)], fill=(2, 132, 199), width=4)
-
-    # Draw EXTRA LARGE numbered badges on the master grid image
-    block_num = 1
-    badge_radius = 40  # 80px diameter badge
-    for r in range(3):
-        for c in range(4):
-            bx1 = int(round(c * dx)) + 20
-            by1 = int(round(r * dy)) + 20
-            bx2 = bx1 + badge_radius * 2
-            by2 = by1 + badge_radius * 2
-
-            # Badge shadow
-            draw.ellipse([(bx1 + 3, by1 + 3), (bx2 + 3, by2 + 3)], fill=(9, 13, 22))
-            # Main Badge Circle
-            draw.ellipse([(bx1, by1), (bx2, by2)], fill=(2, 132, 199), outline=(255, 255, 255), width=3)
-
-            # EXTRA LARGE BOLD NUMBER
-            num_str = str(block_num)
-            bbox = font_huge.getbbox(num_str)
-            nw = bbox[2] - bbox[0]
-            nh = bbox[3] - bbox[1]
-            nx = bx1 + (badge_radius * 2 - nw) / 2.0 - bbox[0]
-            ny = by1 + (badge_radius * 2 - nh) / 2.0 - bbox[1]
-            draw.text((nx, ny), num_str, fill=(255, 255, 255), font=font_huge)
-
-            block_num += 1
-
-    grid_img.save(out_grid_path)
-    print(f"  Saved master QPU grid with EXTRA LARGE numbers: {out_grid_path}")
+        block_file = os.path.join(block_out_dir, f"qpu_block_{i}.png")
+        card.save(block_file)
+        print(f"  Saved QPU block #{i}: {block_file}")
 
 
 def main():
-    print("Generating PURE 2D VECTOR QPU assets (100% mesh-free, big numbers)...")
-
+    print("Generating corrected pure 2D QPU assets...")
     raw_2d = os.path.join(QPU_DIR, "qpu_2d_full_color.png")
     raw_lineart = os.path.join(QPU_DIR, "qpu_circuit_lineart.png")
     grid_img = os.path.join(QPU_DIR, "qpu_2d_12blocks_grid.png")
 
-    # 1. Pure 2D full color
     render_qpu_vector_image(raw_2d, outline_only=False)
     crop_to_content(raw_2d, margin=24)
-    print(f"  Rendered pure 2D vector full color QPU: {raw_2d}")
 
-    # 2. Pure 2D clean blueprint line-art outline
     render_qpu_vector_image(raw_lineart, outline_only=True)
     crop_to_content(raw_lineart, margin=24)
-    print(f"  Rendered pure 2D vector line-art QPU: {raw_lineart}")
 
-    # 3. Split into 12 blocks with EXTRA LARGE NUMBERS
-    split_into_12_blocks_big_numbers(raw_2d, grid_img, QPU_DIR)
-    print("All pure 2D QPU assets generated successfully!")
+    split_into_12_blocks_smart_positions(raw_2d, grid_img, QPU_DIR)
+    print("QPU assets generated successfully!")
 
 
 if __name__ == "__main__":

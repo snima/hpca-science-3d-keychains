@@ -3,11 +3,14 @@
 GENERATE MINIMAL COMPETITION PRINT PACK (CONCURSO LISTO PARA IMPRIMIR)
 ======================================================================
 Generates the minimal, essential A4 PDF sheets required to run the competition:
+- Full-page LARGE illustrations easy to cut along dashed lines
+- Minimal text, maximum cutting clarity
+- Middle cut line: Top row numbers at TOP, Bottom row numbers at BOTTOM (پایین شکل)
 1. 00_GUIA_DEL_CONCURSO.pdf           - 1-Page Organizer & Instructor Quick-Guide
-2. 01_CHIBI_TABLERO_BASE_A4.pdf       - 1-Page Base Board (Kids / 6 Blocks)
-3. 02_CHIBI_PIEZAS_RECORTAR_A4.pdf    - 1-Page Cut-out Sheet (Kids / 6 Blocks - Tijeras ✂️)
-4. 03_QPU_TABLERO_BASE_A4.pdf         - 1-Page Base Board (Teens / 12 Blocks)
-5. 04_QPU_PIEZAS_RECORTAR_A4.pdf      - 1-Page Cut-out Sheet (Teens / 12 Blocks - Tijeras ✂️)
+2. 01_CHIBI_TABLERO_BASE_A4.pdf       - 1-Page Matching Base Board (6 Blocks)
+3. 02_CHIBI_PIEZAS_RECORTAR_A4.pdf    - 1-Page LARGE Cut-out Sheet (6 Blocks - Tijeras ✂️)
+4. 03_QPU_TABLERO_BASE_A4.pdf         - 1-Page Matching Base Board (12 Blocks)
+5. 04_QPU_PIEZAS_RECORTAR_A4.pdf      - 1-Page LARGE Cut-out Sheet (12 Blocks - Tijeras ✂️)
 """
 
 import os
@@ -33,17 +36,13 @@ pdfmetrics.registerFont(TTFont("DejaVu", DEJAVU_REG))
 pdfmetrics.registerFont(TTFont("DejaVuBold", DEJAVU_BOLD))
 
 MM = 72.0 / 25.4
-PAGE_W, PAGE_H = A4
+PAGE_W, PAGE_H = A4  # 595.27 x 841.89 pt (210 x 297 mm)
 
-# Chibi 6 Blocks Assets
-CHIBI_BLOCKS = [os.path.join(KIDS_DIR, f"block_{i}.png") for i in range(1, 7)]
-CHIBI_HERO = os.path.join(KIDS_DIR, "chibi_gpu_2d_full_color.png")
+# Large Grid Image Assets (Full illustration with dashed lines and big numbers)
+CHIBI_GRID_IMG = os.path.join(KIDS_DIR, "chibi_gpu_2d_6blocks_grid.png")
+QPU_GRID_IMG = os.path.join(QPU_DIR, "qpu_2d_12blocks_grid.png")
 
-# QPU 12 Blocks Assets
-QPU_BLOCKS = [os.path.join(QPU_DIR, f"qpu_block_{i}.png") for i in range(1, 13)]
-QPU_HERO = os.path.join(QPU_DIR, "qpu_2d_full_color.png")
-
-CHIBI_DATA = [
+CHIBI_SLOTS = [
     {"num": 1, "title": "Anilla de Viaje", "color": colors.HexColor("#0284c7")},
     {"num": 2, "title": "Cerebro HPC&A", "color": colors.HexColor("#db2777")},
     {"num": 3, "title": "Radiador Superior", "color": colors.HexColor("#0d9488")},
@@ -52,24 +51,24 @@ CHIBI_DATA = [
     {"num": 6, "title": "Escape Turbo", "color": colors.HexColor("#16a34a")},
 ]
 
-QPU_DATA = [
-    {"num": 1, "title": "Wirebond NW & Ojal", "color": colors.HexColor("#0284c7")},
-    {"num": 2, "title": "Placa HPC&A & Pads N1", "color": colors.HexColor("#b45309")},
-    {"num": 3, "title": "QUANTUM & Pads N2", "color": colors.HexColor("#0d9488")},
+QPU_SLOTS = [
+    {"num": 1, "title": "Wirebond NW", "color": colors.HexColor("#0284c7")},
+    {"num": 2, "title": "Placa HPC&A", "color": colors.HexColor("#b45309")},
+    {"num": 3, "title": "QUANTUM", "color": colors.HexColor("#0d9488")},
     {"num": 4, "title": "Almohadillas NE", "color": colors.HexColor("#4f46e5")},
-    {"num": 5, "title": "Bus I/O & Cúbit Q0", "color": colors.HexColor("#06b6d4")},
-    {"num": 6, "title": "Resonador CPW R0", "color": colors.HexColor("#2563eb")},
+    {"num": 5, "title": "Cúbit Q0", "color": colors.HexColor("#06b6d4")},
+    {"num": 6, "title": "Resonador R0", "color": colors.HexColor("#2563eb")},
     {"num": 7, "title": "Cúbit Central Q1", "color": colors.HexColor("#7c3aed")},
-    {"num": 8, "title": "Acoplamiento Este", "color": colors.HexColor("#9333ea")},
-    {"num": 9, "title": "Retorno Tierra Q2", "color": colors.HexColor("#ea580c")},
-    {"num": 10, "title": "Resonador CPW R2", "color": colors.HexColor("#16a34a")},
-    {"num": 11, "title": "Flux Z & Pads S1", "color": colors.HexColor("#059669")},
+    {"num": 8, "title": "Acoplamiento E", "color": colors.HexColor("#9333ea")},
+    {"num": 9, "title": "Retorno Q2", "color": colors.HexColor("#ea580c")},
+    {"num": 10, "title": "Resonador R2", "color": colors.HexColor("#16a34a")},
+    {"num": 11, "title": "Flux Z & S1", "color": colors.HexColor("#059669")},
     {"num": 12, "title": "Almohadillas SE", "color": colors.HexColor("#d97706")},
 ]
 
 
 # ==============================================================================
-# 0. GUÍA RÁPIDA DEL CONCURSO (INSTRUCTOR & ORGANIZADOR)
+# 0. GUÍA RÁPIDA DEL CONCURSO
 # ==============================================================================
 
 def generate_guide_pdf(output_path: str):
@@ -94,7 +93,6 @@ def generate_guide_pdf(output_path: str):
     c.setFillColor(colors.HexColor("#cbd5e1"))
     c.drawString(20 * MM, PAGE_H - 32 * MM, "Instrucciones paso a paso para entregar los llaveros 3D mediante el reto de 6 y 12 bloques")
 
-    # Content Boxes
     y = PAGE_H - 52 * MM
 
     def section_box(title, items, h_mm, accent_hex):
@@ -105,10 +103,10 @@ def generate_guide_pdf(output_path: str):
         c.roundRect(20 * MM, y - h_mm * MM, PAGE_W - 40 * MM, h_mm * MM, 3 * MM, fill=True, stroke=True)
 
         c.setFillColor(colors.HexColor(accent_hex))
-        c.roundRect(24 * MM, y - 6 * MM, 80 * MM, 5.5 * MM, 1.5 * MM, fill=True, stroke=False)
+        c.roundRect(24 * MM, y - 6 * MM, 85 * MM, 5.5 * MM, 1.5 * MM, fill=True, stroke=False)
         c.setFont("DejaVuBold", 7.5)
         c.setFillColor(colors.white)
-        c.drawCentredString(24 * MM + 40 * MM, y - 2.5 * MM, title)
+        c.drawCentredString(24 * MM + 42.5 * MM, y - 2.5 * MM, title)
 
         c.setFont("DejaVu", 7.5)
         c.setFillColor(colors.HexColor("#1e293b"))
@@ -122,7 +120,6 @@ def generate_guide_pdf(output_path: str):
 
         y -= (h_mm + 5) * MM
 
-    # Box 1: Materiales
     section_box(
         "1. MATERIALES MÍNIMOS NECESARIOS",
         [
@@ -136,35 +133,32 @@ def generate_guide_pdf(output_path: str):
         "#0284c7"
     )
 
-    # Box 2: Qué imprimir para el Nivel Infantil
     section_box(
         "2. NIVEL INFANTIL (PRIMARIA) — GPU CHIBI EN 6 BLOQUES",
         [
             ("Público:", "Niños/as de 6 a 11 años. Reto visual y de motricidad."),
             ("Hoja 1:", "01_CHIBI_TABLERO_BASE_A4.pdf (1 copia por participante)."),
             ("Hoja 2:", "02_CHIBI_PIEZAS_RECORTAR_A4.pdf (1 copia por participante para recortar)."),
-            ("Mecánica:", "El niño/a recorta las 6 piezas (#1 al #6) y las pega en las casillas numeradas."),
-            ("Recompensa:", "Al completar los 6 bloques, canjea el Llavero 3D de la GPU Chibi."),
+            ("Corte fácil:", "Corta primero por la línea central horizontal ✂ y luego las dos verticales."),
+            ("Recompensa:", "Al pegar los 6 bloques, canjea el Llavero 3D de la GPU Chibi."),
         ],
         36,
         "#db2777"
     )
 
-    # Box 3: Qué imprimir para el Nivel Avanzado
     section_box(
         "3. NIVEL AVANZADO (SECUNDARIA) — CHIP QPU EN 12 BLOQUES",
         [
             ("Público:", "Estudiantes de 12 a 18+ años. Reto de hardware cuántico real."),
             ("Hoja 1:", "03_QPU_TABLERO_BASE_A4.pdf (1 copia por estudiante)."),
             ("Hoja 2:", "04_QPU_PIEZAS_RECORTAR_A4.pdf (1 copia para recortar las 12 piezas técnicas)."),
-            ("Mecánica:", "Alinear cúbits transmon, resonadores serpentín y pads wirebond en 12 casillas."),
+            ("Corte fácil:", "Corta las 2 líneas horizontales y las 3 verticales siguiendo los puntos ✂."),
             ("Recompensa:", "Al ensamblar los 12 bloques técnicos, recibe el Llavero 3D del Chip QPU."),
         ],
         36,
         "#d97706"
     )
 
-    # Box 4: Protocolo de Entrega del Llavero 3D
     section_box(
         "4. PROTOCOLO DE VALIDACIÓN Y ENTREGA",
         [
@@ -177,7 +171,6 @@ def generate_guide_pdf(output_path: str):
         "#16a34a"
     )
 
-    # Footer
     c.setFont("DejaVu", 7.5)
     c.setFillColor(colors.HexColor("#94a3b8"))
     c.drawCentredString(PAGE_W / 2.0, 10 * MM, "Diseñado por Nima • HPC&A Research Group • High Performance Computing & Architecture")
@@ -188,430 +181,385 @@ def generate_guide_pdf(output_path: str):
 
 
 # ==============================================================================
-# 1. NIVEL INFANTIL: TABLERO BASE DE 6 BLOQUES (1 PÁGINA A4)
+# 2. CHIBI GPU: HOJA GRANDE A4 PARA RECORTAR (MINIMAL TEXT, BIG CUT LINES)
 # ==============================================================================
 
-def generate_chibi_board_pdf(output_path: str):
-    """Generates the 1-page A4 base board for Chibi GPU with EXTRA LARGE numbers."""
+def generate_chibi_cutouts_large_pdf(output_path: str):
+    """
+    Generates a LARGE A4 sheet with the complete 6-block Chibi GPU illustration.
+    - Large cutting image across the page
+    - Middle horizontal cut line clearly marked with scissors
+    - Top row (1, 2, 3) numbers at TOP
+    - Bottom row (4, 5, 6) numbers at BOTTOM (پایین شکل)
+    - Minimal text
+    """
     c = canvas.Canvas(output_path, pagesize=A4)
 
-    # Header
+    # Minimal Top Bar
     c.setFillColor(colors.HexColor("#0f172a"))
-    c.rect(0, PAGE_H - 52 * MM, PAGE_W, 52 * MM, fill=True, stroke=False)
+    c.rect(0, PAGE_H - 24 * MM, PAGE_W, 24 * MM, fill=True, stroke=False)
     c.setFillColor(colors.HexColor("#db2777"))
-    c.rect(0, PAGE_H - 54 * MM, PAGE_W, 2 * MM, fill=True, stroke=False)
+    c.rect(0, PAGE_H - 25.5 * MM, PAGE_W, 1.5 * MM, fill=True, stroke=False)
 
+    c.setFont("DejaVuBold", 13)
+    c.setFillColor(colors.white)
+    c.drawCentredString(PAGE_W / 2.0, PAGE_H - 14 * MM, "HPC&A • RECORTA POR LAS LÍNEAS DE PUNTOS ✂")
+
+    c.setFont("DejaVu", 8)
+    c.setFillColor(colors.HexColor("#f472b6"))
+    c.drawCentredString(PAGE_W / 2.0, PAGE_H - 20 * MM, "Corta primero por la línea del medio y luego separa los 6 bloques")
+
+    # LARGE Image in center of A4 page:
+    # Width: 180 mm, Height: 112.5 mm
+    img_w = 180 * MM
+    img_h = 112.5 * MM
+    img_x = (PAGE_W - img_w) / 2.0
+    img_y = (PAGE_H - img_h) / 2.0 - 5 * MM
+
+    # White card frame with cutting border
+    c.setStrokeColor(colors.HexColor("#db2777"))
+    c.setLineWidth(2.0)
+    c.roundRect(img_x - 3 * MM, img_y - 3 * MM, img_w + 6 * MM, img_h + 6 * MM, 4 * MM, fill=False, stroke=True)
+
+    if os.path.exists(CHIBI_GRID_IMG):
+        c.drawImage(CHIBI_GRID_IMG, img_x, img_y, width=img_w, height=img_h, preserveAspectRatio=True)
+
+    # Outer Cutting Guidelines (Border scissors)
+    c.setFont("DejaVuBold", 8)
+    c.setFillColor(colors.HexColor("#db2777"))
+    c.drawString(img_x, img_y + img_h + 4 * MM, "✂ Recortar contorno exterior")
+    c.drawRightString(img_x + img_w, img_y + img_h + 4 * MM, "6 BLOQUES TOTALES ✂")
+
+    # Minimal Bottom Footer
+    bot_y = 14 * MM
+    c.setFillColor(colors.HexColor("#0f172a"))
+    c.roundRect(img_x, bot_y, img_w, 18 * MM, 3 * MM, fill=True, stroke=False)
+
+    c.setFont("DejaVuBold", 9)
+    c.setFillColor(colors.HexColor("#38bdf8"))
+    c.drawCentredString(PAGE_W / 2.0, bot_y + 10.5 * MM, "¡PEGA LAS 6 PIEZAS EN EL TABLERO BASE PARA GANAR TU LLAVERO 3D REAL!")
+
+    c.setFont("DejaVu", 7.5)
+    c.setFillColor(colors.HexColor("#cbd5e1"))
+    c.drawCentredString(PAGE_W / 2.0, bot_y + 4.5 * MM, "Los bloques 1, 2 y 3 van arriba • Los bloques 4, 5 y 6 van abajo")
+
+    c.showPage()
+    c.save()
+    print(f"Generated Large Chibi Cut-out: {output_path}")
+
+
+# ==============================================================================
+# 1. CHIBI GPU: TABLERO BASE A4 CORRESPONDIENTE (MATCHING BASE BOARD)
+# ==============================================================================
+
+def generate_chibi_board_matching_pdf(output_path: str):
+    """
+    Generates a 1-page A4 base board matching the exact 1:1 size of the cutting image:
+    - Slots 1, 2, 3: numbers at TOP
+    - Slots 4, 5, 6: numbers at BOTTOM (پایین شکل)
+    - Minimal text, maximum pasting area
+    """
+    c = canvas.Canvas(output_path, pagesize=A4)
+
+    # Minimal Top Bar
+    c.setFillColor(colors.HexColor("#0f172a"))
+    c.rect(0, PAGE_H - 32 * MM, PAGE_W, 32 * MM, fill=True, stroke=False)
+    c.setFillColor(colors.HexColor("#db2777"))
+    c.rect(0, PAGE_H - 33.5 * MM, PAGE_W, 1.5 * MM, fill=True, stroke=False)
+
+    c.setFont("DejaVuBold", 14)
+    c.setFillColor(colors.white)
+    c.drawString(15 * MM, PAGE_H - 14 * MM, "TABLERO DE DESAFÍO: GPU CHIBI (6 BLOQUES)")
+
+    c.setFont("DejaVu", 8)
+    c.setFillColor(colors.HexColor("#cbd5e1"))
+    c.drawString(15 * MM, PAGE_H - 20 * MM, "Pega cada pieza recortada sobre su casilla correspondiente")
+
+    # Name Line in header
     c.setFont("DejaVuBold", 7.5)
     c.setFillColor(colors.HexColor("#38bdf8"))
-    c.drawString(20 * MM, PAGE_H - 12 * MM, "HPC&A SCIENCE FOR KIDS • CONCURSO DE CIENCIA")
+    c.drawString(15 * MM, PAGE_H - 28 * MM, "Nombre: __________________________________   Fecha: ____________   Mesa: ______")
 
-    c.setFont("DejaVuBold", 16)
-    c.setFillColor(colors.white)
-    c.drawString(20 * MM, PAGE_H - 22 * MM, "TABLERO DE DESAFÍO: ¡CONSTRUYE TU GPU CHIBI!")
+    # 6 Target Slots: Exact 180 x 112.5 mm grid centered
+    grid_w = 180 * MM
+    grid_h = 112.5 * MM
+    grid_x = (PAGE_W - grid_w) / 2.0
+    grid_y = (PAGE_H - grid_h) / 2.0 - 5 * MM
 
-    c.setFont("DejaVu", 8.5)
-    c.setFillColor(colors.HexColor("#cbd5e1"))
-    c.drawString(20 * MM, PAGE_H - 28 * MM, "Pega los 6 bloques en su casilla numerada para canjear tu Llavero 3D Real")
+    col_w = grid_w / 3.0   # 60 mm
+    row_h = grid_h / 2.0   # 56.25 mm
 
-    # Name Line
-    info_y = PAGE_H - 46 * MM
-    c.setFillColor(colors.HexColor("#1e293b"))
-    c.setStrokeColor(colors.HexColor("#334155"))
-    c.roundRect(20 * MM, info_y, PAGE_W - 40 * MM, 8 * MM, 2 * MM, fill=True, stroke=True)
-
-    c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#94a3b8"))
-    c.drawString(24 * MM, info_y + 2.5 * MM, "Nombre del Explorador/a:")
-    c.drawString(120 * MM, info_y + 2.5 * MM, "Fecha:")
-    c.drawString(155 * MM, info_y + 2.5 * MM, "Mesa:")
-
-    c.setStrokeColor(colors.HexColor("#64748b"))
-    c.line(65 * MM, info_y + 2 * MM, 115 * MM, info_y + 2 * MM)
-    c.line(130 * MM, info_y + 2 * MM, 150 * MM, info_y + 2 * MM)
-    c.line(166 * MM, info_y + 2 * MM, PAGE_W - 25 * MM, info_y + 2 * MM)
-
-    # 6 Slots Grid (3 cols x 2 rows)
-    grid_x0 = 20 * MM
-    grid_y0 = PAGE_H - 220 * MM
-    grid_total_w = PAGE_W - 40 * MM  # 170 mm
-    grid_total_h = 160 * MM
-
-    col_w = (grid_total_w - 6 * MM) / 3.0   # ~54.6 mm
-    row_h = (grid_total_h - 6 * MM) / 2.0   # ~77 mm
+    # Outer Frame
+    c.setStrokeColor(colors.HexColor("#db2777"))
+    c.setLineWidth(2.0)
+    c.roundRect(grid_x - 1.5 * MM, grid_y - 1.5 * MM, grid_w + 3 * MM, grid_h + 3 * MM, 3 * MM, fill=False, stroke=True)
 
     idx = 0
     for r in range(2):
         for col in range(3):
-            data = CHIBI_DATA[idx]
-            bx = grid_x0 + col * (col_w + 3 * MM)
-            by = grid_y0 + (1 - r) * (row_h + 6 * MM)
+            data = CHIBI_SLOTS[idx]
+            bx = grid_x + col * col_w
+            by = grid_y + (1 - r) * row_h
 
             # Slot Box
             c.setFillColor(colors.HexColor("#f8fafc"))
-            c.setStrokeColor(data["color"])
-            c.setLineWidth(1.5)
-            c.setDash(4, 3)
-            c.roundRect(bx, by, col_w, row_h, 3 * MM, fill=True, stroke=True)
-            c.setDash()
+            c.setStrokeColor(colors.HexColor("#cbd5e1"))
+            c.setLineWidth(1.0)
+            c.rect(bx, by, col_w, row_h, fill=True, stroke=True)
 
-            # Slot Header Pill with BIG Number
-            c.setFillColor(data["color"])
-            c.roundRect(bx + 3 * MM, by + row_h - 11 * MM, col_w - 6 * MM, 8 * MM, 2 * MM, fill=True, stroke=False)
-            c.setFont("DejaVuBold", 9)
-            c.setFillColor(colors.white)
-            c.drawCentredString(bx + col_w / 2.0, by + row_h - 6 * MM, f"BLOQUE #{data['num']}")
+            # Central Big Watermark Number
+            c.setFont("DejaVuBold", 42)
+            c.setFillColor(colors.HexColor("#e2e8f0"))
+            c.drawCentredString(bx + col_w / 2.0, by + row_h / 2.0 - 6 * MM, str(data["num"]))
 
-            # EXTRA LARGE WATERMARK NUMBER IN CENTER (56 PT!)
-            c.setFont("DejaVuBold", 56)
-            c.setFillColor(colors.HexColor("#cbd5e1"))
-            c.drawCentredString(bx + col_w / 2.0, by + row_h / 2.0 - 10 * MM, str(data["num"]))
+            # Badge pill: TOP ROW -> at TOP; BOTTOM ROW -> at BOTTOM (پایین شکل!)
+            if r == 0:
+                # Top row: badge at TOP
+                pill_y = by + row_h - 9 * MM
+                c.setFillColor(data["color"])
+                c.roundRect(bx + 4 * MM, pill_y, col_w - 8 * MM, 6.5 * MM, 2 * MM, fill=True, stroke=False)
+                c.setFont("DejaVuBold", 8)
+                c.setFillColor(colors.white)
+                c.drawCentredString(bx + col_w / 2.0, pill_y + 1.8 * MM, f"BLOQUE #{data['num']}")
 
-            # Title & Glue hint
-            c.setFont("DejaVuBold", 7.5)
-            c.setFillColor(colors.HexColor("#1e293b"))
-            c.drawCentredString(bx + col_w / 2.0, by + 12 * MM, data["title"])
+                c.setFont("DejaVu", 6.5)
+                c.setFillColor(colors.HexColor("#64748b"))
+                c.drawCentredString(bx + col_w / 2.0, by + 5 * MM, data["title"])
+            else:
+                # Bottom row: badge at BOTTOM (پایین شکل!)
+                pill_y = by + 3 * MM
+                c.setFillColor(data["color"])
+                c.roundRect(bx + 4 * MM, pill_y, col_w - 8 * MM, 6.5 * MM, 2 * MM, fill=True, stroke=False)
+                c.setFont("DejaVuBold", 8)
+                c.setFillColor(colors.white)
+                c.drawCentredString(bx + col_w / 2.0, pill_y + 1.8 * MM, f"BLOQUE #{data['num']}")
 
-            c.setFont("DejaVu", 6.8)
-            c.setFillColor(data["color"])
-            c.drawCentredString(bx + col_w / 2.0, by + 6 * MM, "[ PEGAR PIEZA AQUÍ ]")
+                c.setFont("DejaVu", 6.5)
+                c.setFillColor(colors.HexColor("#64748b"))
+                c.drawCentredString(bx + col_w / 2.0, by + row_h - 7 * MM, data["title"])
 
             idx += 1
 
-    # Bottom Certification Box
-    cert_y = 12 * MM
-    cert_h = 36 * MM
+    # Minimal Bottom Certification Footer
+    bot_y = 14 * MM
+    bot_h = 28 * MM
     c.setFillColor(colors.HexColor("#0f172a"))
-    c.roundRect(20 * MM, cert_y, PAGE_W - 40 * MM, cert_h, 3 * MM, fill=True, stroke=False)
+    c.roundRect(grid_x, bot_y, grid_w, bot_h, 3 * MM, fill=True, stroke=False)
 
     c.setStrokeColor(colors.HexColor("#db2777"))
     c.setLineWidth(1.2)
-    c.roundRect(22 * MM, cert_y + 2 * MM, PAGE_W - 44 * MM, cert_h - 4 * MM, 2 * MM, fill=False, stroke=True)
+    c.roundRect(grid_x + 1.5 * MM, bot_y + 1.5 * MM, grid_w - 3 * MM, bot_h - 3 * MM, 2 * MM, fill=False, stroke=True)
 
     c.setFont("DejaVuBold", 9.5)
     c.setFillColor(colors.HexColor("#38bdf8"))
-    c.drawString(26 * MM, cert_y + cert_h - 9 * MM, "CERTIFICADO DE CANJE: 1 LLAVERO 3D DE LA GPU CHIBI")
+    c.drawString(grid_x + 6 * MM, bot_y + bot_h - 8.5 * MM, "CERTIFICADO DE CANJE: 1 LLAVERO 3D DE LA GPU CHIBI")
 
     c.setFont("DejaVu", 7.5)
     c.setFillColor(colors.HexColor("#cbd5e1"))
-    c.drawString(26 * MM, cert_y + cert_h - 15 * MM, "Certifico que el/la explorador/a ha completado correctamente los 6 bloques.")
-    c.drawString(26 * MM, cert_y + cert_h - 20 * MM, "Entrega este certificado en el stand de HPC&A para recibir tu premio 3D.")
+    c.drawString(grid_x + 6 * MM, bot_y + bot_h - 15 * MM, "El participante ha completado los 6 bloques de la arquitectura correctamente.")
 
     c.setFont("DejaVuBold", 7.5)
     c.setFillColor(colors.HexColor("#f472b6"))
-    c.drawString(26 * MM, cert_y + 5 * MM, "[ ✓ ] 6 Bloques Verificados")
-    c.drawString(75 * MM, cert_y + 5 * MM, "[ ✓ ] Premio 3D Entregado")
+    c.drawString(grid_x + 6 * MM, bot_y + 4.5 * MM, "[ ✓ ] 6 Bloques Verificados")
 
     c.setFillColor(colors.white)
-    c.drawString(125 * MM, cert_y + 5 * MM, "Firma del Monitor/a:")
-    c.setStrokeColor(colors.HexColor("#64748b"))
-    c.line(160 * MM, cert_y + 4.5 * MM, PAGE_W - 26 * MM, cert_y + 4.5 * MM)
+    c.drawString(grid_x + 65 * MM, bot_y + 4.5 * MM, "Firma del Monitor/a: ___________________________")
 
-    c.showPage()
-    c.save()
-    print(f"Generated Chibi Board: {output_path}")
-
-
-# ==============================================================================
-# 2. NIVEL INFANTIL: PIEZAS PARA RECORTAR EN 6 BLOQUES (1 PÁGINA A4)
-# ==============================================================================
-
-def generate_chibi_cutouts_pdf(output_path: str):
-    """Generates the 1-page A4 cut-out sheet for Chibi GPU with EXTRA LARGE numbers."""
-    c = canvas.Canvas(output_path, pagesize=A4)
-
-    # Header
-    c.setFillColor(colors.HexColor("#0f172a"))
-    c.rect(0, PAGE_H - 46 * MM, PAGE_W, 46 * MM, fill=True, stroke=False)
-    c.setFillColor(colors.HexColor("#db2777"))
-    c.rect(0, PAGE_H - 48 * MM, PAGE_W, 2 * MM, fill=True, stroke=False)
-
-    c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#f472b6"))
-    c.drawString(20 * MM, PAGE_H - 12 * MM, "LÁMINA DE RECORTABLES • TIJERAS ✂️")
-
-    c.setFont("DejaVuBold", 16)
-    c.setFillColor(colors.white)
-    c.drawString(20 * MM, PAGE_H - 22 * MM, "PIEZAS PARA RECORTAR: GPU CHIBI (6 BLOQUES)")
-
-    c.setFont("DejaVu", 8.5)
-    c.setFillColor(colors.HexColor("#cbd5e1"))
-    c.drawString(20 * MM, PAGE_H - 28 * MM, "Recorta por las líneas discontinuas con tijeras de punta redonda y pégalas en el Tablero")
-
-    # Scissor guide
-    c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#38bdf8"))
-    c.drawString(20 * MM, PAGE_H - 40 * MM, "✂ CORTA POR LA LÍNEA DE PUNTOS DE CADA PIEZA • CADA PIEZA TIENE SU NÚMERO (#1 AL #6)")
-
-    # 6 Cut Pieces (3 cols x 2 rows)
-    p_x0 = 20 * MM
-    p_y0 = PAGE_H - 265 * MM
-    p_total_w = PAGE_W - 40 * MM
-    p_col_w = (p_total_w - 6 * MM) / 3.0
-    p_row_h = 102 * MM
-
-    idx = 0
-    for r in range(2):
-        for col in range(3):
-            data = CHIBI_DATA[idx]
-            bx = p_x0 + col * (p_col_w + 3 * MM)
-            by = p_y0 + (1 - r) * (p_row_h + 6 * MM)
-
-            # Dashed outer cutting border
-            c.setStrokeColor(colors.HexColor("#db2777"))
-            c.setLineWidth(1.4)
-            c.setDash(5, 3)
-            c.roundRect(bx, by, p_col_w, p_row_h, 3 * MM, fill=False, stroke=True)
-            c.setDash()
-
-            # Scissor symbol
-            c.setFont("DejaVuBold", 8)
-            c.setFillColor(colors.HexColor("#db2777"))
-            c.drawString(bx + 3 * MM, by + p_row_h - 5 * MM, "✂ Recortar")
-
-            # Header Badge with BIG Number
-            c.setFillColor(data["color"])
-            c.roundRect(bx + 20 * MM, by + p_row_h - 7 * MM, p_col_w - 23 * MM, 6 * MM, 1.5 * MM, fill=True, stroke=False)
-            c.setFont("DejaVuBold", 8.5)
-            c.setFillColor(colors.white)
-            c.drawCentredString(bx + 20 * MM + (p_col_w - 23 * MM) / 2.0, by + p_row_h - 3.5 * MM, f"PIEZA #{data['num']}")
-
-            # Block image
-            img_path = CHIBI_BLOCKS[idx]
-            if os.path.exists(img_path):
-                img_w = p_col_w - 6 * MM
-                img_h = p_row_h - 20 * MM
-                c.drawImage(img_path, bx + 3 * MM, by + 10 * MM, width=img_w, height=img_h, preserveAspectRatio=True, mask='auto')
-
-            # Footer of piece
-            c.setFont("DejaVuBold", 7.5)
-            c.setFillColor(colors.HexColor("#0f172a"))
-            c.drawCentredString(bx + p_col_w / 2.0, by + 3.5 * MM, data["title"])
-
-            idx += 1
-
-    # Footer
-    c.setFont("DejaVu", 7.5)
-    c.setFillColor(colors.HexColor("#94a3b8"))
-    c.drawCentredString(PAGE_W / 2.0, 8 * MM, "HPC&A Research Group • High Performance Computing & Architecture • 100% 3D Printable")
-
-    c.showPage()
-    c.save()
-    print(f"Generated Chibi Cut-outs: {output_path}")
-
-
-# ==============================================================================
-# 3. NIVEL AVANZADO: TABLERO BASE DE 12 BLOQUES (1 PÁGINA A4)
-# ==============================================================================
-
-def generate_qpu_board_pdf(output_path: str):
-    """Generates the 1-page A4 base board for QPU Chip with EXTRA LARGE numbers."""
-    c = canvas.Canvas(output_path, pagesize=A4)
-
-    # Header
-    c.setFillColor(colors.HexColor("#090d16"))
-    c.rect(0, PAGE_H - 52 * MM, PAGE_W, 52 * MM, fill=True, stroke=False)
     c.setFillColor(colors.HexColor("#f59e0b"))
-    c.rect(0, PAGE_H - 54 * MM, PAGE_W, 2 * MM, fill=True, stroke=False)
+    c.drawString(grid_x + grid_w - 45 * MM, bot_y + 4.5 * MM, "[ CANJEADO ★ ]")
 
-    c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#38bdf8"))
-    c.drawString(18 * MM, PAGE_H - 12 * MM, "HPC&A QUANTUM LAB • CONCURSO TÉCNICO AVANZADO")
+    c.showPage()
+    c.save()
+    print(f"Generated Matching Chibi Board: {output_path}")
 
-    c.setFont("DejaVuBold", 15.5)
+
+# ==============================================================================
+# 4. QPU CHIP: HOJA GRANDE A4 PARA RECORTAR (MINIMAL TEXT, BIG CUT LINES)
+# ==============================================================================
+
+def generate_qpu_cutouts_large_pdf(output_path: str):
+    """
+    Generates a LARGE A4 sheet with the complete 12-block QPU Chip illustration.
+    - Large cutting image across the page
+    - Row 0 (top): numbers at top
+    - Row 1 (middle): numbers in center
+    - Row 2 (bottom): numbers at bottom (پایین شکل)
+    - Minimal text
+    """
+    c = canvas.Canvas(output_path, pagesize=A4)
+
+    # Minimal Top Bar
+    c.setFillColor(colors.HexColor("#090d16"))
+    c.rect(0, PAGE_H - 24 * MM, PAGE_W, 24 * MM, fill=True, stroke=False)
+    c.setFillColor(colors.HexColor("#f59e0b"))
+    c.rect(0, PAGE_H - 25.5 * MM, PAGE_W, 1.5 * MM, fill=True, stroke=False)
+
+    c.setFont("DejaVuBold", 13)
     c.setFillColor(colors.white)
-    c.drawString(18 * MM, PAGE_H - 22 * MM, "TABLERO DE ENSAMBLAJE: CHIP CUÁNTICO (12 BLOQUES)")
+    c.drawCentredString(PAGE_W / 2.0, PAGE_H - 14 * MM, "HPC&A QUANTUM LAB • RECORTA LAS 12 PIEZAS TÉCNICAS ✂")
 
-    c.setFont("DejaVu", 8.5)
+    c.setFont("DejaVu", 8)
+    c.setFillColor(colors.HexColor("#f59e0b"))
+    c.drawCentredString(PAGE_W / 2.0, PAGE_H - 20 * MM, "Corta siguiendo las líneas de puntos y ensambla la arquitectura cuántica")
+
+    # LARGE Image in center
+    # Width: 180 mm, Height: 114.3 mm
+    img_w = 180 * MM
+    img_h = 114.3 * MM
+    img_x = (PAGE_W - img_w) / 2.0
+    img_y = (PAGE_H - img_h) / 2.0 - 5 * MM
+
+    c.setStrokeColor(colors.HexColor("#f59e0b"))
+    c.setLineWidth(2.0)
+    c.roundRect(img_x - 3 * MM, img_y - 3 * MM, img_w + 6 * MM, img_h + 6 * MM, 4 * MM, fill=False, stroke=True)
+
+    if os.path.exists(QPU_GRID_IMG):
+        c.drawImage(QPU_GRID_IMG, img_x, img_y, width=img_w, height=img_h, preserveAspectRatio=True)
+
+    # Cut guide lines
+    c.setFont("DejaVuBold", 8)
+    c.setFillColor(colors.HexColor("#f59e0b"))
+    c.drawString(img_x, img_y + img_h + 4 * MM, "✂ Recortar contorno exterior")
+    c.drawRightString(img_x + img_w, img_y + img_h + 4 * MM, "12 BLOQUES CUÁNTICOS ✂")
+
+    # Minimal Bottom Footer
+    bot_y = 14 * MM
+    c.setFillColor(colors.HexColor("#090d16"))
+    c.roundRect(img_x, bot_y, img_w, 18 * MM, 3 * MM, fill=True, stroke=False)
+
+    c.setFont("DejaVuBold", 9)
+    c.setFillColor(colors.HexColor("#38bdf8"))
+    c.drawCentredString(PAGE_W / 2.0, bot_y + 10.5 * MM, "¡ENSAMBLA LOS 12 BLOQUES EN EL TABLERO Y CANJEA TU LLAVERO 3D REAL!")
+
+    c.setFont("DejaVu", 7.5)
     c.setFillColor(colors.HexColor("#cbd5e1"))
-    c.drawString(18 * MM, PAGE_H - 28 * MM, "Reconstruye la arquitectura de microondas en 12 bloques para canjear tu Llavero 3D Real")
+    c.drawCentredString(PAGE_W / 2.0, bot_y + 4.5 * MM, "Bloques 1 al 4 (Arriba) • Bloques 5 al 8 (Centro) • Bloques 9 al 12 (Abajo)")
+
+    c.showPage()
+    c.save()
+    print(f"Generated Large QPU Cut-out: {output_path}")
+
+
+# ==============================================================================
+# 3. QPU CHIP: TABLERO BASE A4 CORRESPONDIENTE (MATCHING BASE BOARD)
+# ==============================================================================
+
+def generate_qpu_board_matching_pdf(output_path: str):
+    """
+    Generates a 1-page A4 base board matching the exact 1:1 size of the cutting image:
+    - 12 slots (4 cols x 3 rows)
+    - Row 0: numbers at top
+    - Row 1: numbers in center
+    - Row 2: numbers at bottom (پایین شکل)
+    - Minimal text, maximum pasting area
+    """
+    c = canvas.Canvas(output_path, pagesize=A4)
+
+    # Minimal Top Bar
+    c.setFillColor(colors.HexColor("#090d16"))
+    c.rect(0, PAGE_H - 32 * MM, PAGE_W, 32 * MM, fill=True, stroke=False)
+    c.setFillColor(colors.HexColor("#f59e0b"))
+    c.rect(0, PAGE_H - 33.5 * MM, PAGE_W, 1.5 * MM, fill=True, stroke=False)
+
+    c.setFont("DejaVuBold", 14)
+    c.setFillColor(colors.white)
+    c.drawString(15 * MM, PAGE_H - 14 * MM, "TABLERO DE ENSAMBLAJE: CHIP CUÁNTICO (12 BLOQUES)")
+
+    c.setFont("DejaVu", 8)
+    c.setFillColor(colors.HexColor("#cbd5e1"))
+    c.drawString(15 * MM, PAGE_H - 20 * MM, "Pega cada bloque técnico sobre su casilla para reconstruir el procesador")
 
     # Name Line
-    info_y = PAGE_H - 46 * MM
-    c.setFillColor(colors.HexColor("#111827"))
-    c.setStrokeColor(colors.HexColor("#334155"))
-    c.roundRect(18 * MM, info_y, PAGE_W - 36 * MM, 8 * MM, 2 * MM, fill=True, stroke=True)
-
     c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#94a3b8"))
-    c.drawString(22 * MM, info_y + 2.5 * MM, "Investigador/a Junior:")
-    c.drawString(110 * MM, info_y + 2.5 * MM, "Fecha:")
-    c.drawString(150 * MM, info_y + 2.5 * MM, "Estación:")
+    c.setFillColor(colors.HexColor("#38bdf8"))
+    c.drawString(15 * MM, PAGE_H - 28 * MM, "Investigador/a: ________________________________  Fecha: ____________  Estación: _____")
 
-    c.setStrokeColor(colors.HexColor("#64748b"))
-    c.line(62 * MM, info_y + 2 * MM, 105 * MM, info_y + 2 * MM)
-    c.line(122 * MM, info_y + 2 * MM, 146 * MM, info_y + 2 * MM)
-    c.line(175 * MM, info_y + 2 * MM, PAGE_W - 22 * MM, info_y + 2 * MM)
+    # 12 Target Slots: Exact 180 x 114.3 mm grid centered
+    grid_w = 180 * MM
+    grid_h = 114.3 * MM
+    grid_x = (PAGE_W - grid_w) / 2.0
+    grid_y = (PAGE_H - grid_h) / 2.0 - 5 * MM
 
-    # 12 Slots Grid (4 cols x 3 rows)
-    grid_x0 = 18 * MM
-    grid_y0 = PAGE_H - 222 * MM
-    grid_total_w = PAGE_W - 36 * MM  # 174 mm
-    grid_total_h = 162 * MM
+    col_w = grid_w / 4.0   # 45 mm
+    row_h = grid_h / 3.0   # 38.1 mm
 
-    col_w = (grid_total_w - 6 * MM) / 4.0   # ~42.0 mm
-    row_h = (grid_total_h - 6 * MM) / 3.0   # ~52 mm
+    # Outer Frame
+    c.setStrokeColor(colors.HexColor("#f59e0b"))
+    c.setLineWidth(2.0)
+    c.roundRect(grid_x - 1.5 * MM, grid_y - 1.5 * MM, grid_w + 3 * MM, grid_h + 3 * MM, 3 * MM, fill=False, stroke=True)
 
     idx = 0
     for r in range(3):
         for col in range(4):
-            data = QPU_DATA[idx]
-            bx = grid_x0 + col * (col_w + 2 * MM)
-            by = grid_y0 + (2 - r) * (row_h + 3 * MM)
+            data = QPU_SLOTS[idx]
+            bx = grid_x + col * col_w
+            by = grid_y + (2 - r) * row_h
 
             # Slot Box
             c.setFillColor(colors.HexColor("#f8fafc"))
-            c.setStrokeColor(data["color"])
-            c.setLineWidth(1.2)
-            c.setDash(3, 2)
-            c.roundRect(bx, by, col_w, row_h, 2.5 * MM, fill=True, stroke=True)
-            c.setDash()
+            c.setStrokeColor(colors.HexColor("#cbd5e1"))
+            c.setLineWidth(1.0)
+            c.rect(bx, by, col_w, row_h, fill=True, stroke=True)
 
-            # Slot Header Pill
+            # Central Big Watermark Number
+            c.setFont("DejaVuBold", 32)
+            c.setFillColor(colors.HexColor("#e2e8f0"))
+            c.drawCentredString(bx + col_w / 2.0, by + row_h / 2.0 - 5 * MM, str(data["num"]))
+
+            # Badge pill: Row 0 at top, Row 1 in center, Row 2 at bottom (پایین شکل!)
+            if r == 0:
+                # Top row: pill at top
+                pill_y = by + row_h - 7.5 * MM
+            elif r == 1:
+                # Middle row: pill in center
+                pill_y = by + row_h / 2.0 - 3 * MM
+            else:
+                # Bottom row: pill at bottom (پایین شکل!)
+                pill_y = by + 2 * MM
+
             c.setFillColor(data["color"])
-            c.roundRect(bx + 2 * MM, by + row_h - 8 * MM, col_w - 4 * MM, 6 * MM, 1.5 * MM, fill=True, stroke=False)
-            c.setFont("DejaVuBold", 7.5)
+            c.roundRect(bx + 3 * MM, pill_y, col_w - 6 * MM, 5.5 * MM, 1.5 * MM, fill=True, stroke=False)
+            c.setFont("DejaVuBold", 7)
             c.setFillColor(colors.white)
-            c.drawCentredString(bx + col_w / 2.0, by + row_h - 4.5 * MM, f"BLOQUE #{data['num']}")
-
-            # EXTRA LARGE WATERMARK NUMBER IN CENTER (44 PT!)
-            c.setFont("DejaVuBold", 44)
-            c.setFillColor(colors.HexColor("#cbd5e1"))
-            c.drawCentredString(bx + col_w / 2.0, by + row_h / 2.0 - 7 * MM, str(data["num"]))
-
-            # Title & Glue hint
-            c.setFont("DejaVuBold", 5.8)
-            c.setFillColor(colors.HexColor("#0f172a"))
-            c.drawCentredString(bx + col_w / 2.0, by + 8 * MM, data["title"])
-
-            c.setFont("DejaVu", 5)
-            c.setFillColor(data["color"])
-            c.drawCentredString(bx + col_w / 2.0, by + 3 * MM, "[ PEGAR BLOQUE ]")
+            c.drawCentredString(bx + col_w / 2.0, pill_y + 1.5 * MM, f"#{data['num']} {data['title'][:11]}")
 
             idx += 1
 
-    # Bottom Certification Box
-    cert_y = 12 * MM
-    cert_h = 36 * MM
+    # Minimal Bottom Certification Footer
+    bot_y = 14 * MM
+    bot_h = 28 * MM
     c.setFillColor(colors.HexColor("#090d16"))
-    c.roundRect(18 * MM, cert_y, PAGE_W - 36 * MM, cert_h, 3 * MM, fill=True, stroke=False)
+    c.roundRect(grid_x, bot_y, grid_w, bot_h, 3 * MM, fill=True, stroke=False)
 
     c.setStrokeColor(colors.HexColor("#f59e0b"))
     c.setLineWidth(1.2)
-    c.roundRect(20 * MM, cert_y + 2 * MM, PAGE_W - 40 * MM, cert_h - 4 * MM, 2 * MM, fill=False, stroke=True)
+    c.roundRect(grid_x + 1.5 * MM, bot_y + 1.5 * MM, grid_w - 3 * MM, bot_h - 3 * MM, 2 * MM, fill=False, stroke=True)
 
     c.setFont("DejaVuBold", 9.5)
     c.setFillColor(colors.HexColor("#f59e0b"))
-    c.drawString(25 * MM, cert_y + cert_h - 9 * MM, "VERIFICACIÓN TÉCNICA: 1 LLAVERO 3D DEL CHIP CUÁNTICO QPU")
+    c.drawString(grid_x + 6 * MM, bot_y + bot_h - 8.5 * MM, "VERIFICACIÓN TÉCNICA: 1 LLAVERO 3D DEL CHIP CUÁNTICO QPU")
 
     c.setFont("DejaVu", 7.5)
     c.setFillColor(colors.HexColor("#cbd5e1"))
-    c.drawString(25 * MM, cert_y + cert_h - 15 * MM, "Acreditación oficial: los 12 bloques del procesador superconductor han sido ensamblados correctamente.")
-    c.drawString(25 * MM, cert_y + cert_h - 20 * MM, "Válido para canje directo por el modelo 3D original fabricado en el laboratorio.")
+    c.drawString(grid_x + 6 * MM, bot_y + bot_h - 15 * MM, "Los 12 bloques de microondas del procesador cuántico han sido verificados con éxito.")
 
     c.setFont("DejaVuBold", 7.5)
     c.setFillColor(colors.HexColor("#38bdf8"))
-    c.drawString(25 * MM, cert_y + 5 * MM, "[ ✓ ] 12 Bloques Verificados")
-    c.drawString(75 * MM, cert_y + 5 * MM, "[ ✓ ] Premio 3D Entregado")
+    c.drawString(grid_x + 6 * MM, bot_y + 4.5 * MM, "[ ✓ ] 12 Bloques Verificados")
 
     c.setFillColor(colors.white)
-    c.drawString(125 * MM, cert_y + 5 * MM, "Firma del Investigador:")
-    c.setStrokeColor(colors.HexColor("#64748b"))
-    c.line(160 * MM, cert_y + 4.5 * MM, PAGE_W - 25 * MM, cert_y + 4.5 * MM)
+    c.drawString(grid_x + 65 * MM, bot_y + 4.5 * MM, "Firma del Investigador: ___________________________")
+
+    c.setFillColor(colors.HexColor("#f59e0b"))
+    c.drawString(grid_x + grid_w - 45 * MM, bot_y + 4.5 * MM, "[ CANJEADO ★ ]")
 
     c.showPage()
     c.save()
-    print(f"Generated QPU Board: {output_path}")
-
-
-# ==============================================================================
-# 4. NIVEL AVANZADO: PIEZAS PARA RECORTAR EN 12 BLOQUES (1 PÁGINA A4)
-# ==============================================================================
-
-def generate_qpu_cutouts_pdf(output_path: str):
-    """Generates the 1-page A4 cut-out sheet for QPU Chip with EXTRA LARGE numbers."""
-    c = canvas.Canvas(output_path, pagesize=A4)
-
-    # Header
-    c.setFillColor(colors.HexColor("#090d16"))
-    c.rect(0, PAGE_H - 46 * MM, PAGE_W, 46 * MM, fill=True, stroke=False)
-    c.setFillColor(colors.HexColor("#f59e0b"))
-    c.rect(0, PAGE_H - 48 * MM, PAGE_W, 2 * MM, fill=True, stroke=False)
-
-    c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#f59e0b"))
-    c.drawString(18 * MM, PAGE_H - 12 * MM, "LÁMINA TÉCNICA DE RECORTABLES • TIJERAS ✂️")
-
-    c.setFont("DejaVuBold", 15.5)
-    c.setFillColor(colors.white)
-    c.drawString(18 * MM, PAGE_H - 22 * MM, "PIEZAS PARA RECORTAR: CHIP QPU (12 BLOQUES)")
-
-    c.setFont("DejaVu", 8.5)
-    c.setFillColor(colors.HexColor("#cbd5e1"))
-    c.drawString(18 * MM, PAGE_H - 28 * MM, "Recorta las 12 piezas por la línea discontinua y alinea las pistas de microondas en el Tablero")
-
-    c.setFont("DejaVuBold", 7.5)
-    c.setFillColor(colors.HexColor("#38bdf8"))
-    c.drawString(18 * MM, PAGE_H - 40 * MM, "✂ CORTE DE PRECISIÓN • CADA PIEZA TIENE SU NÚMERO (#1 AL #12) Y ETIQUETA DE HARDWARE")
-
-    # 12 Cut Pieces (4 cols x 3 rows)
-    p_x0 = 18 * MM
-    p_y0 = PAGE_H - 265 * MM
-    p_total_w = PAGE_W - 36 * MM
-    p_col_w = (p_total_w - 6 * MM) / 4.0
-    p_row_h = 68 * MM
-
-    idx = 0
-    for r in range(3):
-        for col in range(4):
-            data = QPU_DATA[idx]
-            bx = p_x0 + col * (p_col_w + 2 * MM)
-            by = p_y0 + (2 - r) * (p_row_h + 4 * MM)
-
-            # Dashed cutting border
-            c.setStrokeColor(data["color"])
-            c.setLineWidth(1.2)
-            c.setDash(4, 2)
-            c.roundRect(bx, by, p_col_w, p_row_h, 2.5 * MM, fill=False, stroke=True)
-            c.setDash()
-
-            # Scissor icon
-            c.setFont("DejaVuBold", 6.5)
-            c.setFillColor(data["color"])
-            c.drawString(bx + 2 * MM, by + p_row_h - 4.5 * MM, "✂")
-
-            # Header badge with BIG Number
-            c.setFillColor(data["color"])
-            c.roundRect(bx + 8 * MM, by + p_row_h - 6 * MM, p_col_w - 10 * MM, 5 * MM, 1.2 * MM, fill=True, stroke=False)
-            c.setFont("DejaVuBold", 7)
-            c.setFillColor(colors.white)
-            c.drawCentredString(bx + 8 * MM + (p_col_w - 10 * MM) / 2.0, by + p_row_h - 3 * MM, f"PIEZA #{data['num']}")
-
-            # Block image
-            img_path = QPU_BLOCKS[idx]
-            if os.path.exists(img_path):
-                img_w = p_col_w - 4 * MM
-                img_h = p_row_h - 14 * MM
-                c.drawImage(img_path, bx + 2 * MM, by + 7 * MM, width=img_w, height=img_h, preserveAspectRatio=True, mask='auto')
-
-            # Footer label
-            c.setFont("DejaVuBold", 5.5)
-            c.setFillColor(colors.HexColor("#0f172a"))
-            c.drawCentredString(bx + p_col_w / 2.0, by + 2.5 * MM, data["title"])
-
-            idx += 1
-
-    # Footer
-    c.setFont("DejaVu", 7.5)
-    c.setFillColor(colors.HexColor("#94a3b8"))
-    c.drawCentredString(PAGE_W / 2.0, 8 * MM, "HPC&A Quantum Computing & Architecture • 100% 3D Printable Hardware Souvenirs")
-
-    c.showPage()
-    c.save()
-    print(f"Generated QPU Cut-outs: {output_path}")
+    print(f"Generated Matching QPU Board: {output_path}")
 
 
 def main():
-    print("Generating Minimal Competition Print Pack...")
+    print("Generating Minimal Competition Print Pack with LARGE A4 cutting sheets and correct number positions...")
 
     f_guide = os.path.join(PACK_DIR, "00_GUIA_DEL_CONCURSO.pdf")
     f_chibi_b = os.path.join(PACK_DIR, "01_CHIBI_TABLERO_BASE_A4.pdf")
@@ -620,12 +568,12 @@ def main():
     f_qpu_c = os.path.join(PACK_DIR, "04_QPU_PIEZAS_RECORTAR_A4.pdf")
 
     generate_guide_pdf(f_guide)
-    generate_chibi_board_pdf(f_chibi_b)
-    generate_chibi_cutouts_pdf(f_chibi_c)
-    generate_qpu_board_pdf(f_qpu_b)
-    generate_qpu_cutouts_pdf(f_qpu_c)
+    generate_chibi_board_matching_pdf(f_chibi_b)
+    generate_chibi_cutouts_large_pdf(f_chibi_c)
+    generate_qpu_board_matching_pdf(f_qpu_b)
+    generate_qpu_cutouts_large_pdf(f_qpu_c)
 
-    print("All 5 Competition Print Pack PDFs generated successfully in concurso_listo_para_imprimir/!")
+    print("All 5 Competition Print Pack PDFs generated successfully!")
 
 
 if __name__ == "__main__":
