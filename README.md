@@ -121,6 +121,42 @@ The repository provides high-resolution, print-ready companion cards in Spanish 
 
 ---
 
+## Competition Print Pack (Hojas Listas para Imprimir)
+
+For quick workshop operations, science fairs, and school competitions, the dedicated folder [`concurso_listo_para_imprimir/`](concurso_listo_para_imprimir/) contains **strictly the minimum printable sheets** with **pure 2D vector illustrations (100% mesh-free)** and **extra-large numbers**:
+
+![Competition Print Pack Showcase](concurso_listo_para_imprimir/competition_pack_showcase.png)
+
+* **[`00_GUIA_DEL_CONCURSO.pdf`](concurso_listo_para_imprimir/00_GUIA_DEL_CONCURSO.pdf)** — 1-Page quick guide for the booth instructor (materials, cutting rules, prize flow).
+* **Junior Level (Kids / Primary School — Chibi GPU in 6 Blocks):**
+  - **[`01_CHIBI_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/01_CHIBI_TABLERO_BASE_A4.pdf)** — 1 copy per child: Assembly board with large numbers 1 to 6 and official certification.
+  - **[`02_CHIBI_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/02_CHIBI_PIEZAS_RECORTAR_A4.pdf)** — 1 copy per child: Full-color 6-block cut-out sheet with scissor guides (`✂ - - -`).
+* **Advanced Level (Teens & Secondary School — Superconducting QPU Chip in 12 Blocks):**
+  - **[`03_QPU_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/03_QPU_TABLERO_BASE_A4.pdf)** — 1 copy per student: 12-Slot quantum hardware board with extra-large numbers 1 to 12.
+  - **[`04_QPU_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/04_QPU_PIEZAS_RECORTAR_A4.pdf)** — 1 copy per student: 12-Piece microwave hardware cut-out sheet.
+
+---
+
+## Kids & Students 2D Reward & Activity Suite (Extended)
+
+The extended suite under [`kids_reward_challenge/`](kids_reward_challenge/) also includes scientific passports, stamp cards, coloring sheets, and an interactive HTML web dashboard:
+
+1. **Junior Level (Chibi GPU — 6 Blocks):**
+   * [`tablero_puzle_recompensa_a4.pdf`](kids_reward_challenge/tablero_puzle_recompensa_a4.pdf) — 2-Page A4: Board + 6 Cut-out pieces.
+   * [`pasaporte_misiones_chibi_a4.pdf`](kids_reward_challenge/pasaporte_misiones_chibi_a4.pdf) — 1-Page A4: 6-Challenge science passport with stamp circles and tear-off claim coupon.
+   * [`colorea_tu_gpu_chibi_a4.pdf`](kids_reward_challenge/colorea_tu_gpu_chibi_a4.pdf) — 1-Page A4: Clean 6-zone coloring challenge with color-code guide.
+   * [`hoja_combinada_todo_en_uno_a4.pdf`](kids_reward_challenge/hoja_combinada_todo_en_uno_a4.pdf) — 1-Page A4: Single eco-friendly sheet.
+
+2. **Advanced Level (QPU Chip — 12 Blocks):**
+   * [`tablero_cuantico_avanzado_12bloques_a4.pdf`](kids_reward_challenge/qpu_advanced_12blocks/tablero_cuantico_avanzado_12bloques_a4.pdf) — 2-Page A4: 12-Slot quantum board + 12 technical cut-out pieces.
+   * [`pasaporte_cuantico_avanzado_12retos_a4.pdf`](kids_reward_challenge/qpu_advanced_12blocks/pasaporte_cuantico_avanzado_12retos_a4.pdf) — 1-Page A4: 12-Challenge quantum milestone passport with stamp slots and official prize voucher.
+   * [`esquema_circuito_cuantico_12bloques_a4.pdf`](kids_reward_challenge/qpu_advanced_12blocks/esquema_circuito_cuantico_12bloques_a4.pdf) — 1-Page A4: 12-Zone microwave schematic and blueprint tracing.
+   * [`hoja_combinada_cuantica_expres_a4.pdf`](kids_reward_challenge/qpu_advanced_12blocks/hoja_combinada_cuantica_expres_a4.pdf) — 1-Page A4: Express 12-block single sheet.
+
+3. **Interactive Web Dashboard:** Open [`kids_reward_challenge/index.html`](kids_reward_challenge/index.html) in any browser to preview sheets, inspect individual blocks, and trigger `@media print` directly.
+
+---
+
 ## CAD Generation & Reproducibility
 
 Prerequisites: Python 3.10+ and a virtual environment.
