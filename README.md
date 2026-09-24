@@ -123,17 +123,25 @@ The repository provides high-resolution, print-ready companion cards in Spanish 
 
 ## Competition Print Pack (Hojas Listas para Imprimir)
 
-For quick workshop operations, science fairs, and school competitions, the dedicated folder [`concurso_listo_para_imprimir/`](concurso_listo_para_imprimir/) contains **strictly the minimum printable sheets** with **pure 2D vector illustrations (100% mesh-free)** and **extra-large numbers**:
+For quick workshop operations, science fairs, and school competitions, the dedicated folder [`concurso_listo_para_imprimir/`](concurso_listo_para_imprimir/) contains **strictly the minimum printable sheets** with **pure 2D vector illustrations (100% mesh-free)**, **90° rotation to occupy >80% of the A4 page**, and **clean cut lines with numbers placed away from cutting seams**:
 
 ![Competition Print Pack Showcase](concurso_listo_para_imprimir/competition_pack_showcase.png)
 
 * **[`00_GUIA_DEL_CONCURSO.pdf`](concurso_listo_para_imprimir/00_GUIA_DEL_CONCURSO.pdf)** — 1-Page quick guide for the booth instructor (materials, cutting rules, prize flow).
-* **Junior Level (Kids / Primary School — Chibi GPU in 6 Blocks):**
-  - **[`01_CHIBI_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/01_CHIBI_TABLERO_BASE_A4.pdf)** — 1 copy per child: Assembly board with large numbers 1 to 6 and official certification.
-  - **[`02_CHIBI_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/02_CHIBI_PIEZAS_RECORTAR_A4.pdf)** — 1 copy per child: Full-color 6-block cut-out sheet with scissor guides (`✂ - - -`).
-* **Advanced Level (Teens & Secondary School — Superconducting QPU Chip in 12 Blocks):**
-  - **[`03_QPU_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/03_QPU_TABLERO_BASE_A4.pdf)** — 1 copy per student: 12-Slot quantum hardware board with extra-large numbers 1 to 12.
-  - **[`04_QPU_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/04_QPU_PIEZAS_RECORTAR_A4.pdf)** — 1 copy per student: 12-Piece microwave hardware cut-out sheet.
+* **Junior Level (Kids / Primary School — 6 Large Blocks):**
+  - **Option A (Chibi GPU — 90° Rotated Full A4):**
+    * [`01_CHIBI_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/01_CHIBI_TABLERO_BASE_A4.pdf) — Assembly board (1 copy per child) with official certification.
+    * [`02_CHIBI_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/02_CHIBI_PIEZAS_RECORTAR_A4.pdf) — Full-color 6-block cut-out sheet with scissor guides (`✂ - - -`).
+  - **Option B (HPC&A Cyber Sword — Native Full A4 Portrait):**
+    * [`03_SWORD_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/03_SWORD_TABLERO_BASE_A4.pdf) — Assembly board for the 6 energy blade & rune blocks.
+    * [`04_SWORD_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/04_SWORD_PIEZAS_RECORTAR_A4.pdf) — Giant cut-out sheet for the Cyber Sword keychain prize.
+* **Advanced Level (Teens & Secondary School — 12 Technical Blocks):**
+  - **Option A (Superconducting QPU Chip — 90° Rotated Full A4):**
+    * [`05_QPU_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/05_QPU_TABLERO_BASE_A4.pdf) — 12-Slot quantum hardware board with extra-large numbers 1 to 12.
+    * [`06_QPU_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/06_QPU_PIEZAS_RECORTAR_A4.pdf) — 12-Piece microwave hardware cut-out sheet.
+  - **Option B (Quantum Dilution Chandelier — Native Full A4 Portrait):**
+    * [`07_CHANDELIER_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/07_CHANDELIER_TABLERO_BASE_A4.pdf) — Assembly board for the 5 cryogenic thermal stages ($300\text{ K}$ to $15\text{ mK}$).
+    * [`08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf) — 12-Piece dilution refrigerator cut-out sheet.
 
 ---
 

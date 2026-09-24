@@ -6,51 +6,63 @@
 
 ## 📌 ¿Qué hay en esta carpeta?
 
-Esta carpeta contiene **exclusivamente las hojas mínimas que deben imprimirse** para realizar el concurso en un evento, taller o feria científica:
+Esta carpeta contiene **exclusivamente las hojas mínimas que deben imprimirse** para realizar el concurso en ferias científicas, talleres y stands de divulgación:
 
 ```text
 concurso_listo_para_imprimir/
-├── 00_GUIA_DEL_CONCURSO.pdf           # Esta guía en 1 página A4 lista para el monitor/a
-├── 00_GUIA_DEL_CONCURSO.md           # Guía en texto markdown
+├── 00_GUIA_DEL_CONCURSO.pdf               # Esta guía oficial en 1 página A4 lista para monitores/as
+├── 00_GUIA_DEL_CONCURSO.md               # Guía en formato markdown
+├── competition_pack_showcase.png         # Póster mosaico 3x3 de todas las hojas de impresión
 │
-├── [NIVEL 1: INFANTIL / PRIMARIA — GPU CHIBI EN 6 BLOQUES]
-│   ├── 01_CHIBI_TABLERO_BASE_A4.pdf       # 1 copia por niño/a: Tablero con casillas 1 al 6
-│   └── 02_CHIBI_PIEZAS_RECORTAR_A4.pdf    # 1 copia por niño/a: Las 6 piezas a todo color con tijeras ✂️
+├── [NIVEL 1: INFANTIL / PRIMARIA — 6 BLOQUES GRANDES]
+│   ├── Opción A: GPU Chibi Kawaii (Orientación Rotada 90° para ocupar toda la página A4)
+│   │   ├── 01_CHIBI_TABLERO_BASE_A4.pdf       # Tablero base con 6 casillas (1 copia por participante)
+│   │   └── 02_CHIBI_PIEZAS_RECORTAR_A4.pdf    # Hoja gigante para recortar con tijeras ✂️
+│   │
+│   └── Opción B: Espada Cibernética HPC&A (Orientación Vertical Nativa)
+│       ├── 03_SWORD_TABLERO_BASE_A4.pdf       # Tablero base con 6 casillas de energía y runas
+│       └── 04_SWORD_PIEZAS_RECORTAR_A4.pdf    # Hoja gigante con hoja de plasma y runas ✂️
 │
-└── [NIVEL 2: AVANZADO / SECUNDARIA — CHIP CUÁNTICO QPU EN 12 BLOQUES]
-    ├── 03_QPU_TABLERO_BASE_A4.pdf         # 1 copia por estudiante: Tablero con 12 casillas técnicas
-    └── 04_QPU_PIEZAS_RECORTAR_A4.pdf      # 1 copia por estudiante: Las 12 piezas de hardware cuántico ✂️
+└── [NIVEL 2: AVANZADO / SECUNDARIA — 12 BLOQUES TÉCNICOS]
+    ├── Opción A: Chip Cuántico Superconductor QPU (Orientación Rotada 90°)
+    │   ├── 05_QPU_TABLERO_BASE_A4.pdf         # Tablero base con 12 casillas técnicas
+    │   └── 06_QPU_PIEZAS_RECORTAR_A4.pdf      # Hoja gigante con 12 bloques de microondas ✂️
+    │
+    └── Opción B: Candelabro de Dilución Cuántica (Orientación Vertical Nativa)
+        ├── 07_CHANDELIER_TABLERO_BASE_A4.pdf   # Tablero base con las 5 etapas térmicas (300 K a 15 mK)
+        └── 08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf # Hoja gigante con criostato y guías de corte ✂️
 ```
 
 ---
 
-## 🖨️ Instrucciones de Impresión
+## 🖨️ Instrucciones de Impresión y Formato A4
 
-* **Tipo de Papel:** Papel blanco estándar **A4** ($210 \times 297\text{ mm}$). Gramaje recomendado: $80\text{ g/m}^2$ a $120\text{ g/m}^2$.
-* **Ajuste de Impresora:** 
-  - Orientación: **Vertical (Portrait)**.
-  - Escala: **100% (Tamaño Real / Sin Ajustar)**.
-  - Calidad: **Color** (Normal o Alta para que los números y colores resalten).
-* **Materiales para la mesa:**
-  - Tijeras escolares de punta redonda.
-  - Barras de pegamento de papel.
-  - Bolígrafo o sello para firmar la entrega del premio.
+* **Tipo de Papel:** Papel blanco estándar **A4** ($210 \times 297\text{ mm}$), gramaje $80\text{ a }120\text{ g/m}^2$.
+* **Ajuste de Impresora:**
+  - Orientación: **Vertical (Portrait)** para todas las hojas.
+  - Escala: **100% (Tamaño Real / Sin Ajustar Margen)**.
+  - Calidad: **Color** (Normal o Alta para contraste óptimo).
+* **Aprovechamiento del Espacio A4 (>80% de ocupación):**
+  - Los modelos horizontales (GPU Chibi y Chip QPU) están **rotados 90 grados** en la página A4 para que la ilustración alcance ~245 mm de altura, eliminando espacios muertos y haciendo las piezas mucho más grandes y fáciles de recortar.
+  - Los modelos verticales (Espada y Candelabro) llenan naturalmente los 245 mm de altura en formato vertical.
+* **Seguridad en las Líneas de Corte:**
+  - Los números de la fila superior están situados arriba del todo.
+  - Los números de la fila inferior están situados **abajo del todo** (`پایین شکل`).
+  - La línea central de corte ✂ está completamente libre de textos o números, evitando cortes accidentales.
 
 ---
 
 ## 🏆 Dinámica del Concurso y Entrega del Premio 3D
 
-### Nivel 1: Niños/as de 6 a 11 años (GPU Chibi — 6 Bloques)
-1. Dale al participante **1 copia del Tablero (`01`)** y **1 copia de las Piezas (`02`)**.
-2. El participante escribe su nombre y fecha en la cabecera.
-3. Con tijeras, recorta las 6 piezas por las líneas de puntos. Cada pieza tiene su número grande (**#1 al #6**).
-4. Pega cada pieza con pegamento en la casilla correspondiente del Tablero.
-5. Al completar los 6 bloques, la ilustración 2D de la GPU Chibi queda formada.
-6. El monitor/a firma el **Certificado de Canje** y le entrega el **Llavero 3D Real de la GPU Chibi** impreso en PLA.
+### Nivel 1: Niños/as de 6 a 11 años (6 Bloques — Piezas Extra Grandes de 73 x 81 mm)
+1. Elige entre la **GPU Chibi** (Hojas `01` y `02`) o la **Espada Cibernética** (Hojas `03` y `04`).
+2. Entrega 1 Tablero Base y 1 Hoja para Recortar al participante.
+3. El participante recorta por la línea central y las divisorias siguiendo las tijeras ✂️.
+4. Pega los 6 bloques en su casilla correspondiente del Tablero.
+5. El monitor/a revisa que los números coincidan, firma el **Certificado de Canje** y entrega el **Llavero 3D Real** (GPU Chibi o Espada con anilla integrada).
 
-### Nivel 2: Estudiantes de 12 a 18+ años (Chip QPU — 12 Bloques)
-1. Dale al participante **1 copia del Tablero Cuántico (`03`)** y **1 copia de las Piezas (`04`)**.
-2. El participante recorta las 12 piezas de hardware (**#1 al #12**).
-3. Debe alinear los cúbits transmon en cruz, los resonadores serpentín azules y las almohadillas de oro de wirebonding.
-4. Al pegar los 12 bloques y reconstruir el chip, el instructor firma la acreditación oficial.
-5. ¡Recibe el **Llavero 3D Real del Chip Cuántico QPU**!
+### Nivel 2: Estudiantes de 12 a 18+ años (12 Bloques Técnicos)
+1. Elige entre el **Chip QPU** (Hojas `05` y `06`) o el **Candelabro de Dilución** (Hojas `07` y `08`).
+2. El estudiante debe alinear la arquitectura cuántica (cúbits transmon, resonadores CPW, o las 5 etapas criogénicas de 300 K a 15 mK).
+3. Tras pegar los 12 bloques, el monitor/a firma la validación oficial.
+4. ¡El participante gana el **Llavero 3D Real del Procesador Cuántico o del Criostato**!
