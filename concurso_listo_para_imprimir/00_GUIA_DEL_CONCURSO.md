@@ -6,31 +6,32 @@
 
 ## 📌 ¿Qué hay en esta carpeta?
 
-Esta carpeta contiene **exclusivamente las hojas mínimas que deben imprimirse** para realizar el concurso en ferias científicas, talleres y stands de divulgación:
+Esta carpeta contiene **exclusivamente las hojas mínimas que deben imprimirse** para realizar el concurso en ferias científicas, talleres escolares y stands de divulgación:
 
 ```text
 concurso_listo_para_imprimir/
-├── 00_GUIA_DEL_CONCURSO.pdf               # Esta guía oficial en 1 página A4 lista para monitores/as
-├── 00_GUIA_DEL_CONCURSO.md               # Guía en formato markdown
-├── competition_pack_showcase.png         # Póster mosaico 3x3 de todas las hojas de impresión
+├── 00_GUIA_DEL_CONCURSO.pdf                    # Guía oficial en 1 página A4 lista para monitores/as
+├── 00_GUIA_DEL_CONCURSO.md                    # Esta guía en formato markdown
+├── competition_pack_showcase.png              # Mosaico visual de todas las hojas de impresión
 │
-├── [NIVEL 1: INFANTIL / PRIMARIA — 6 BLOQUES GRANDES]
-│   ├── Opción A: GPU Chibi Kawaii (Orientación Rotada 90° para ocupar toda la página A4)
-│   │   ├── 01_CHIBI_TABLERO_BASE_A4.pdf       # Tablero base con 6 casillas (1 copia por participante)
-│   │   └── 02_CHIBI_PIEZAS_RECORTAR_A4.pdf    # Hoja gigante para recortar con tijeras ✂️
+├── [MODO GUIADO — CON NÚMEROS (PARA PRINCIPIANTES / NIÑOS PEQUEÑOS)]
+│   ├── Nivel Infantil / Primaria (6 Bloques Extra Grandes):
+│   │   ├── 01_CHIBI_TABLERO_BASE_A4.pdf       # Tablero base para pegar GPU Chibi
+│   │   ├── 02_CHIBI_PIEZAS_RECORTAR_A4.pdf    # Hoja para recortar GPU Chibi (Rotada 90° para llenar A4)
+│   │   ├── 03_GPU_ESPADA_TABLERO_BASE_A4.pdf  # Tablero base para GPU con Espada Heroica
+│   │   └── 04_GPU_ESPADA_PIEZAS_RECORTAR_A4.pdf # Hoja para recortar GPU con Espada (Rotada 90°)
 │   │
-│   └── Opción B: Espada Cibernética HPC&A (Orientación Vertical Nativa)
-│       ├── 03_SWORD_TABLERO_BASE_A4.pdf       # Tablero base con 6 casillas de energía y runas
-│       └── 04_SWORD_PIEZAS_RECORTAR_A4.pdf    # Hoja gigante con hoja de plasma y runas ✂️
+│   └── Nivel Avanzado / Secundaria (12 Bloques Técnicos):
+│       ├── 05_QPU_TABLERO_BASE_A4.pdf         # Tablero base para Chip Cuántico QPU
+│       ├── 06_QPU_PIEZAS_RECORTAR_A4.pdf      # Hoja para recortar Chip QPU (Rotada 90°)
+│       ├── 07_CHANDELIER_TABLERO_BASE_A4.pdf  # Tablero base para Candelabro Cuántico (15 mK)
+│       └── 08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf # Hoja para recortar Candelabro Cuántico (Vertical nativo)
 │
-└── [NIVEL 2: AVANZADO / SECUNDARIA — 12 BLOQUES TÉCNICOS]
-    ├── Opción A: Chip Cuántico Superconductor QPU (Orientación Rotada 90°)
-    │   ├── 05_QPU_TABLERO_BASE_A4.pdf         # Tablero base con 12 casillas técnicas
-    │   └── 06_QPU_PIEZAS_RECORTAR_A4.pdf      # Hoja gigante con 12 bloques de microondas ✂️
-    │
-    └── Opción B: Candelabro de Dilución Cuántica (Orientación Vertical Nativa)
-        ├── 07_CHANDELIER_TABLERO_BASE_A4.pdf   # Tablero base con las 5 etapas térmicas (300 K a 15 mK)
-        └── 08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf # Hoja gigante con criostato y guías de corte ✂️
+└── [MODO RETO EXPERTO — SIN NÚMEROS (PUZLE VISUAL PURO)]
+    ├── 09_CHIBI_RECORTAR_SIN_NUMEROS_A4.pdf       # Hoja de corte Chibi sin números sobre el arte
+    ├── 10_GPU_ESPADA_RECORTAR_SIN_NUMEROS_A4.pdf # Hoja de corte GPU Espada sin números sobre el arte
+    ├── 11_QPU_RECORTAR_SIN_NUMEROS_A4.pdf        # Hoja de corte Chip QPU sin números sobre el arte
+    └── 12_CHANDELIER_RECORTAR_SIN_NUMEROS_A4.pdf # Hoja de corte Candelabro sin números sobre el arte
 ```
 
 ---
@@ -43,26 +44,29 @@ concurso_listo_para_imprimir/
   - Escala: **100% (Tamaño Real / Sin Ajustar Margen)**.
   - Calidad: **Color** (Normal o Alta para contraste óptimo).
 * **Aprovechamiento del Espacio A4 (>80% de ocupación):**
-  - Los modelos horizontales (GPU Chibi y Chip QPU) están **rotados 90 grados** en la página A4 para que la ilustración alcance ~245 mm de altura, eliminando espacios muertos y haciendo las piezas mucho más grandes y fáciles de recortar.
-  - Los modelos verticales (Espada y Candelabro) llenan naturalmente los 245 mm de altura en formato vertical.
+  - Los modelos horizontales (GPU Chibi, GPU con Espada y Chip QPU) están **rotados 90 grados** en la página A4 para que la ilustración alcance ~245 mm de altura, eliminando espacios muertos y haciendo las piezas mucho más grandes y fáciles de recortar.
+  - El Candelabro Cuántico llena naturalmente los 245 mm de altura en formato vertical.
 * **Seguridad en las Líneas de Corte:**
   - Los números de la fila superior están situados arriba del todo.
   - Los números de la fila inferior están situados **abajo del todo** (`پایین شکل`).
   - La línea central de corte ✂ está completamente libre de textos o números, evitando cortes accidentales.
+* **Modalidad con o sin números:**
+  - Para niños más pequeños o actividades rápidas: imprime las hojas **Con Números (02, 04, 06, 08)**.
+  - Para un rompecabezas real donde deben buscar las pistas visuales (pistas de circuitos, aspas de ventilador, conectores PCIe o etapas criogénicas): imprime las hojas **Sin Números (09, 10, 11, 12)**.
 
 ---
 
 ## 🏆 Dinámica del Concurso y Entrega del Premio 3D
 
-### Nivel 1: Niños/as de 6 a 11 años (6 Bloques — Piezas Extra Grandes de 73 x 81 mm)
-1. Elige entre la **GPU Chibi** (Hojas `01` y `02`) o la **Espada Cibernética** (Hojas `03` y `04`).
-2. Entrega 1 Tablero Base y 1 Hoja para Recortar al participante.
+### Nivel 1: Niños/as de 6 a 11 años (6 Bloques — Piezas Extra Grandes de 77 x 80 mm)
+1. Elige entre la **GPU Chibi** o la **GPU con Espada**.
+2. Entrega 1 Tablero Base y 1 Hoja para Recortar (en modo con números o modo visual según la edad).
 3. El participante recorta por la línea central y las divisorias siguiendo las tijeras ✂️.
 4. Pega los 6 bloques en su casilla correspondiente del Tablero.
-5. El monitor/a revisa que los números coincidan, firma el **Certificado de Canje** y entrega el **Llavero 3D Real** (GPU Chibi o Espada con anilla integrada).
+5. El monitor/a revisa que la ilustración coincida, firma el **Certificado de Canje** y entrega el **Llavero 3D Real** (`gpu_fantasy_chibi.stl` o `gpu_fantasy_sword.stl`).
 
 ### Nivel 2: Estudiantes de 12 a 18+ años (12 Bloques Técnicos)
-1. Elige entre el **Chip QPU** (Hojas `05` y `06`) o el **Candelabro de Dilución** (Hojas `07` y `08`).
+1. Elige entre el **Chip QPU** o el **Candelabro Cuántico**.
 2. El estudiante debe alinear la arquitectura cuántica (cúbits transmon, resonadores CPW, o las 5 etapas criogénicas de 300 K a 15 mK).
 3. Tras pegar los 12 bloques, el monitor/a firma la validación oficial.
-4. ¡El participante gana el **Llavero 3D Real del Procesador Cuántico o del Criostato**!
+4. ¡El participante gana el **Llavero 3D Real del Procesador Cuántico o del Criostato** (`qpu_keychain_hpca.stl` o `quantum_chandelier.stl`)!

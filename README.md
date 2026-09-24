@@ -127,21 +127,19 @@ For quick workshop operations, science fairs, and school competitions, the dedic
 
 ![Competition Print Pack Showcase](concurso_listo_para_imprimir/competition_pack_showcase.png)
 
-* **[`00_GUIA_DEL_CONCURSO.pdf`](concurso_listo_para_imprimir/00_GUIA_DEL_CONCURSO.pdf)** — 1-Page quick guide for the booth instructor (materials, cutting rules, prize flow).
-* **Junior Level (Kids / Primary School — 6 Large Blocks):**
-  - **Option A (Chibi GPU — 90° Rotated Full A4):**
-    * [`01_CHIBI_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/01_CHIBI_TABLERO_BASE_A4.pdf) — Assembly board (1 copy per child) with official certification.
-    * [`02_CHIBI_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/02_CHIBI_PIEZAS_RECORTAR_A4.pdf) — Full-color 6-block cut-out sheet with scissor guides (`✂ - - -`).
-  - **Option B (HPC&A Cyber Sword — Native Full A4 Portrait):**
-    * [`03_SWORD_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/03_SWORD_TABLERO_BASE_A4.pdf) — Assembly board for the 6 energy blade & rune blocks.
-    * [`04_SWORD_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/04_SWORD_PIEZAS_RECORTAR_A4.pdf) — Giant cut-out sheet for the Cyber Sword keychain prize.
-* **Advanced Level (Teens & Secondary School — 12 Technical Blocks):**
-  - **Option A (Superconducting QPU Chip — 90° Rotated Full A4):**
-    * [`05_QPU_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/05_QPU_TABLERO_BASE_A4.pdf) — 12-Slot quantum hardware board with extra-large numbers 1 to 12.
-    * [`06_QPU_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/06_QPU_PIEZAS_RECORTAR_A4.pdf) — 12-Piece microwave hardware cut-out sheet.
-  - **Option B (Quantum Dilution Chandelier — Native Full A4 Portrait):**
-    * [`07_CHANDELIER_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/07_CHANDELIER_TABLERO_BASE_A4.pdf) — Assembly board for the 5 cryogenic thermal stages ($300\text{ K}$ to $15\text{ mK}$).
-    * [`08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf) — 12-Piece dilution refrigerator cut-out sheet.
+* **[`00_GUIA_DEL_CONCURSO.pdf`](concurso_listo_para_imprimir/00_GUIA_DEL_CONCURSO.pdf)** — Guía oficial de 1 página A4 para el instructor/a del stand (materiales, reglas y canje).
+* **Modo Estándar con Números (Para niños pequeños / dinámica rápida):**
+  - **Junior Level (Niños / Primaria — 6 Bloques):**
+    * [`01_CHIBI_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/01_CHIBI_TABLERO_BASE_A4.pdf) & [`02_CHIBI_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/02_CHIBI_PIEZAS_RECORTAR_A4.pdf) — GPU Chibi Kawaii.
+    * [`03_GPU_ESPADA_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/03_GPU_ESPADA_TABLERO_BASE_A4.pdf) & [`04_GPU_ESPADA_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/04_GPU_ESPADA_PIEZAS_RECORTAR_A4.pdf) — GPU con Espada Heroica.
+  - **Advanced Level (Jóvenes / Secundaria — 12 Bloques Técnicos):**
+    * [`05_QPU_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/05_QPU_TABLERO_BASE_A4.pdf) & [`06_QPU_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/06_QPU_PIEZAS_RECORTAR_A4.pdf) — Chip Cuántico Superconductor QPU.
+    * [`07_CHANDELIER_TABLERO_BASE_A4.pdf`](concurso_listo_para_imprimir/07_CHANDELIER_TABLERO_BASE_A4.pdf) & [`08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf`](concurso_listo_para_imprimir/08_CHANDELIER_PIEZAS_RECORTAR_A4.pdf) — Candelabro de Dilución Cuántica ($15\text{ mK}$).
+* **Modo Desafío Experto Sin Números (Puzle Visual Puro — Rompecabezas sin números sobre el arte):**
+  - [`09_CHIBI_RECORTAR_SIN_NUMEROS_A4.pdf`](concurso_listo_para_imprimir/09_CHIBI_RECORTAR_SIN_NUMEROS_A4.pdf) — GPU Chibi (6 bloques sin números).
+  - [`10_GPU_ESPADA_RECORTAR_SIN_NUMEROS_A4.pdf`](concurso_listo_para_imprimir/10_GPU_ESPADA_RECORTAR_SIN_NUMEROS_A4.pdf) — GPU con Espada (6 bloques sin números).
+  - [`11_QPU_RECORTAR_SIN_NUMEROS_A4.pdf`](concurso_listo_para_imprimir/11_QPU_RECORTAR_SIN_NUMEROS_A4.pdf) — Chip Cuántico QPU (12 bloques sin números).
+  - [`12_CHANDELIER_RECORTAR_SIN_NUMEROS_A4.pdf`](concurso_listo_para_imprimir/12_CHANDELIER_RECORTAR_SIN_NUMEROS_A4.pdf) — Candelabro Cuántico (12 bloques sin números).
 
 ---
 
